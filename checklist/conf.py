@@ -30,7 +30,8 @@ html_title = '学习笔记'
 extensions = [
     'recommonmark',
     'sphinx_markdown_tables',
-    'sphinx.ext.githubpages'
+    'sphinx.ext.githubpages',
+    'sphinx_copybutton'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
