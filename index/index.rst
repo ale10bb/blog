@@ -3,11 +3,14 @@
 
 本项目包含一些乱七八糟的学习笔记，以及从五湖四海白嫖来的文章（logo也是偷来的）。
 
-本项目托管在：`https://github.com/ale10bb/blog <https://github.com/ale10bb/blog>`_ ，并由sphinx编译。
+里面写的东西其实是给自己看的，逻辑混乱什么的是常态。
 
-本项目的 Github Pages 地址为：`https://ale10bb.github.io/blog/ <https://ale10bb.github.io/blog/>`_。
+现在项目部署在了两个地方：
 
-本项目撰写时受 `[野火]sphinx文档规范与模版 <https://ebf-contribute-guide.readthedocs.io/zh_CN/latest/>`_ 大量启发，在此向项目组表示谢意。
+- `Github Pages <https://ale10bb.github.io/blog/>`_ （众所周知，Github很慢）
+- `白嫖的服务器 <https://www.chenqlz.top>`_ （被查了可能就下线了）
+
+此外，本项目撰写时受 `[野火]sphinx文档规范与模版 <https://ebf-contribute-guide.readthedocs.io/zh_CN/latest/>`_ 大量启发，在此向项目组表示谢意。
 
 ----------
 

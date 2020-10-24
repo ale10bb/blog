@@ -58,7 +58,7 @@
     │  └─doctrees
     │      *.doctree
     │
-    html
+    ├─html
     │  │  .buildinfo
     │  │  .nojekyll
     │  │  *.html
