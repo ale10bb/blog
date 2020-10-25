@@ -112,6 +112,7 @@ Makefile
 - 执行 ``make clean`` 可以删除临时目录和结果目录。
 
 .. code-block:: bat
+    :linenos:
 
     @ECHO OFF
 
