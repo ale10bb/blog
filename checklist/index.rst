@@ -1,3 +1,6 @@
+CheckList
+==============
+
 .. toctree::
    :maxdepth: 2
    :caption: CheckList
