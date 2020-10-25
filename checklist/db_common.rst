@@ -7,6 +7,7 @@
    mysql
    oracle
    mssql
+   pg
    redis
    db2
 
@@ -90,3 +91,11 @@
             DB2INST1_PASSWORD: test-PW-123456  
             DBNAME: testDB
          privileged: true
+
+      pg-test:
+         image: postgres
+         container_name: postgres
+         ports:
+            - 5432:5432
+         environment:
+            POSTGRES_PASSWORD: test-PW-123456
