@@ -61,7 +61,7 @@
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="db2.html" rel="next" title="DB2"/>
-  <link href="mssql.html" rel="prev" title="MSSQL"/>
+  <link href="pg.html" rel="prev" title="PostgreSQL"/>
  </head>
  <body data-md-color-accent="blue" data-md-color-primary="blue-grey" dir="ltr">
   <svg class="md-svg">
@@ -209,7 +209,7 @@
           <li class="md-nav__item">
            <span class="md-nav__link caption">
             <span class="caption-text">
-             CheckList
+             计算环境索引
             </span>
            </span>
           </li>
@@ -241,6 +241,11 @@
             <li class="md-nav__item">
              <a class="md-nav__link" href="mssql.html">
               MSSQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="pg.html">
+              PostgreSQL
              </a>
             </li>
             <li class="md-nav__item">
@@ -700,13 +705,13 @@
         参数。
        </p>
        <p>
-        <a class="reference internal" href="_images/image114.png">
-         <img alt="image1" src="_images/image114.png" style="width: 5.76806in; height: 1.42986in;"/>
+        <a class="reference internal" href="_images/image115.png">
+         <img alt="image1" src="_images/image115.png" style="width: 5.76806in; height: 1.42986in;"/>
         </a>
        </p>
        <p>
-        <a class="reference internal" href="_images/image210.png">
-         <img alt="image2" src="_images/image210.png" style="width: 5.76806in; height: 1.08056in;"/>
+        <a class="reference internal" href="_images/image213.png">
+         <img alt="image2" src="_images/image213.png" style="width: 5.76806in; height: 1.08056in;"/>
         </a>
        </p>
        <h3 id="acl">
@@ -807,8 +812,8 @@
         参数即可。
        </p>
        <p>
-        <a class="reference internal" href="_images/image33.png">
-         <img alt="image3" src="_images/image33.png" style="width: 5.76806in; height: 0.87847in;"/>
+        <a class="reference internal" href="_images/image34.png">
+         <img alt="image3" src="_images/image34.png" style="width: 5.76806in; height: 0.87847in;"/>
         </a>
        </p>
        <h3 id="id5">
@@ -823,8 +828,8 @@
         Redis自带了一个保护机制，防止管理员误操作导致的数据泄露。当Redis未设置密码且绑定了所有网络接口，则自动启动保护模式，仅允许环回地址及Unix Socket访问。
        </p>
        <p>
-        <a class="reference internal" href="_images/image44.png">
-         <img alt="image4" src="_images/image44.png" style="width: 5.76806in; height: 3.30069in;"/>
+        <a class="reference internal" href="_images/image45.png">
+         <img alt="image4" src="_images/image45.png" style="width: 5.76806in; height: 3.30069in;"/>
         </a>
        </p>
        <h2 id="id6">
@@ -906,13 +911,13 @@
         可查看ACL帐户列表，其参数为：user/用户名/用户状态(on/off)/密码/键权限/命令权限。
        </p>
        <p>
-        <a class="reference internal" href="_images/image53.png">
-         <img alt="image5" src="_images/image53.png" style="width: 5.76806in; height: 1.34653in;"/>
+        <a class="reference internal" href="_images/image54.png">
+         <img alt="image5" src="_images/image54.png" style="width: 5.76806in; height: 1.34653in;"/>
         </a>
        </p>
        <p>
-        <a class="reference internal" href="_images/image63.png">
-         <img alt="image6" src="_images/image63.png" style="width: 5.76806in; height: 2.11597in;"/>
+        <a class="reference internal" href="_images/image64.png">
+         <img alt="image6" src="_images/image64.png" style="width: 5.76806in; height: 2.11597in;"/>
         </a>
        </p>
        <p>
@@ -925,8 +930,8 @@
         参数设置口令，可以对其设置ACL策略，甚至去除所有权限。
        </p>
        <p>
-        <a class="reference internal" href="_images/image73.png">
-         <img alt="image7" src="_images/image73.png" style="width: 5.76806in; height: 1.35764in;"/>
+        <a class="reference internal" href="_images/image74.png">
+         <img alt="image7" src="_images/image74.png" style="width: 5.76806in; height: 1.35764in;"/>
         </a>
        </p>
        <p>
@@ -945,8 +950,8 @@
         ），该帐户默认有所有命令权限、没有键权限、没有密码、状态off。
        </p>
        <p>
-        <a class="reference internal" href="_images/image83.png">
-         <img alt="image8" src="_images/image83.png" style="width: 5.76806in; height: 1.56319in;"/>
+        <a class="reference internal" href="_images/image84.png">
+         <img alt="image8" src="_images/image84.png" style="width: 5.76806in; height: 1.56319in;"/>
         </a>
        </p>
        <h2 id="id8">
@@ -978,8 +983,8 @@
         （能够记录大部分系统事件，但任何级别都不能记录操作）。
        </p>
        <p>
-        <a class="reference internal" href="_images/image92.png">
-         <img alt="image9" src="_images/image92.png" style="width: 5.76806in; height: 4.575in;"/>
+        <a class="reference internal" href="_images/image93.png">
+         <img alt="image9" src="_images/image93.png" style="width: 5.76806in; height: 4.575in;"/>
         </a>
        </p>
        <p>
@@ -998,8 +1003,8 @@
         参数，实现日志的本地保存。并可以配置输出日志到syslog。
        </p>
        <p>
-        <a class="reference internal" href="_images/image103.png">
-         <img alt="image10" src="_images/image103.png" style="width: 5.76806in; height: 3.99583in;"/>
+        <a class="reference internal" href="_images/image104.png">
+         <img alt="image10" src="_images/image104.png" style="width: 5.76806in; height: 3.99583in;"/>
         </a>
        </p>
        <h3 id="acl-log">
@@ -1026,8 +1031,8 @@
         ACL日志的字段包括：类型（key或者command）、客户端IP、时间戳、用户、一级操作。
        </p>
        <p>
-        <a class="reference internal" href="_images/image115.png">
-         <img alt="image11" src="_images/image115.png" style="width: 5.76806in; height: 3.73125in;"/>
+        <a class="reference internal" href="_images/image116.png">
+         <img alt="image11" src="_images/image116.png" style="width: 5.76806in; height: 3.73125in;"/>
         </a>
        </p>
        <p>
@@ -1104,7 +1109,7 @@
   <footer class="md-footer">
    <div class="md-footer-nav">
     <nav class="md-footer-nav__inner md-grid">
-     <a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="mssql.html" rel="prev" title="MSSQL">
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="pg.html" rel="prev" title="PostgreSQL">
       <div class="md-flex__cell md-flex__cell--shrink">
        <i class="md-icon md-icon--arrow-back md-footer-nav__button">
        </i>
@@ -1114,7 +1119,7 @@
         <span class="md-footer-nav__direction">
          Previous
         </span>
-        MSSQL
+        PostgreSQL
        </span>
       </div>
      </a>
