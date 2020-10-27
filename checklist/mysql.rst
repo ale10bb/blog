@@ -1,6 +1,9 @@
 MySQL
 ================
 
+软件信息
+~~~~~~~~~~~~~~~~
+
 - 发行商/维护者
 
    - Oracle（2008年收购MySQL并维护）
@@ -31,6 +34,11 @@ MySQL
 
    - `Percona Server for MySQL <https://github.com/percona/percona-server/tags>`_
    
+.. code:: sql
+
+   SHOW VARIABLES WHERE variable_name LIKE 'version';
+   SELECT VERSION();
+
 .. note::
    还有些其他的发行版已经消失在了历史的尘埃中，比如：Drizzle、OurDelta、WebScaleSQL。
 
@@ -43,18 +51,15 @@ MySQL
 身份鉴别
 ~~~~~~~~~~~~~~~
 
-唯一性标识
-^^^^^^^^^^^^^^^^
+鉴别模型
+---------------
 
-MySQL的唯一性标识为 ``'username'@'host'`` ，其中 ``host`` 的取值可以为hostname或者IP。在 ``mysql.user`` 表中及其他所有涉及用户身份标识的情况里，Host和User均为联合主键。如果 ``host`` 为hostname，用户进行身份鉴别时，MySQL会尝试使用默认DNS对hostname发起解析请求，解析失败则会在日志中输出相应的警告信息。如果MySQL启动时设置了 ``skip-name-resolve`` 参数，则不进行DNS解析，仅采用ip或hostname匹配。
+MySQL在用户身份标识时，将Host和User视作联合主键，作为客户端的唯一性标识，即 ``'username'@'host'`` ，其中 ``host`` 的取值可以为hostname或者IP。如果 ``host`` 为hostname，用户进行身份鉴别时，MySQL会尝试使用默认DNS对hostname发起解析请求，解析失败则会在日志中输出相应的警告信息。如果MySQL启动时设置了 ``skip-name-resolve`` 参数，则不进行DNS解析，仅采用ip或hostname匹配。
 
 此外，MySQL将hostname及IP视作不同的 ``host`` 值，因此可能会出现 ``localhost`` 和 ``127.0.0.1`` （或其他相同客户端）同时存在的情况，如下图所示：
 
 .. image:: media/mysql/41b10e2142af4958cae256766c1a72e2.png
    :align: center
-
-鉴别流程
-^^^^^^^^^^^^^^^^
 
 当客户端对MySQL发起连接后，服务器的鉴别方式如下：
 
@@ -76,42 +81,52 @@ MySQL的唯一性标识为 ``'username'@'host'`` ，其中 ``host`` 的取值可
    - 在启动mysqld时添加参数 ``-–skip-grant-tables`` 
 
 变量模型
-^^^^^^^^^^^^^^^^
+---------------
 
-在MySQL中存在Global变量和Session变量。每次建立Session时，MySQL服务器会将全局变量的部分参数复制（如 ``wait_timeout`` ），并注册给Session，形成会话变量。一般全局变量的修改需要Super权限，而修改自身会话变量不需要特权。
+MySQL使用系统变量控制一些运行时设置，方便管理员进行动态修改。系统变量分为Global变量和Session变量两种，其中Global变量的修改需要Super权限，而客户端可随意修改自身的Session变量。每次建立Session时，MySQL服务器会将全局变量的部分参数复制（如 ``wait_timeout`` ），并注册给Session，形成会话变量。
 
 .. hint:: 所有涉及变量的核查，都要针对全局变量。(SHOW **GLOBAL** VARIABLES LIKE XXX)
 
-插件
-^^^^^^^^^^^^^^^^
+安全机制
+---------------
 
-MySQL的插件安装之后就默认开启，除非插件内部另有定义。
+插件
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+MySQL使用插件的方式，以便于官方和开发者自行添加第三方功能模块。其中发行版编译时已自带了20多个插件，在 `官方repo <https://github.com/mysql/mysql-server/tree/8.0/plugin>`_ 中可以查询内置插件。
+MySQL的插件根据功能和机制的不同，分为“可动态加载”和“不可动态加载”两种。对于前者，在MySQL运行时，可直接执行SQL命令加载插件，而不需要重启数据库。加载信息写入 ``mysql.plugin`` 表中，并在重启之后自动重载。
+
+.. code-block:: sql
+
+   INSTALL PLUGIN myplugin SONAME 'somepluglib.so';
+
+对于“不可动态加载”的插件而言，必须修改配置文件，或添加启动参数 ``plugin-load`` ，告知MySQL服务器需要在启动时加载的插件。
 
 口令复杂度/validate_password
-----------------------------
+"""""""""""""""""""""""""""""""""""""""""""""
 
 .. image:: media/mysql/70df1c1f9008c4c37ee9c37032602a84.png
    :align: center
 
 .. list-table:: validate_password 参数
-    :header-rows: 1
+   :header-rows: 1
 
-    * - 参数
-      - 说明
-    * - validate_password_check_user_name
-      - 设为ON时，密码中不允许包含用户名(独立开关)
-    * - validate_password_policy
-      - 设置密码验证级别(下方详解)
-    * - validate_password_length
-      - 限制密码最短长度
-    * - validate_password_mixed_case_count
-      - 密码中大小写字母的最少个数
-    * - validate_password_number_count
-      - 密码中数字的最少个数
-    * - validate_password_special_char_count
-      - 密码中特殊符号的最少个数
-    * - validate_password_dictionary_file
-      - 用于密码验证的字典文件路径
+   * - 参数
+     - 说明
+   * - validate_password_check_user_name
+     - 设为ON时，密码中不允许包含用户名(独立开关)
+   * - validate_password_policy
+     - 设置密码验证级别(下方详解)
+   * - validate_password_length
+     - 限制密码最短长度
+   * - validate_password_mixed_case_count
+     - 密码中大小写字母的最少个数
+   * - validate_password_number_count
+     - 密码中数字的最少个数
+   * - validate_password_special_char_count
+     - 密码中特殊符号的最少个数
+   * - validate_password_dictionary_file
+     - 用于密码验证的字典文件路径
 
 其中，密码复杂度级别/validate_password_policy说明：
 
@@ -122,7 +137,18 @@ MySQL的插件安装之后就默认开启，除非插件内部另有定义。
 -  STRONG（2）：额外启用dictionary_file。
 
 登录失败处理/connection_control
--------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""
+
+connection_control实现效果为，客户端多次登录失败之后，针对每个失败的登录请求，服务端延迟一定时间之后再返回认证失败的结果。如设置connection_control的参数如下：
+
+::
+
+   connection_control_failed_connections_threshold=3
+   connection_control_min_connection_delay=1000
+   connection_control_max_connection_delay=10000
+
+客户端的前三个连续失败连接尝试没有延迟，第四次失败尝试有1000毫秒的延迟，第五次失败尝试有2000毫秒的延迟，依此类推，直到达到最大延迟 
+``connection_control_max_connection_delay`` 。
 
 +------------------------------+----------------------------------------+
 |             参数             |                  说明                  |
@@ -140,22 +166,36 @@ MySQL的插件安装之后就默认开启，除非插件内部另有定义。
 | max_connection_delay         |                                        |
 +------------------------------+----------------------------------------+
 
-配置举例说明
-"""""""""""""""""""
+认证插件
+"""""""""""""""""""""""""""""""""""""""""""""
 
-设置connection_control的参数如下：
+MySQL的所有身份鉴别均采用插件机制，保证密码以非明文方式传输、以非明文方式存储。可在全局变量中查询默认的认证插件。
 
-::
+.. image:: media/mysql/08a3501bb52b1d366b048f4812f02b35.png
+   :align: center
 
-   connection_control_failed_connections_threshold=3
-   connection_control_min_connection_delay=1000
-   connection_control_max_connection_delay=10000
+MySQL 5.7及以下版本中，创建新用户默认使用 ``mysql_native_password`` 插件(SHA1)进行认证，由客户端运行SHA1算法之后，将非明文口令发送至服务端验证。其中密码字段的运算规则为 ``concat('*', sha1(unhex(sha1(password))))``
 
-客户端的前三个连续失败连接尝试没有延迟，第四次失败尝试有1000毫秒的延迟，第五次失败尝试有2000毫秒的延迟，依此类推，直到达到最大延迟 
-``connection_control_max_connection_delay`` 。
+.. image:: media/mysql/d4e1f772e247da6858626119058e67ce.png
+   :align: center
+
+从MySQL
+8.0.4开始，默认插件换成 ``caching_sha2_password`` (带高速缓存的SHA-256)。算法懒得找。
+
+.. image:: media/mysql/71317628d7842dda4a27e581be2ed7df.png
+   :align: center
+
+另一个常见的MySQL认证插件为 ``sha256_password`` (公私钥 with SSL)。 ``mysql_ssl_rsa_setup`` 会自动生成一对公私钥，之后MySQL使用 ``private_key.pem`` 和 ``public_key.pem`` 文件对通信过程中密码进行加密。通过查找相关变量，可以获取服务器公私钥文件的存放位置。
+
+.. image:: media/mysql/6873d7cb2ededd6af4d6f6be722c5d8b.png
+   :align: center
+
+.. hint:: 
+
+   原则上，该认证方式必须和SSL通信同时启用。对于JDBC而言，必须设置“Allow public key retrieval”。
 
 口令过期
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 从MySQL 5.6.6开始，User表中增加 ``password_expired`` 、 ``password_last_changed`` 、 ``password_lifetime`` ，用于控制用户的口令过期。5.7.4开始，增加全局变量 ``default_password_lifetime`` 。
 
@@ -171,23 +211,23 @@ MySQL的插件安装之后就默认开启，除非插件内部另有定义。
    :align: center
 
 连接超时、会话超时
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  连接超时变量： ``connect_timeout``
+-  连接超时变量： ``connect_timeout`` ；
 
--  交互式客户端空闲会话超时： ``interactive_timeout``
+-  交互式客户端空闲会话超时： ``interactive_timeout`` ；
 
--  非交互式客户端的空闲会话超时： ``wait_timeout``
+-  非交互式客户端的空闲会话超时： ``wait_timeout`` ；
 
 其中，交互式会话指通过MySQL Native Client连接的会话(mysql -h xxx)。非交互式会话指hibernate或jdbc等建立的会话。
 
-核查命令
-^^^^^^^^^^^^^^^^
+操作手册
+---------------
 
 连接数据库
-------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: bash
+.. code-block:: bash
 
    # 不加参数时默认连接本地3306数据库
    mysql -u'root' -p
@@ -196,10 +236,18 @@ MySQL的插件安装之后就默认开启，除非插件内部另有定义。
    # 客户端主动尝试SSL连接，服务器未开启SSL则连接失败
    mysql -h 192.168.3.8 -P 33306 -u'root' -p'my-secret-pw' --ssl=TRUE 
 
-空口令&口令定期更换
-----------------------------
+.. code-block:: sql
 
-.. code:: sql
+   SELECT current_user(); --查询当前连接匹配了user表中的哪一行
+   SELECT user();--显示当前连接的实际用户名和IP地址（如'%'地址将被替换成实际地址，''用户将被替换成实际用户）
+
+.. image:: media/mysql/5660cef79097dceb1a64ab77352928ce.png
+   :align: center
+
+核查：空口令&口令定期更换
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: sql
 
    -- 在MySQL 5.7之前，User表中的口令字段为Password
    -- 从MySQL 5.7之后，口令字段改为authentication_string
@@ -210,10 +258,13 @@ MySQL的插件安装之后就默认开启，除非插件内部另有定义。
    SHOW GLOBAL VARIABLES LIKE 'default_password_lifetime'; 
    SHOW GLOBAL VARIABLES LIKE 'disconnect_on_expired_password'; 
 
-已安装插件&插件参数
-------------------------------
+.. image:: media/mysql/c5cca965587235734b15e9862fc1cf1f.png
+   :align: center
 
-.. code:: sql
+核查：已安装插件&插件参数
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: sql
 
    -- 列出所有插件，不能搜索
    SHOW PLUGINS; 
@@ -225,49 +276,34 @@ MySQL的插件安装之后就默认开启，除非插件内部另有定义。
    -- 展示插件参数变量
    SHOW GLOBAL VARIABLES LIKE 'validate_password%'; 
 
-连接超时&会话超时
-------------------
+核查：连接超时&会话超时
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: sql
+.. code-block:: sql
 
    SHOW GLOBAL VARIABLES LIKE '%timeout%';
 
-|image6|
-
-运维命令
-^^^^^^^^^^^^^^^^
-
-判断当前连接
-------------------
-
-.. code:: sql
-
-   SELECT current_user(); --查询当前连接匹配了user表中的哪一行
-   SELECT user();--显示当前连接的实际用户名和IP地址（如'%'地址将被替换成实际地址，''用户将被替换成实际用户）
-
-|image7|
-
-修改密码&重置密码
--------------------------
+操作：修改密码&重置密码
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  操作系统中使用 ``mysqladmin``
 
-.. code:: bash
+.. code-block:: bash
 
    mysqladmin -u root -p'old_password' password 'new_password'
 
 -  在MySQL内部修改
 
-.. code:: sql
+.. code-block:: sql
 
-   use mysql;
-   update user set password=password("test") where user='root';
-   flush privileges;
-   exit;
+   UPDATE mysql.user 
+   SET password=password("test") 
+   WHERE user='root';
+   FLUSH PRIVILEGES;
 
 -  启用MySQL免登录模式，进入数据库后，使用方法2重置密码
 
-.. code:: bash
+.. code-block:: bash
 
    # 先停止MySQL的服务或守护进程
    systemctl stop mysqld # systemd
@@ -281,40 +317,44 @@ MySQL的插件安装之后就默认开启，除非插件内部另有定义。
 ~~~~~~~~~~~~~~~
 
 权限模型
-^^^^^^^^^^^^^^^^
+---------------
 
-MySQL采取的权限控制原则为：除非明确指定，否则默认拒绝所有访问行为。为了方便管理员进行权限管理，MySQL将权限分为四个层级，并分别存储在四张表中。在这四张权限相关表中增加数据，等同于进行赋权操作。
+MySQL采取的权限模型为DAC，其控制原则为：除非明确指定，否则默认拒绝所有访问行为。MySQL初始预置root帐户，具备数据库的所有权限，之后可以通过root帐户进行创建帐户及授权操作。授权对象管理员在进行授权操作时，可添加额外命令 ``WITH GRANT OPTION / WITH ADMIN OPTION`` ，这样用户就可以将这条权限再转授他人。
 
--  全局权限： ``mysql.user`` 。注：某些服务器级别特权仅可在全局中设置，如 ``file_priv`` 、 ``load_priv`` 、 ``shutdown_priv`` 等。
+为了方便管理员进行权限管理，MySQL将权限分为四个层级，并分别存储在四张表中。在这四张权限相关表中增加数据，等同于进行赋权操作。客户端通过身份鉴别后，其权限判断过程为：
 
-|image8|
+-  服务器在 ``mysql.user`` 表中检查主体和客体，确认是否存在授权值；
 
--  数据库权限： ``mysql.db`` 。有些数据库级别特权在这里设置，如execute、index、create_tmp_table等。
+-  服务器在 ``mysql.db`` 表中检查主体和客体，确认是否存在授权值；
 
-|image9|
+-  服务器在 ``mysql.tables_priv`` 表中检查主体和客体，确认是否存在授权值；
 
--  表权限： ``mysql.tables_priv`` 。这里基本只有增删改查权限
-
-|image10|
-
--  列权限： ``mysql.columns_priv`` 。只有增删改权限
-
-|image11|
-
-权限判断过程(客户端通过身份鉴别后)：
-
--  服务器在 ``mysql.user`` 表中检查主体和客体，确认是否存在授权值
-
--  服务器在 ``mysql.db`` 表中检查主体和客体，确认是否存在授权值
-
--  服务器在 ``mysql.tables_priv`` 表中检查主体和客体，确认是否存在授权值
-
--  服务器在 ``mysql.columns_priv`` 表中检查主体和客体，确认是否存在授权值
+-  服务器在 ``mysql.columns_priv`` 表中检查主体和客体，确认是否存在授权值；
 
 如果检查过程结束，但还是没有找到允许的权限操作，MySQL将返回无权限的错误信息。
 
 权限列表
 ^^^^^^^^^^^^^^^^
+
+-  全局权限： ``mysql.user`` 。注：某些服务器级别特权仅可在全局中设置，如 ``file_priv`` 、 ``load_priv`` 、 ``shutdown_priv`` 等。
+
+.. image:: media/mysql/bb7a3ece795b37ddab9739239db56cba.png
+   :align: center
+
+-  数据库权限： ``mysql.db`` 。有些数据库级别特权在这里设置，如execute、index、create_tmp_table等。
+
+.. image:: media/mysql/111d5345a31e233ccb60ded4a60544d6.png
+   :align: center
+
+-  表权限： ``mysql.tables_priv`` 。这里基本只有增删改查权限。
+
+.. image:: media/mysql/a861b8f899652ba17a52164a68e7eff1.png
+   :align: center
+
+-  列权限： ``mysql.columns_priv`` 。只有增删改权限。
+
+.. image:: media/mysql/4714e4db4ab9a0aa8d6fc138cf9c8008.png
+   :align: center
 
 +------------------------+--------------------------------------------------------------+
 |         权限名         |                             描述                             |
@@ -395,22 +435,31 @@ MySQL采取的权限控制原则为：除非明确指定，否则默认拒绝所
 
 -  MySQL 8.0及以上进一步新增系统帐户 ``mysql.infoschema`` 。以上系统帐户均为锁定状态，且不得修改属性，否则将导致数据库无法正常运行。
 
-核查命令
-^^^^^^^^^^^^^^^^
+操作手册
+---------------
 
-用户权限
-------------------
+核查：用户权限
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: sql
+.. code-block:: sql
 
-   -- 注：以下所有查询需要同时匹配host和user
    -- 需关注user表、db表中的grant_priv字段，判断帐户是否能够将自己的权限再次分配
-   -- 为了满足等保标准，除安全管理员之外应该都不具备grant权限
-   SHOW GRANTS FOR rm@'192.168.1.144'; --展示该用户创建时的授权语句
+   SHOW GRANTS FOR root@'%'; --展示该用户创建时的授权语句
+
+.. image:: media/mysql/21bf5c5c27df75fc41a1955a2ca9cff7.png
+   :align: center
+
+.. code-block:: sql
+
    SELECT * FROM mysql.`user`; --展示用户的实际权限
    SELECT * FROM mysql.db;
    SELECT * FROM mysql.tables_priv;
    SELECT * FROM mysql.columns_priv;
+
+.. image:: media/mysql/ab4674f21f2fc9e25ec095df63618083.png
+   :align: center
+
+.. code-block:: sql
 
    -- 除了管理员帐户，其他帐户不应具有全局访问权限
    SELECT user, host 
@@ -431,31 +480,19 @@ MySQL采取的权限控制原则为：除非明确指定，否则默认拒绝所
          (shutdown_priv = 'Y') OR (create_user_priv = 'Y') OR (grant_priv = 'Y') OR
          (reload_priv = 'Y') OR (repl_slave_priv = 'Y'); 
 
-   -- 管理员帐户不应具有数据库的INSERT，SELECT，UPDATE，DELETE，DROP，CREATE和ALTER权限。
+   -- 管理员帐户不应具有业务数据库的INSERT，SELECT，UPDATE，DELETE，DROP，CREATE和ALTER权限。
    SELECT User, Host, db 
    FROM mysql.db 
    WHERE Select_priv='Y' OR Insert_priv='Y' OR Update_priv='Y' OR Delete_priv='Y' OR
          Create_priv='Y' OR Drop_priv='Y' OR Alter_priv='Y';
 
-.. image:: media/mysql/21bf5c5c27df75fc41a1955a2ca9cff7.png
-   :align: center
-
-|image13|
-
-|image14|
-
-|image15|
-
-运维命令
-^^^^^^^^^^^^^^^^
-
 权限分配
-------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: sql
 
-   -- 一个偷懒的登录地址限制方式：在user表中限制远程地址，db表不限制
-   -- 由于非法用户在登录时就被拒绝连接，这种设置是有效的。这样用户ip改变后，只需要修改user表即可
+   -- 创建帐户并赋权
+   -- 实际上只需要在user表中限制远程连接地址，非法地址在登录时就被拒绝连接
    CREATE USER 'user1'@'x.x.x.x' IDENTIFIED BY 'xxxx';
    GRANT ALL PRIVILEGES ON somedb.* to 'user1'@'%';
 
@@ -484,7 +521,7 @@ MySQL采取的权限控制原则为：除非明确指定，否则默认拒绝所
    FLUSH PRIVILEGES;
 
 配置三权分立-安全管理员
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: sql
 
@@ -507,21 +544,21 @@ MySQL采取的权限控制原则为：除非明确指定，否则默认拒绝所
 ~~~~~~~~~~~~~~~
 
 general log
-^^^^^^^^^^^^^^^^
+------------------------------
 
-在MySQL中自带了 **全局日志**  (不算审计)功能——general log，作用是记录MySQL服务器每时每刻发生的事件（如SQL命令执行、服务器状态、服务器错误）。general log一旦开启，会给服务器和数据库带来一定资源占用。
+在MySQL中自带了 **全局日志** 功能—— general log ，作用是记录MySQL服务器每时每刻发生的事件（如SQL命令执行、服务器状态、服务器错误）。 general log 一旦开启，会给服务器和数据库带来一定资源占用。
 
 general log具有一定缺陷：
 
--  只记录命令内容，不记录命令的操作结果
+-  只记录命令内容，不记录命令的操作结果；
 
 -  可读性一般：
 
-   -  每个客户端采用ID进行标识(ID为自增主键，服务器重启后重置)，如果要追溯操作的主体，只能靠搜索该ID的Connect操作实现
+   -  每个客户端采用ID进行标识(ID为自增主键，服务器重启后重置)，如果要追溯操作的主体，只能靠搜索该ID的Connect操作实现；
 
-   -  无法快速根据操作客体查找
+   -  无法快速根据操作客体查找；
 
-其字段如下
+其字段如下：
 
 ======== ====================
 字段     内容
@@ -532,29 +569,28 @@ Command  Query/Connect/Quit等
 Argument 具体内容
 ======== ====================
 
-|image16|
+.. image:: media/mysql/e9641caf9abf8bba063471a4e9f9916d.png
+   :align: center
 
-MySQL数据库中有几个全局变量与general
-log的设置有关。这些配置都可以在my.ini中指定，也可以在启动时手动指定(–general_log=ON)，也可以由super权限的管理员修改系统变量
+MySQL数据库中有几个全局变量与 general log 的设置有关：
 
--  ``general_log`` ：开关
+-  ``general_log`` ：开关；
 
--  ``log_output`` ：日志存放位置 (MySQL 5.1.6 后引入)
+-  ``log_output`` ：日志存放位置 (MySQL 5.1.6 后引入)；
 
-   -  FILE(Default)：操作系统文件
+   -  FILE(Default)：操作系统文件；
 
-   -  TABLE：mysql.general_log表
+   -  TABLE：mysql.general_log表；
 
--  ``general_log_file`` ：日志文件位置
+-  ``general_log_file`` ：日志文件位置；
 
-|image17|
-
-|image18|
+.. image:: media/mysql/e6128fc4762fdda86d819620d78cdc9c.png
+   :align: center
 
 MariaDB Server Audit Plugin
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
-该插件本来是为了MariaDB开发，但可以直接用于部分MySQL，占用稍微小一点。将server_audit.so复制过来之后手动安装就行。该插件的有效变量如下：
+该插件本来是为了MariaDB开发，但可以直接用于部分MySQL，占用稍微小一点。将 ``server_audit.so`` 复制过来之后手动安装就行。该插件的有效变量如下：
 
 .. list-table:: MariaDB Server Audit Plugin 参数
     :header-rows: 1
@@ -613,10 +649,9 @@ server_audit_events指明记录的事件，如果为空字符串，则代表记�
    data/xml、delete、insert、update、handler和replace语句）
 
 MySQL Enterprise Audit Plugin (仅企业版本)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------------
 
-MySQL 企业版的 Enterprise Edition 中自带 Audit
-Plugin，可以在my.cnf文件中加入“plugin-load=audit_log.so”参数启用。该插件的相关系统变量为：
+MySQL 企业版的 Enterprise Edition 中自带 Audit Plugin，so文件为 ``audit_log.so`` 。该插件的相关系统变量为：
 
 +----------------------------+------------------------------------------------------+
 |            参数            |                         说明                         |
@@ -646,16 +681,18 @@ Plugin，可以在my.cnf文件中加入“plugin-load=audit_log.so”参数启�
 
 日志内容如下：
 
-|image19|
+.. image:: media/mysql/106ae62f020c7f55d219811e4882baef.png
+   :align: center
 
 McAfee Audit Plugin
-^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 McAfee已不再更新，最新版本v1.1.6(2018-03)，不建议使用
 
 支持的MySQL/MariaDB/Percona列表可在官方\ `Changelog <https://github.com/mcafee/mysql-audit/wiki/Changelog>`__\ 上查询
 
-|image20|
+.. image:: media/mysql/17bb76c0b830cbda0751ffe3937d517c.png
+   :align: center
 
 该插件的主要变量如下，其余变量可在\ `官方文档 <https://github.com/mcafee/mysql-audit/wiki/Configuration>`__\ 查询：
 
@@ -707,13 +744,11 @@ McAfee已不再更新，最新版本v1.1.6(2018-03)，不建议使用
        "query": "insert into e values (9898,'smart','james')"
    }
 
-.. _核查命令-2:
+操作手册
+---------------
 
-核查命令
-^^^^^^^^^^^^^^^^
-
-审计开关
-------------------
+核查：审计开关
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: sql
 
@@ -733,11 +768,11 @@ McAfee已不再更新，最新版本v1.1.6(2018-03)，不建议使用
 入侵防范
 ~~~~~~~~~~~~~~~
 
-多余组件/参数
-^^^^^^^^^^^^^^^^
+操作手册
+---------------
 
-核查：配置文件或全局变量
------------------------------
+核查：多余功能
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: sql
 
@@ -757,149 +792,15 @@ McAfee已不再更新，最新版本v1.1.6(2018-03)，不建议使用
    -- 默认不安装
    SELECT * FROM information_schema.plugins WHERE PLUGIN_NAME='daemon_memcached';
 
-   -- 设置secure_file_priv(限制客户端可以读取数据文件的路径)
-   -- 默认为/var/lib/mysql-files/
+   -- 设置secure_file_priv(限制客户端可以通过load_file读取数据文件的路径)
+   -- 默认为'/var/lib/mysql-files/'
    SHOW GLOBAL VARIABLES WHERE Variable_name = 'secure_file_priv';
 
-定期更新
-^^^^^^^^^^^^^^^^
 
-核查：数据库版本
-------------------
+一个好用的备份脚本
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: sql
-
-   SHOW VARIABLES WHERE variable_name LIKE 'version';
-   SELECT VERSION();
-
-安全通信
-~~~~~~~~~~~~~~~
-
-认证插件
-^^^^^^^^^^^^^^^^
-
-MySQL的所有身份鉴别均采用插件机制，保证密码以非明文方式传输、以非明文方式存储。可在全局变量中查询默认的认证插件。
-
-|image21|
-
-MySQL
-5.7及以下版本中，创建新用户默认使用 ``mysql_native_password`` 插件(SHA1)进行认证，由客户端运行SHA1算法之后，将非明文口令发送至服务端验证。其中密码字段的运算规则为 ``concat('*', sha1(unhex(sha1(password))))``
-
-|image22|
-
-从MySQL
-8.0.4开始，默认插件换成 ``caching_sha2_password`` (带高速缓存的SHA-256)。算法懒得找。
-
-|image23|
-
-另一个常见的MySQL认证插件为 ``sha256_password`` (公私钥 with SSL)。 ``mysql_ssl_rsa_setup`` 会自动生成一对公私钥，之后MySQL使用 ``private_key.pem`` 和 ``public_key.pem`` 文件对通信过程中密码进行加密。通过查找相关变量，可以获取服务器公私钥文件的存放位置。
-
-|image24|
-
-注：原则上，该认证方式必须和SSL通信同时启用。对于JDBC而言，必须设置“Allow
-public key retrieval”。
-
-|image25|
-
-SSL模型
-^^^^^^^^^^^^^^^^
-
-MySQL支持SSL通信加密及SSL双向认证(X509)的安全机制。在查阅资料时(20-09-17)，MySQL仅对5.6、5.7、8.0三个版本提供支持，官方文档也只包括这三个版本，这三个版本全系列均支持SSL功能。老版本中，MySQL
-5.5查得到SSL配置文档，但更老的版本缺失资料。
-
-注意：在5.6.46前及5.7.28前的MySQL版本中，MySQL同时支持使用yaSSL库或OpenSSL库进行编译。MySQL
-8.0全系列及较新的5.6、5.7版本仅支持使用OpenSSL库编译。yaSSL支持的特性较少，如不支持X509双向认证、最高支持TLSv1.0版本的协议等。在数据库中可通过查询ssl相关的全局变量，获取MySQL编译时是否引入了SSL库(have_ssl)，是否使用
-OpenSSL库编译(have_openssl)。如果这两个参数为DISABLED，则说明该数据库支持SSL，但未启用。
-
-|image26|
-
-.. _核查命令-3:
-
-核查命令
-^^^^^^^^^^^^^^^^
-
-启用SSL&强制SSL
-------------------
-
-.. code:: sql
-
-   -- 核查是否支持SSL，是否配置了证书、CA证书和Key
-   SHOW GLOBAL VARIABLES LIKE '%ssl%';
-
-   -- 以下情况二选一配置，任意一条有效均可
-   -- 配置全局变量，限制所有用户仅允许使用SSL连接
-   SHOW GLOBAL VARIABLES LIKE 'require_secure_transport';
-   -- 为所有远程连接用户单独配置，限制仅允许使用SSL连接
-   -- 关注ssl_type参数，为ANY或X509均可，不得为Null
-   SELECT host, user, ssl_type, ssl_cipher, x509_issuer, x509_subject 
-   FROM mysql.`user`;
-
-|image27|
-
-.. _运维命令-2:
-
-运维命令
-^^^^^^^^^^^^^^^^
-
-查看当前连接是否为SSL
-----------------------------
-
-.. code:: sql
-
-   -- 在JDBC查询中用show status like命令
-   -- 如果是SSL连接，ssl_cipher和ssl_version均不为空
-   SHOW STATUS LIKE '%ssl%';
-   -- 在MySQL Native Client中可直接使用status命令(或\s)
-   status;
-
-|image28|
-
-|image29|
-
-开启SSL
-------------------
-
-MySQL
-5.6及以下，用户只能通过OpenSSL手动生成证书及密钥，并复制到data文件夹内(记得设置权限<600)。MySQL 5.7以上，安装后在 ``/usr/bin/`` 下释放一个二进制文件 ``mysql_ssl_rsa_setup`` 。当MySQL的data目录下不存在 ``ca.pem`` 、 ``server-cert.pem`` 、 ``server-key.pem`` 时，运行该程序后会自动调用OpenSSL，在data目录下生成相关证书和密钥。 ``mysql_ssl_rsa_setup`` 的运行帮助如下：
-
-|image30|
-
-成功运行后的data文件夹如下。
-
-|image31|
-
-之后在my.ini中，加入 ``ssl_ca`` 、 ``ssl_cert`` 、 ``ssl_key`` 参数，导入相关证书和密钥，并重启服务器后，即可开启SSL。
-
-开启X509
-------------------
-
-（没试过，抄的）
-
-把 ``mysql_ssl_rsa_setup`` 生成的 ``ca.pem`` (私有CA证书)、 ``client-cert.pem`` (客户端证书)、 ``client-key.pem`` (客户端密钥)复制到客户端，之后通过以下命令连接：
-
-.. code-block:: bash
-
-   mysql -u'user' \
-         -p'pass' \
-         -h mysql_server_IP \
-         --ssl-ca=/path/to/ca.pem \
-         --ssl-cert=/path/to/client-cert.pem \
-         --ssl-key=/path/to/client-key.pem
-
-或将以上参数添加到 ``~/.my.cnf`` 文件中：
-
-.. code-block:: kconfig
-
-   [client]
-   ssl-ca = /path/to/ca.pem
-   ssl-cert = /path/to/client-cert.pem
-   ssl-key = /path/to/client-key.pem
-
-备份恢复
-~~~~~~~~~~~~~~~
-
-运维：备份
-^^^^^^^^^^^^^^^^
+可实现"-k"指定保留日期、"-d"指定备份的数据库。
 
 .. code-block:: bash
    :linenos:
@@ -939,28 +840,91 @@ MySQL
    find $BAKPATH -mtime +$KEEP -name $BAKFILENAME'_*.sql' -exec rm -rf {} \;
 
 
-.. |image6| image:: media/mysql/c5cca965587235734b15e9862fc1cf1f.png
-.. |image7| image:: media/mysql/5660cef79097dceb1a64ab77352928ce.png
-.. |image8| image:: media/mysql/bb7a3ece795b37ddab9739239db56cba.png
-.. |image9| image:: media/mysql/111d5345a31e233ccb60ded4a60544d6.png
-.. |image10| image:: media/mysql/a861b8f899652ba17a52164a68e7eff1.png
-.. |image11| image:: media/mysql/4714e4db4ab9a0aa8d6fc138cf9c8008.png
-.. |image13| image:: media/mysql/ab4674f21f2fc9e25ec095df63618083.png
-.. |image14| image:: media/mysql/cf783ef4218b67ef57032e8376971215.png
-.. |image15| image:: media/mysql/6b23e9c9f2f642f2d6c53baf8cc484d6.png
-.. |image16| image:: media/mysql/e9641caf9abf8bba063471a4e9f9916d.png
-.. |image17| image:: media/mysql/e6128fc4762fdda86d819620d78cdc9c.png
-.. |image18| image:: media/mysql/887e8d7f8c7e088cb9c7f96d9168cf8c.png
-.. |image19| image:: media/mysql/106ae62f020c7f55d219811e4882baef.png
-.. |image20| image:: media/mysql/17bb76c0b830cbda0751ffe3937d517c.png
-.. |image21| image:: media/mysql/08a3501bb52b1d366b048f4812f02b35.png
-.. |image22| image:: media/mysql/d4e1f772e247da6858626119058e67ce.png
-.. |image23| image:: media/mysql/71317628d7842dda4a27e581be2ed7df.png
-.. |image24| image:: media/mysql/6873d7cb2ededd6af4d6f6be722c5d8b.png
-.. |image25| image:: media/mysql/95ba3bad9e4924724f58ba500f6712f6.png
-.. |image26| image:: media/mysql/4a380904ab739fa95cebf1b256839bdf.png
-.. |image27| image:: media/mysql/bce5c503ddc9cfd9f64b6cfe34898bc1.png
-.. |image28| image:: media/mysql/d7e61ccf373cf8cfd86e8fb46db876e0.png
-.. |image29| image:: media/mysql/199b91629eb21de2750dc36ac3f94926.png
-.. |image30| image:: media/mysql/3e36a6711fd331c747ee4b4efef7da3e.png
-.. |image31| image:: media/mysql/c352d199352dd4ba31cb2a7c8a786852.png
+安全通信
+~~~~~~~~~~~~~~~
+
+SSL模型
+---------------
+
+MySQL支持SSL通信加密及SSL双向认证(X509)的安全机制。在查阅资料时(20-09-17)，MySQL仅对5.6、5.7、8.0三个版本提供支持，官方文档也只包括这三个版本，这三个版本全系列均支持SSL功能。老版本中，MySQL 5.5查得到SSL配置文档，但更老的版本缺失资料。
+
+在5.6.46前及5.7.28前的MySQL版本中，MySQL同时支持使用yaSSL库或OpenSSL库进行编译。MySQL 8.0全系列及较新的5.6、5.7版本仅支持使用OpenSSL库编译。yaSSL支持的特性较少，如不支持X509双向认证、最高支持TLSv1.0版本的协议等。在数据库中可通过查询ssl相关的全局变量，获取MySQL编译时是否引入了SSL库(have_ssl)，是否使用 OpenSSL库编译(have_openssl)。如果这两个参数为DISABLED，则说明该数据库支持SSL，但未启用。
+
+.. image:: media/mysql/4a380904ab739fa95cebf1b256839bdf.png
+   :align: center
+
+
+操作手册
+---------------
+
+配置SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. 生成证书：
+
+- MySQL 5.6 及以下，用户只能通过OpenSSL手动生成证书及密钥。
+
+- MySQL 5.7以上，安装后在 ``/usr/bin/`` 下释放一个二进制文件 ``mysql_ssl_rsa_setup`` 。当MySQL的data目录下不存在 ``ca.pem`` 、 ``server-cert.pem`` 、 ``server-key.pem`` 时，运行该程序后会自动调用OpenSSL，在data目录下生成相关证书和密钥。 
+
+.. image:: media/mysql/c352d199352dd4ba31cb2a7c8a786852.png
+   :align: center
+
+2. 将证书复制到data文件夹内（记得设置权限<600)。之后在配置中，加入 ``ssl_ca`` 、 ``ssl_cert`` 、 ``ssl_key`` 参数，导入相关证书和密钥，并重启服务器后，即可开启SSL。
+
+配置X509
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+（没试过，抄的）
+
+把 ``mysql_ssl_rsa_setup`` 生成的 ``ca.pem`` (私有CA证书)、 ``client-cert.pem`` (客户端证书)、 ``client-key.pem`` (客户端密钥)复制到客户端，之后通过以下命令连接：
+
+.. code-block:: bash
+
+   mysql -u'user' \
+         -p'pass' \
+         -h mysql_server_IP \
+         --ssl-ca=/path/to/ca.pem \
+         --ssl-cert=/path/to/client-cert.pem \
+         --ssl-key=/path/to/client-key.pem
+
+或将以上参数添加到 ``~/.my.cnf`` 文件中：
+
+.. code-block:: kconfig
+
+   [client]
+   ssl-ca = /path/to/ca.pem
+   ssl-cert = /path/to/client-cert.pem
+   ssl-key = /path/to/client-key.pem
+
+配置强制SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: sql
+
+   -- 核查是否支持SSL，是否配置了证书、CA证书和Key
+   SHOW GLOBAL VARIABLES LIKE '%ssl%';
+
+   -- 以下情况二选一配置，任意一条有效均可
+   -- 配置全局变量，限制所有用户仅允许使用SSL连接
+   SHOW GLOBAL VARIABLES LIKE 'require_secure_transport';
+   -- 为所有远程连接用户单独配置，限制仅允许使用SSL连接
+   -- 关注ssl_type参数，为ANY或X509均可，不得为Null
+   SELECT host, user, ssl_type, ssl_cipher, x509_issuer, x509_subject 
+   FROM mysql.`user`;
+
+.. image:: media/mysql/bce5c503ddc9cfd9f64b6cfe34898bc1.png
+   :align: center
+
+查看当前连接是否为SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: sql
+
+   -- 在JDBC查询中用show status like命令
+   -- 如果是SSL连接，ssl_cipher和ssl_version均不为空
+   SHOW STATUS LIKE '%ssl%';
+   -- 在MySQL Native Client中可直接使用status命令(或\s)
+   status;
+
+.. image:: media/mysql/d7e61ccf373cf8cfd86e8fb46db876e0.png
+   :align: center
