@@ -91,5 +91,8 @@ nginx.conf
          listen 80 default_server;
          server_name _;
          root /var/www/html;
+
+         error_page 404 /404.html;
+         error_page 400 403 500 502 503 504 /error.html;
       }
    }
