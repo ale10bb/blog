@@ -56,7 +56,7 @@ Dockerfile
 
 .. code-block:: docker
 
-   FROM nginx:stable
+   FROM nginx:stable-alpine
    ADD ./docker/nginx.conf /etc/nginx/nginx.conf
    # COPY 挖矿木马&病毒 /guess/where/they/are
    ADD ./html /var/www/html
