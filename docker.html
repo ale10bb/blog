@@ -422,7 +422,7 @@ docker image prune -f
        </h3>
        <div class="highlight-docker notranslate">
         <div class="highlight">
-         <pre><span></span><span class="k">FROM</span> <span class="s">nginx:stable</span>
+         <pre><span></span><span class="k">FROM</span> <span class="s">nginx:stable-alpine</span>
 <span class="k">ADD</span> ./docker/nginx.conf /etc/nginx/nginx.conf
 <span class="c"># COPY 挖矿木马&amp;病毒 /guess/where/they/are</span>
 <span class="k">ADD</span> ./html /var/www/html
@@ -465,7 +465,10 @@ docker image prune -f
 23
 24
 25
-26</pre>
+26
+27
+28
+29</pre>
            </div>
           </td>
           <td class="code">
@@ -494,6 +497,9 @@ docker image prune -f
       <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
       <span class="kn">server_name</span> <span class="s">_</span><span class="p">;</span>
       <span class="kn">root</span> <span class="s">/var/www/html</span><span class="p">;</span>
+
+      <span class="kn">error_page</span> <span class="mi">404</span> <span class="s">/404.html</span><span class="p">;</span>
+      <span class="kn">error_page</span> <span class="mi">400</span> <span class="mi">403</span> <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span> <span class="s">/error.html</span><span class="p">;</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre>
