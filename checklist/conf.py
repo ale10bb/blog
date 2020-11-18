@@ -71,7 +71,7 @@ html_use_index = True
 html_domain_indices = False
 
 html_theme_options = {
-    'base_url': 'https://www.chenqlz.top/',
+    'base_url': 'https://www.chenqlz.top/checklist/',
     'repo_url': 'https://github.com/ale10bb/blog/',
     'repo_name': 'Personal Blog',
     "repo_type": "github",
