@@ -38,8 +38,8 @@
   <title>
    MySQL — 学习笔记
   </title>
-  <link href="_static/material.css" rel="stylesheet" type="text/css"/>
   <link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/material.css" rel="stylesheet" type="text/css"/>
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
@@ -3085,7 +3085,7 @@ mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
          <ul>
           <li>
            <p>
-            每个客户端采用ID进行标识(ID为自增主键，服务器重启后重置)，如果要追溯操作的主体，只能靠搜索该ID的Connect操作实现；
+            每个客户端采用ID进行标识(ID为自增主键)，如果要追溯操作的主体，只能靠搜索该ID的Connect操作实现；
            </p>
           </li>
           <li>
@@ -4238,7 +4238,7 @@ ssl-key <span class="o">=</span> /path/to/client-key.pem
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      3.2.1.
+      3.3.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for
