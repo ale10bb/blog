@@ -1,0 +1,4 @@
+[submodule "build/html"]
+	path = build/html
+	url = https://github.com/ale10bb/blog.git
+	branch = gh-pages

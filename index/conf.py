@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = '学习笔记'
-copyright = '2020, 腿哥牛逼'
+copyright = '2021, 腿哥牛逼'
 author = '腿哥牛逼'
 html_title = '学习笔记'
 
@@ -61,17 +61,17 @@ html_theme = 'sphinx_material'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['../_static']
+html_extra_path = ['extra/robots.txt', 'extra/sitemap.xml']
 
 html_copy_source = False
 html_show_sourcelink = False
 
 html_logo = '../_static/logo.png'
 html_favicon = '../_static/favicon.png'
-html_use_index = True
+html_use_index = False
 html_domain_indices = False
 
 html_theme_options = {
-    'base_url': 'https://www.chenqlz.top/',
     'repo_url': 'https://github.com/ale10bb/blog/',
     'repo_name': 'Personal Blog',
     "repo_type": "github",
@@ -81,7 +81,7 @@ html_theme_options = {
     'globaltoc_depth': 2,
     "master_doc": False,
     "nav_links": [
-        {"href": "index", "internal": True, "title": "项目简介"},
+        {"href": "index", "internal": True, "title": "README"},
         {"href": "checklist/index", "internal": True, "title": "CheckList"}
     ],
     "heroes": {
@@ -90,5 +90,5 @@ html_theme_options = {
 }
 
 html_sidebars = {
-    "**": ["globaltoc.html", "localtoc.html"]
+    "**": ["localtoc.html"]
 }

@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = '学习笔记'
-copyright = '2020, 腿哥牛逼'
+copyright = '2021, 腿哥牛逼'
 author = '腿哥牛逼'
 html_title = '学习笔记'
 
@@ -30,7 +30,6 @@ html_title = '学习笔记'
 extensions = [
     'recommonmark',
     'sphinx_markdown_tables',
-    'sphinx.ext.githubpages',
     'sphinx_copybutton'
 ]
 
@@ -81,7 +80,7 @@ html_theme_options = {
     'globaltoc_depth': 2,
     "master_doc": False,
     "nav_links": [
-        {"href": "../index", "internal": True, "title": "项目简介"},
+        {"href": "../index", "internal": True, "title": "README"},
         {"href": "index", "internal": True, "title": "CheckList"}
     ],
     "heroes": {
@@ -90,5 +89,5 @@ html_theme_options = {
 }
 
 html_sidebars = {
-    "**": ["globaltoc.html", "localtoc.html", "searchbox.html"]
+    "**": ["globaltoc.html", "localtoc.html", "relations.html", "searchbox.html"]
 }

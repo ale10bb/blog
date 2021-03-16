@@ -1,0 +1,6 @@
+.git*
+.vscode
+build
+LICENSE
+make.bat
+README.md
