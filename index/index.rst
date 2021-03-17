@@ -58,12 +58,12 @@ build from src
 .. code-block:: 
 
    git clone https://github.com/ale10bb/blog.git
-   python -m venv sphinx-build
-   sphinx-build\Scripts\activate
-   pip install -r blog\requirements.txt
-   blog\make
+   cd blog
+   python3 -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   .\make
    deactivate
-
 
 LICENSE
 ~~~~~~~~~~~~~~~

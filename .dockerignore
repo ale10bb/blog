@@ -1,5 +1,6 @@
 .git*
 .vscode
+.venv
 build
 LICENSE
 make.bat
