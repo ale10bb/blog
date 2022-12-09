@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <meta content="Copy to clipboard" name="lang:clipboard.copy"/>
+  <meta content="Copied to clipboard" name="lang:clipboard.copied"/>
+  <meta content="en" name="lang:search.language"/>
+  <meta content="True" name="lang:search.pipeline.stopwords"/>
+  <meta content="True" name="lang:search.pipeline.trimmer"/>
+  <meta content="No matching documents" name="lang:search.result.none"/>
+  <meta content="1 matching document" name="lang:search.result.one"/>
+  <meta content="# matching documents" name="lang:search.result.other"/>
+  <meta content="[\s\-]+" name="lang:search.tokenizer"/>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&amp;display=fallback" rel="stylesheet"/>
+  <style>
+   body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+  </style>
+  <link href="_static/stylesheets/application.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-palette.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-fixes.css" rel="stylesheet"/>
+  <link href="_static/fonts/material-icons.css" rel="stylesheet"/>
+  <meta content="#3f51b5" name="theme-color"/>
+  <script src="_static/javascripts/modernizr.js">
+  </script>
+  <title>
+   DB2 — 学习笔记
+  </title>
+  <link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/material.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
+  </script>
+  <script src="_static/jquery.js">
+  </script>
+  <script src="_static/underscore.js">
+  </script>
+  <script src="_static/_sphinx_javascript_frameworks_compat.js">
+  </script>
+  <script src="_static/doctools.js">
+  </script>
+  <script src="_static/sphinx_highlight.js">
+  </script>
+  <script src="_static/clipboard.min.js">
+  </script>
+  <script src="_static/copybutton.js">
+  </script>
+  <script src="_static/translations.js">
+  </script>
+  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="genindex.html" rel="index" title="索引"/>
+  <link href="search.html" rel="search" title="搜索"/>
+  <link href="db_domestic.html" rel="next" title="国产数据库"/>
+  <link href="redis.html" rel="prev" title="Redis"/>
+ </head>
+ <body data-md-color-accent="blue" data-md-color-primary="blue-grey" dir="ltr">
+  <svg class="md-svg">
+   <defs data-children-count="0">
+    <svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg">
+     <path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor">
+     </path>
+    </svg>
+   </defs>
+  </svg>
+  <input class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+  <input class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+  <label class="md-overlay" data-md-component="overlay" for="__drawer">
+  </label>
+  <a class="md-skip" href="#db2" tabindex="1">
+   Skip to content
+  </a>
+  <header class="md-header" data-md-component="header">
+   <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
+       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
+      </a>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer">
+      </label>
+     </div>
+     <div class="md-flex__cell md-flex__cell--stretch">
+      <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+       <span class="md-header-nav__topic">
+        学习笔记
+       </span>
+       <span class="md-header-nav__topic">
+        DB2
+       </span>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--search md-header-nav__button" for="__search">
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+       <label class="md-search__overlay" for="__search">
+       </label>
+       <div class="md-search__inner" role="search">
+        <form action="search.html" class="md-search__form" method="get" name="search">
+         <input autocapitalize="off" autocomplete="off" class="md-search__input" data-md-component="query" data-md-state="active" name="q" placeholder="Search" spellcheck="false" type="text"/>
+         <label class="md-icon md-search__icon" for="__search">
+         </label>
+         <button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+          
+         </button>
+        </form>
+        <div class="md-search__output">
+         <div class="md-search__scrollwrap" data-md-scrollfix="">
+          <div class="md-search-result" data-md-component="result">
+           <div class="md-search-result__meta">
+            Type to start searching
+           </div>
+           <ol class="md-search-result__list">
+           </ol>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <div class="md-header-nav__source">
+       <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+        <div class="md-source__icon">
+         <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <use height="24" width="24" xlink:href="#__github">
+          </use>
+         </svg>
+        </div>
+        <div class="md-source__repository">
+         Personal Blog
+        </div>
+       </a>
+      </div>
+     </div>
+     <script src="_static/javascripts/version_dropdown.js">
+     </script>
+     <script>
+      var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+     </script>
+    </div>
+   </nav>
+  </header>
+  <div class="md-container">
+   <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+     <ul class="md-tabs__list">
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="../index.html">
+        README
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="index.html">
+        CheckList
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="db_common.html">
+        通用数据库
+       </a>
+      </li>
+     </ul>
+    </div>
+   </nav>
+   <main class="md-main">
+    <div class="md-main__inner md-grid" data-md-component="container">
+     <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--primary" data-md-level="0">
+         <label class="md-nav__title md-nav__title--site" for="__drawer">
+          <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
+           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+          </a>
+          <a href="index.html" title="学习笔记">
+           学习笔记
+          </a>
+         </label>
+         <div class="md-nav__source">
+          <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+           <div class="md-source__icon">
+            <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+             <use height="24" width="24" xlink:href="#__github">
+             </use>
+            </svg>
+           </div>
+           <div class="md-source__repository">
+            Personal Blog
+           </div>
+          </a>
+         </div>
+         <ul class="md-nav__list">
+          <li class="md-nav__item">
+           <span class="md-nav__link caption">
+            <span class="caption-text">
+             计算环境索引
+            </span>
+           </span>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_common.html">
+            通用操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_domestic.html">
+            国产操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_common.html">
+            通用数据库
+           </a>
+           <ul class="md-nav__list">
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="mysql.html">
+              MySQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="oracle.html">
+              Oracle
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="mssql.html">
+              MSSQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="pg.html">
+              PostgreSQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="redis.html">
+              Redis
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+             <label class="md-nav__link md-nav__link--active" for="__toc">
+              DB2
+             </label>
+             <a class="md-nav__link md-nav__link--active" href="#">
+              DB2
+             </a>
+             <nav class="md-nav md-nav--secondary">
+              <label class="md-nav__title" for="__toc">
+               Contents
+              </label>
+              <ul class="md-nav__list" data-md-scrollfix="">
+               <li class="md-nav__item">
+                <a class="md-nav__link" href="#db2--page-root">
+                 DB2
+                </a>
+                <nav class="md-nav">
+                 <ul class="md-nav__list">
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id2">
+                    身份鉴别
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id3">
+                       认证模型
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id4">
+                       核查命令
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id5">
+                    访问控制
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id6">
+                       权限模型
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id7">
+                          管理权限
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id8">
+                       核查命令
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id9">
+                       运维命令
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id10">
+                    安全审计
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id11">
+                       审计概述
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id12">
+                       审计对象
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id13">
+                       日志格式
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id14">
+                       日志缓冲区
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id15">
+                       日志读取
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id16">
+                       核查命令
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id17">
+                    安全通信
+                   </a>
+                  </li>
+                 </ul>
+                </nav>
+               </li>
+              </ul>
+             </nav>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id2">
+              免费工具们
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id3">
+              实验环境搭建
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_domestic.html">
+            国产数据库
+           </a>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--secondary">
+         <label class="md-nav__title" for="__toc">
+          Contents
+         </label>
+         <ul class="md-nav__list" data-md-scrollfix="">
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="#db2--page-root">
+            DB2
+           </a>
+           <nav class="md-nav">
+            <ul class="md-nav__list">
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id2">
+               身份鉴别
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id3">
+                  认证模型
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id4">
+                  核查命令
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id5">
+               访问控制
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id6">
+                  权限模型
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id7">
+                     管理权限
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id8">
+                  核查命令
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id9">
+                  运维命令
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id10">
+               安全审计
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id11">
+                  审计概述
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id12">
+                  审计对象
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id13">
+                  日志格式
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id14">
+                  日志缓冲区
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id15">
+                  日志读取
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id16">
+                  核查命令
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id17">
+               安全通信
+              </a>
+             </li>
+            </ul>
+           </nav>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-content">
+      <article class="md-content__inner md-typeset" role="main">
+       <section id="db2">
+        <h1 id="db2--page-root">
+         <a class="toc-backref" href="#db2--page-root" role="doc-backlink">
+          DB2
+         </a>
+         <a class="headerlink" href="#db2--page-root" title="此标题的永久链接">
+          ¶
+         </a>
+        </h1>
+        <ul>
+         <li>
+          <p>
+           维护者
+          </p>
+          <blockquote>
+           <div>
+            <ul class="simple">
+             <li>
+              <p>
+               IBM
+              </p>
+             </li>
+            </ul>
+           </div>
+          </blockquote>
+         </li>
+         <li>
+          <p>
+           是否免费
+          </p>
+          <blockquote>
+           <div>
+            <ul>
+             <li>
+              <p>
+               DB2 Community Edition：免费&amp;开源&amp;受限
+              </p>
+              <blockquote>
+               <div>
+                <ul class="simple">
+                 <li>
+                  <p>
+                   Memory limit: 16GB
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   Core limit: 4 cores
+                  </p>
+                 </li>
+                </ul>
+               </div>
+              </blockquote>
+             </li>
+             <li>
+              <p>
+               DB2：收费
+              </p>
+             </li>
+             <li>
+              <p>
+               DB2 on Cloud：常规云服务
+              </p>
+             </li>
+            </ul>
+           </div>
+          </blockquote>
+         </li>
+         <li>
+          <p>
+           Latest Release
+          </p>
+          <blockquote>
+           <div>
+            <ul class="simple">
+             <li>
+              <p>
+               <a class="reference external" href="https://hub.docker.com/r/ibmcom/db2">
+                Docker Hub
+               </a>
+              </p>
+             </li>
+            </ul>
+           </div>
+          </blockquote>
+         </li>
+        </ul>
+        <hr class="docutils"/>
+        <nav class="contents" id="id1">
+         <p class="topic-title">
+          目录
+         </p>
+         <ul class="simple">
+          <li>
+           <p>
+            <a class="reference internal" href="#db2" id="id19">
+             DB2
+            </a>
+           </p>
+           <ul>
+            <li>
+             <p>
+              <a class="reference internal" href="#id2" id="id20">
+               身份鉴别
+              </a>
+             </p>
+             <ul>
+              <li>
+               <p>
+                <a class="reference internal" href="#id3" id="id21">
+                 认证模型
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id4" id="id22">
+                 核查命令
+                </a>
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <a class="reference internal" href="#id5" id="id23">
+               访问控制
+              </a>
+             </p>
+             <ul>
+              <li>
+               <p>
+                <a class="reference internal" href="#id6" id="id24">
+                 权限模型
+                </a>
+               </p>
+               <ul>
+                <li>
+                 <p>
+                  <a class="reference internal" href="#id7" id="id25">
+                   管理权限
+                  </a>
+                 </p>
+                </li>
+               </ul>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id8" id="id26">
+                 核查命令
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id9" id="id27">
+                 运维命令
+                </a>
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <a class="reference internal" href="#id10" id="id28">
+               安全审计
+              </a>
+             </p>
+             <ul>
+              <li>
+               <p>
+                <a class="reference internal" href="#id11" id="id29">
+                 审计概述
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id12" id="id30">
+                 审计对象
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id13" id="id31">
+                 日志格式
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id14" id="id32">
+                 日志缓冲区
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id15" id="id33">
+                 日志读取
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id16" id="id34">
+                 核查命令
+                </a>
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <a class="reference internal" href="#id17" id="id35">
+               安全通信
+              </a>
+             </p>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </nav>
+        <hr class="docutils"/>
+        <section id="id2">
+         <h2 id="id2">
+          <a class="toc-backref" href="#id20" role="doc-backlink">
+           身份鉴别
+          </a>
+          <a class="headerlink" href="#id2" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id3">
+          <h3 id="id3">
+           <a class="toc-backref" href="#id21" role="doc-backlink">
+            认证模型
+           </a>
+           <a class="headerlink" href="#id3" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           可从
+           <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.sec.doc/doc/c0005435.html">
+            IBM官网
+           </a>
+           查询DB2的身份认证机制详解。DB2的认证方式保存在配置文件中，查看
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             AUTHENTICATION
+            </span>
+           </code>
+           相关的参数即可，主要身份认证方式如下：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               SERVER
+              </span>
+             </code>
+             （默认值） 将客户端输入的用户名和密码发送至服务器，由服务器的安全性机制（如PAM）进行认证以确定是否允许该用户访问实例。
+            </p>
+           </li>
+          </ul>
+          <div class="admonition hint">
+           <p class="admonition-title">
+            提示
+           </p>
+           <p>
+            对于来自服务器的本地连接，当认证类型是 SERVER 时，不需用户标识和密码就可认证成功。
+           </p>
+          </div>
+          <ul class="simple">
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               SERVER_ENCRYPT
+              </span>
+             </code>
+             同上，但客户端和服务器会先协商生成密钥，并对认证过程采用AES或DES方式加密（但不是基于SSL/TLS）。
+            </p>
+           </li>
+          </ul>
+          <p>
+           <a class="reference internal" href="_images/image1.png">
+            <img alt="image1" src="_images/image1.png" style="width: 5.76806in; height: 1.66806in;"/>
+           </a>
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               CLIENT
+              </span>
+             </code>
+             由客户端的安全性机制进行认证，可视为单点登录。根据服务器端trust_allclnts及trust_clntauth配置的不同，可以控制是否对客户端进行完全信任。
+            </p>
+           </li>
+          </ul>
+          <p>
+           <a class="reference internal" href="_images/image2.png">
+            <img alt="image2" src="_images/image2.png" style="width: 5.76806in; height: 2.79722in;"/>
+           </a>
+          </p>
+          <table id="id18">
+           <caption>
+            <span class="caption-text">
+             认证主体
+            </span>
+            <a class="headerlink" href="#id18" title="此表格的永久链接">
+             ¶
+            </a>
+           </caption>
+           <thead>
+            <tr class="row-odd">
+             <th class="head">
+              <p>
+               TRUST_ALLCLNTS
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               TRUST_CLNTAUTH
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               不可信非 DRDA® 客户机认证（没有用户标识和密码）
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               不可信非 DRDA 客户机认证（具有用户标识和密码）
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               可信非 DRDA 客户机认证（没有用户标识和密码）
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               可信非 DRDA 客户机认证（具有用户标识和密码）
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               DRDA 客户机认证（没有用户标识和密码）
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               DRDA 客户机认证（有用户标识和密码）
+              </p>
+             </th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="row-even">
+             <td>
+              <p>
+               YES
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               YES
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               NO
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               NO
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               DRDAONLY
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               DRDAONLY
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+             <td>
+              <p>
+               CLIENT
+              </p>
+             </td>
+             <td>
+              <p>
+               SERVER
+              </p>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+          <ul class="simple">
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               DATA_ENCRYPT
+              </span>
+             </code>
+             与
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               SERVER_ENCRYPT
+              </span>
+             </code>
+             类似，但会强制对整个通信进行加密。
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               DATA_ENCRYPT_CMP
+              </span>
+             </code>
+             与DATA_ENCRYPT类似，但提供了向下兼容性，允许客户端采用非加密方式通信。
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               KERBEROS
+              </span>
+             </code>
+             and
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               KERBEROS_SERVER_ENCRYPT
+              </span>
+             </code>
+             略
+            </p>
+           </li>
+           <li>
+            <p>
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               GSSPLUGIN
+              </span>
+             </code>
+             AND
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               GSS_SERVER_ENCRYPT
+              </span>
+             </code>
+             略（服务器级别第三方插件）
+            </p>
+           </li>
+          </ul>
+         </section>
+         <section id="id4">
+          <h3 id="id4">
+           <a class="toc-backref" href="#id22" role="doc-backlink">
+            核查命令
+           </a>
+           <a class="headerlink" href="#id4" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="highlight-bash notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># 在操作系统中核查配置</span>
+db2 attach to db2apm
+
+<span class="c1"># 核查配置</span>
+db2 get dbm cfg <span class="p">|</span> grep AUTHENTICATION
+
+-- 列出所有帐户
+-- SERVER认证方式下，可直接通过db2命令连接数据库并执行命令
+db2 <span class="s2">"SELETE authid FROM sysibmadm.authorizationids WHERE authidtype = 'U'"</span>
+</pre>
+           </div>
+          </div>
+         </section>
+        </section>
+        <section id="id5">
+         <h2 id="id5">
+          <a class="toc-backref" href="#id23" role="doc-backlink">
+           访问控制
+          </a>
+          <a class="headerlink" href="#id5" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id6">
+          <h3 id="id6">
+           <a class="toc-backref" href="#id24" role="doc-backlink">
+            权限模型
+           </a>
+           <a class="headerlink" href="#id6" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           在DB2中，授权分为两个层次，一个是管理权限，另一个是对象权限（privilege）。管理权限是比较高层次的权限，包含实例的管理命令、数据库管理命令等。而特权则是低层次的针对某一个对象的访问权限。
+          </p>
+          <p>
+           有关权限的信息存储在系统编目表（SYSCAT）中，可以通过下面的语句看到所有的信息。
+          </p>
+          <div class="highlight-bash notranslate">
+           <div class="highlight">
+            <pre><span></span>db2 <span class="s2">"SELECT SUBSTR(tabname, 1, 20) FROM syscat.tables WHERE tabschema='SYSCAT' AND tabname LIKE '%AUTH'"</span>
+</pre>
+           </div>
+          </div>
+          <section id="id7">
+           <h4 id="id7">
+            <a class="toc-backref" href="#id25" role="doc-backlink">
+             管理权限
+            </a>
+            <a class="headerlink" href="#id7" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            在管理权限中包括两大类，一类是实例级的管理权限，另一类是数据库级的管理权限。管理权限的特点及命令如下表所示：
+           </p>
+           <table>
+            <thead>
+             <tr class="row-odd">
+              <th class="head">
+               <p>
+                管理权限类型
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                涉及权限
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                特点
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                授予方法
+               </p>
+              </th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr class="row-even">
+              <td>
+               <p>
+                实例级管理权限
+               </p>
+              </td>
+              <td>
+               <p>
+                SYSADM
+               </p>
+               <p>
+                SYSCTRL
+               </p>
+               <p>
+                SYSMAINT
+               </p>
+               <p>
+                SYSMON
+               </p>
+              </td>
+              <td>
+               <p>
+                决定是否有权利进行特定的
+               </p>
+               <p>
+                数据库管理工作，比如执行
+               </p>
+               <p>
+                备份恢复等操作。在这些权
+               </p>
+               <p>
+                限中SYSADM具有最大权限，
+               </p>
+               <p>
+                它不仅能进行实例管理工
+               </p>
+               <p>
+                作，甚至包含了DBADM的权
+               </p>
+               <p>
+                限，可以访问和操作数据库
+               </p>
+               <p>
+                里的数据。
+               </p>
+              </td>
+              <td>
+               <p>
+                在DBM CFG中有四个参数，
+               </p>
+               <p>
+                需要把这四个参数设置成
+               </p>
+               <p>
+                操作系统的组，在组里的
+               </p>
+               <p>
+                用户自动获得相应的管理
+               </p>
+               <p>
+                权限。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                数据库管理权限
+               </p>
+              </td>
+              <td>
+               <p>
+                DBADM
+               </p>
+               <p>
+                SECADM
+               </p>
+               <p>
+                LOAD
+               </p>
+              </td>
+              <td>
+               <p>
+                决定是否能对数据库数据进
+               </p>
+               <p>
+                行管理，创建数据库对象、
+               </p>
+               <p>
+                导入等操作。SECADM负责数
+               </p>
+               <p>
+                据库安全相关的操作，比如
+               </p>
+               <p>
+                管理可信上下文和基于标签
+               </p>
+               <p>
+                的访问控制（LBAC）。
+               </p>
+              </td>
+              <td>
+               <p>
+                使用GRANT把相应权限授予
+               </p>
+               <p>
+                用户或者组。
+               </p>
+              </td>
+             </tr>
+            </tbody>
+           </table>
+           <p>
+            除了管理权限，还有一些针对具体数据库对象的特权，这些特权也是通过GRANT和REVOKE语句授予和撤销的，授予对象可以是一个用户，一个用户组，或者全部用户（PUBLIC）。可通过下表看到创建或控制某个对象所需要的权限。
+           </p>
+           <table>
+            <thead>
+             <tr class="row-odd">
+              <th class="head">
+               <p>
+                数据库对象
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                重建对象所需权限
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                控制对象所需权限
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                与对象相关的权限
+               </p>
+              </th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr class="row-even">
+              <td>
+               <p>
+                数据库
+               </p>
+               <p>
+                （Database）
+               </p>
+              </td>
+              <td>
+               <p>
+                SYSADM
+               </p>
+               <p>
+                SYSCTRL
+               </p>
+              </td>
+              <td>
+               <p>
+                DBADM
+               </p>
+              </td>
+              <td>
+               <p>
+                CONNECT
+               </p>
+               <p>
+                BINDADD
+               </p>
+               <p>
+                CREATETAB
+               </p>
+               <p>
+                NOFENCE
+               </p>
+               <p>
+                IMPLICIT_SCHEMA
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                包（Package）
+               </p>
+              </td>
+              <td>
+               <p>
+                BINDADD
+               </p>
+              </td>
+              <td>
+               <p>
+                CONTROL
+               </p>
+              </td>
+              <td>
+               <p>
+                BIND
+EXECUTE
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                表（Table）
+               </p>
+               <p>
+                视图（View）
+               </p>
+              </td>
+              <td>
+               <p>
+                CREATEAB（表）
+               </p>
+               <p>
+                CONTROL（视图）
+               </p>
+               <p>
+                SELECT（视图）
+               </p>
+              </td>
+              <td>
+               <p>
+                CONTROL
+               </p>
+              </td>
+              <td>
+               <p>
+                SELECT（表/视图）
+               </p>
+               <p>
+                INSERT（表/视图）
+               </p>
+               <p>
+                DELETE（表/视图）
+               </p>
+               <p>
+                UPDATE（表/视图）
+               </p>
+               <p>
+                ALTER（表）
+               </p>
+               <p>
+                INDEX（表）
+               </p>
+               <p>
+                REFERENCES（表）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                索引（Index）
+               </p>
+              </td>
+              <td>
+               <p>
+                INDEX
+               </p>
+              </td>
+              <td>
+               <p>
+                CONTROL
+               </p>
+              </td>
+              <td>
+               <p>
+                无
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                别名（Alias）
+               </p>
+              </td>
+              <td>
+               <p>
+                如果Schema
+不同于当前用户，
+               </p>
+               <p>
+                用户需要SYS
+ADM或DBADM权限
+               </p>
+              </td>
+              <td>
+               <p>
+                CONTROL
+               </p>
+              </td>
+              <td>
+               <p>
+                无
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                模式（Schema）
+               </p>
+              </td>
+              <td>
+               <p>
+                SYSADM
+               </p>
+               <p>
+                DBADM
+               </p>
+               <p>
+                IMPLICIT_SCHEMA
+               </p>
+              </td>
+              <td>
+               <p>
+                Schema的拥有者
+               </p>
+              </td>
+              <td>
+               <p>
+                CREATEIN
+               </p>
+               <p>
+                ALTERIN
+               </p>
+               <p>
+                DROPIN
+               </p>
+              </td>
+             </tr>
+            </tbody>
+           </table>
+          </section>
+         </section>
+         <section id="id8">
+          <h3 id="id8">
+           <a class="toc-backref" href="#id26" role="doc-backlink">
+            核查命令
+           </a>
+           <a class="headerlink" href="#id8" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="highlight-bash notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># DB2查看连接帐户权限</span>
+db2 <span class="s2">"SELECT * FROM syscat.dbauth WHERE GRANTEETYPE = 'U'"</span>
+</pre>
+           </div>
+          </div>
+         </section>
+         <section id="id9">
+          <h3 id="id9">
+           <a class="toc-backref" href="#id27" role="doc-backlink">
+            运维命令
+           </a>
+           <a class="headerlink" href="#id9" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="highlight-bash notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># 在操作系统层面，把SYSCTRL权限授予db2test帐户</span>
+db2 update dbm cfg using SYSCTRL_GROUP group1
+db2stop
+db2start
+</pre>
+           </div>
+          </div>
+          <div class="highlight-sql notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1">-- DBADM权限授予db2test</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">DBADM</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">db2test</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 撤销db2test用户的DBADM权限</span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="n">DBADM</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">db2test</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 把EMPLOYEE表的SELECT权限授予HERON</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">HERON</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 撤销HERON的SELECT权限</span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="n">HERON</span><span class="p">;</span><span class="w"></span>
+</pre>
+           </div>
+          </div>
+         </section>
+        </section>
+        <section id="id10">
+         <h2 id="id10">
+          <a class="toc-backref" href="#id28" role="doc-backlink">
+           安全审计
+          </a>
+          <a class="headerlink" href="#id10" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id11">
+          <h3 id="id11">
+           <a class="toc-backref" href="#id29" role="doc-backlink">
+            审计概述
+           </a>
+           <a class="headerlink" href="#id11" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           DB2 UDB 审计功能是一件重要的安全性工具。它可以生成对一系列预定义的数据库事件的审计跟踪，并允许DBA维护审计跟踪。它可以对一些数据库事件，例如授权检查、数据库对象维护、安全性维护、系统管理和用户验证等做日志记录。可在
+           <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.sec.doc/doc/c0050525.html">
+            IBM官网
+           </a>
+           获取审计功能的详细说明。
+          </p>
+          <p>
+           审计发生在实例级，为实例中的所有数据库服务。另外还有一个配置文件，用来设置审计选项。且审计功能必须单独启动和停止。例如，如果使用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             db2stop
+            </span>
+           </code>
+           命令停止一个实例，那么审计功能不会自动停止；它必须单独使用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             db2audit
+            </span>
+            <span class="pre">
+             stop
+            </span>
+           </code>
+           命令来停止。 只有具有
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             SYSADM
+            </span>
+           </code>
+           权限的用户才能配置和使用审计功能。
+          </p>
+          <p>
+           启动审计功能后，生成的审计记录被写入到一个缓冲区，然后刷新到磁盘上的一个审计文件中。审计结束后，便可以将审计文件从它本地的原始格式转换成一种易读的文本文件。还可以将审计记录装载到 DB2 表中，以便于使用 SQL 查询数据和生成定制的报告。
+          </p>
+          <p>
+           审计功能的文件存储和维护在实例的
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             security
+            </span>
+           </code>
+           文件夹中。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image3.gif">
+            <img alt="DB2 UDB 架构中的 DB2 审计功能" src="_images/image3.gif" style="width: 3.98819in; height: 4.30347in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="id12">
+          <h3 id="id12">
+           <a class="toc-backref" href="#id30" role="doc-backlink">
+            审计对象
+           </a>
+           <a class="headerlink" href="#id12" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="https://www.ibm.com/developerworks/cn/data/library/techarticles/dm-0603wasserman/index.html">
+            IBM官网
+           </a>
+           提供了审计事件类型及审计对象的详细描述。安全管理员可以创建审计策略来控制在单个数据库内审计的内容。对于特定对象，只能有一个审计策略有效。例如，不能同时有多个审计策略与同一个表关联。审计策略不能与视图或类型表关联。根据基础表的策略，将审计访问具有关联审计策略的表的视图。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image4.png">
+            <img alt="image3" src="_images/image4.png" style="width: 5.76806in; height: 4.96736in;"/>
+           </a>
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             整个数据库：根据审计策略，将审计该数据库内发生的所有可审计事件。
+            </p>
+           </li>
+           <li>
+            <p>
+             表：审计所有数据操作语言 (DML) 以及对表（无类型）、MQT（具体化查询表）或昵称的 XQUERY 访问。在访问表时，只生成包含或不包含数据的 EXECUTE 类别审计事件。
+            </p>
+           </li>
+           <li>
+            <p>
+             可信上下文：由特定可信上下文定义的可信连接内发生的所有可审计事件。
+            </p>
+           </li>
+           <li>
+            <p>
+             主体：审计由指定用户组或角色成员启动的所有可审计事件。
+            </p>
+           </li>
+           <li>
+            <p>
+             权限（SYSADM、SECADM、DBADM、SQLADM、WLMADM、ACCESSCTRL、DATAACCESS、SYSCTRL、SYSMAINT 和 SYSMON）审计由拥有指定权限的用户启动的所有可审计事件。
+            </p>
+           </li>
+          </ul>
+         </section>
+         <section id="id13">
+          <h3 id="id13">
+           <a class="toc-backref" href="#id31" role="doc-backlink">
+            日志格式
+           </a>
+           <a class="headerlink" href="#id13" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <table>
+           <thead>
+            <tr class="row-odd">
+             <th class="head">
+              <p>
+               <strong>
+                名称
+               </strong>
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               <strong>
+                格式
+               </strong>
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               <strong>
+                描述
+               </strong>
+              </p>
+             </th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="row-even">
+             <td>
+              <p>
+               时间戳
+              </p>
+             </td>
+             <td>
+              <p>
+               CHAR(26)
+              </p>
+             </td>
+             <td>
+              <p>
+               审计事件的日期和时间
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               类别
+              </p>
+             </td>
+             <td>
+              <p>
+               CHAR(8)
+              </p>
+             </td>
+             <td>
+              <p>
+               审计事件的类别。可能的值为：AUDIT
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               审计事件
+              </p>
+             </td>
+             <td>
+              <p>
+               CHAR(32)
+              </p>
+             </td>
+             <td>
+              <p>
+               特定的审计事件。可能的值包括：
+              </p>
+              <p>
+               CONFIGURE、DB2AUD、EXTRACT
+              </p>
+              <p>
+               FLUSH、PRUNE、START、STOP
+              </p>
+              <p>
+               UPDATE_ADMIN_CFG
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               事件相关符
+              </p>
+             </td>
+             <td>
+              <p>
+               INTEGER
+              </p>
+             </td>
+             <td>
+              <p>
+               被审计的操作的相关标识符。
+              </p>
+              <p>
+               可用于标识哪些审计记录与某个事件相关。
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               事件状态
+              </p>
+             </td>
+             <td>
+              <p>
+               INTEGER
+              </p>
+             </td>
+             <td>
+              <p>
+               审计事件的状态，由一个 SQLCODE
+表示，其中：
+              </p>
+              <ul class="simple">
+               <li>
+                <p>
+                 成功的事件 &gt;= 0
+                </p>
+               </li>
+               <li>
+                <p>
+                 失败的事件 &lt; 0
+                </p>
+               </li>
+              </ul>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               用户 ID
+              </p>
+             </td>
+             <td>
+              <p>
+               VARCHAR(1024)
+              </p>
+             </td>
+             <td>
+              <p>
+               审计事件发生时的用户 ID
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               权限 ID
+              </p>
+             </td>
+             <td>
+              <p>
+               VARCHAR(128)
+              </p>
+             </td>
+             <td>
+              <p>
+               审计事件发生时的权限 ID
+              </p>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </section>
+         <section id="id14">
+          <h3 id="id14">
+           <a class="toc-backref" href="#id32" role="doc-backlink">
+            日志缓冲区
+           </a>
+           <a class="headerlink" href="#id14" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           审计记录通常首先被写入到一个内存缓冲区，然后才刷新到磁盘。为了防止缓冲时间过长，DB2 定时强制地写审计记录。还可以使用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             db2audit
+            </span>
+            <span class="pre">
+             flush
+            </span>
+           </code>
+           命令手动地刷新审计缓冲区。
+          </p>
+          <p>
+           缓冲区的大小是由
+           <strong>
+            AUDIT_BUF_SZ
+           </strong>
+           这个数据库管理器配置参数决定的。该参数指定为审计缓冲分配的 4K 大小的页面的数量。如果缓冲区的大小大于 0，那么审计记录是异步写的（可能导致丢失一定审计记录）。如果将缓冲区大小设置为 0，那么将发生同步写日志操作，而不使用审计缓冲区。
+          </p>
+         </section>
+         <section id="id15">
+          <h3 id="id15">
+           <a class="toc-backref" href="#id33" role="doc-backlink">
+            日志读取
+           </a>
+           <a class="headerlink" href="#id15" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             db2audit.log
+            </span>
+           </code>
+           文件中的审计记录是以raw格式存储的。必须从该文件中将所有审计记录提取到一个文本文件中，然后才可以进行分析。也可以将审计记录提取到定界 ASCII 文件中。
+          </p>
+          <p>
+           可以使用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             db2audit
+            </span>
+            <span class="pre">
+             extract
+            </span>
+            <span class="pre">
+             file
+            </span>
+            <span class="pre">
+             &lt;dest&gt;
+            </span>
+           </code>
+           命令提取日志，并写入文本文件中。如果不指定一个文件名，那么这些记录将被写入到
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             $INSTHOME/sqllib/security/db2audit.out
+            </span>
+           </code>
+           文件中，其中
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             $INSTHOME
+            </span>
+           </code>
+           是实例的主目录。
+          </p>
+          <p>
+           也可以使用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             db2audit
+            </span>
+            <span class="pre">
+             extract
+            </span>
+            <span class="pre">
+             delasc
+            </span>
+            <span class="pre">
+             delimiter
+            </span>
+            <span class="pre">
+             !
+            </span>
+           </code>
+           命令，将记录提取到定界 ASCII 文件，以便后续导入数据库表。
+          </p>
+          <p>
+           提取日志时，可以指定类型CATEGORY、数据库DATABASE、事件状态STATUS 参数，如：
+          </p>
+          <div class="highlight-bash notranslate">
+           <div class="highlight">
+            <pre><span></span>db2audit extract delasc delimiter ! category audit database sample status failure
+</pre>
+           </div>
+          </div>
+         </section>
+         <section id="id16">
+          <h3 id="id16">
+           <a class="toc-backref" href="#id34" role="doc-backlink">
+            核查命令
+           </a>
+           <a class="headerlink" href="#id16" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="highlight-bash notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># 查看db2审计状态</span>
+<span class="c1"># 只有SYSADM权限的帐户可以使用该命令</span>
+db2audit describe
+</pre>
+           </div>
+          </div>
+          <p>
+           <a class="reference internal" href="_images/image5.jpeg">
+            <img alt="image4" src="_images/image5.jpeg" style="width: 3.625in; height: 2.175in;"/>
+           </a>
+          </p>
+         </section>
+        </section>
+        <section id="id17">
+         <h2 id="id17">
+          <a class="toc-backref" href="#id35" role="doc-backlink">
+           安全通信
+          </a>
+          <a class="headerlink" href="#id17" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          DB2支持配置通信SSL/TLS。
+          <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.sec.doc/doc/c0005815.html">
+           IBM官方文档
+          </a>
+          有详细的配置方法。
+         </p>
+         <p>
+          配置成功后，可在DB2配置文件中查找SSL_SVR_KEYDB、SSL_SVR_STASH等参数，如果有内容即为启用了SSL。
+         </p>
+        </section>
+       </section>
+      </article>
+     </div>
+    </div>
+   </main>
+  </div>
+  <footer class="md-footer">
+   <div class="md-footer-nav">
+    <nav class="md-footer-nav__inner md-grid">
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="redis.html" rel="prev" title="Redis">
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-back md-footer-nav__button">
+       </i>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Previous
+        </span>
+        Redis
+       </span>
+      </div>
+     </a>
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="db_domestic.html" rel="next" title="国产数据库">
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Next
+        </span>
+        国产数据库
+       </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-forward md-footer-nav__button">
+       </i>
+      </div>
+     </a>
+    </nav>
+   </div>
+   <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+     <div class="md-footer-copyright">
+      <div class="md-footer-copyright__highlight">
+       © Copyright 2021, 腿哥牛逼.
+      </div>
+      Created using
+      <a href="http://www.sphinx-doc.org/">
+       Sphinx
+      </a>
+      5.3.0.
+             and
+      <a href="https://github.com/bashtage/sphinx-material/">
+       Material for
+              Sphinx
+      </a>
+     </div>
+     <div class="md-footer-copyright" style="float: right">
+      <a href="https://beian.miit.gov.cn">
+       沪ICP备 2020030506号
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script src="_static/javascripts/application.js">
+  </script>
+  <script>
+   app.initialize({version: "1.0.4", url: {base: ".."}})
+  </script>
+ </body>
+</html>

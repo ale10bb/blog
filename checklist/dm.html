@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <meta content="Copy to clipboard" name="lang:clipboard.copy"/>
+  <meta content="Copied to clipboard" name="lang:clipboard.copied"/>
+  <meta content="en" name="lang:search.language"/>
+  <meta content="True" name="lang:search.pipeline.stopwords"/>
+  <meta content="True" name="lang:search.pipeline.trimmer"/>
+  <meta content="No matching documents" name="lang:search.result.none"/>
+  <meta content="1 matching document" name="lang:search.result.one"/>
+  <meta content="# matching documents" name="lang:search.result.other"/>
+  <meta content="[\s\-]+" name="lang:search.tokenizer"/>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&amp;display=fallback" rel="stylesheet"/>
+  <style>
+   body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+  </style>
+  <link href="_static/stylesheets/application.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-palette.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-fixes.css" rel="stylesheet"/>
+  <link href="_static/fonts/material-icons.css" rel="stylesheet"/>
+  <meta content="#3f51b5" name="theme-color"/>
+  <script src="_static/javascripts/modernizr.js">
+  </script>
+  <title>
+   达梦 — 学习笔记
+  </title>
+  <link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/material.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
+  </script>
+  <script src="_static/jquery.js">
+  </script>
+  <script src="_static/underscore.js">
+  </script>
+  <script src="_static/_sphinx_javascript_frameworks_compat.js">
+  </script>
+  <script src="_static/doctools.js">
+  </script>
+  <script src="_static/sphinx_highlight.js">
+  </script>
+  <script src="_static/clipboard.min.js">
+  </script>
+  <script src="_static/copybutton.js">
+  </script>
+  <script src="_static/translations.js">
+  </script>
+  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="genindex.html" rel="index" title="索引"/>
+  <link href="search.html" rel="search" title="搜索"/>
+  <link href="db_domestic.html" rel="prev" title="国产数据库"/>
+ </head>
+ <body data-md-color-accent="blue" data-md-color-primary="blue-grey" dir="ltr">
+  <svg class="md-svg">
+   <defs data-children-count="0">
+    <svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg">
+     <path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor">
+     </path>
+    </svg>
+   </defs>
+  </svg>
+  <input class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+  <input class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+  <label class="md-overlay" data-md-component="overlay" for="__drawer">
+  </label>
+  <a class="md-skip" href="#dm" tabindex="1">
+   Skip to content
+  </a>
+  <header class="md-header" data-md-component="header">
+   <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
+       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
+      </a>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer">
+      </label>
+     </div>
+     <div class="md-flex__cell md-flex__cell--stretch">
+      <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+       <span class="md-header-nav__topic">
+        学习笔记
+       </span>
+       <span class="md-header-nav__topic">
+        达梦
+       </span>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--search md-header-nav__button" for="__search">
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+       <label class="md-search__overlay" for="__search">
+       </label>
+       <div class="md-search__inner" role="search">
+        <form action="search.html" class="md-search__form" method="get" name="search">
+         <input autocapitalize="off" autocomplete="off" class="md-search__input" data-md-component="query" data-md-state="active" name="q" placeholder="Search" spellcheck="false" type="text"/>
+         <label class="md-icon md-search__icon" for="__search">
+         </label>
+         <button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+          
+         </button>
+        </form>
+        <div class="md-search__output">
+         <div class="md-search__scrollwrap" data-md-scrollfix="">
+          <div class="md-search-result" data-md-component="result">
+           <div class="md-search-result__meta">
+            Type to start searching
+           </div>
+           <ol class="md-search-result__list">
+           </ol>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <div class="md-header-nav__source">
+       <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+        <div class="md-source__icon">
+         <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <use height="24" width="24" xlink:href="#__github">
+          </use>
+         </svg>
+        </div>
+        <div class="md-source__repository">
+         Personal Blog
+        </div>
+       </a>
+      </div>
+     </div>
+     <script src="_static/javascripts/version_dropdown.js">
+     </script>
+     <script>
+      var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+     </script>
+    </div>
+   </nav>
+  </header>
+  <div class="md-container">
+   <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+     <ul class="md-tabs__list">
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="../index.html">
+        README
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="index.html">
+        CheckList
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="db_domestic.html">
+        国产数据库
+       </a>
+      </li>
+     </ul>
+    </div>
+   </nav>
+   <main class="md-main">
+    <div class="md-main__inner md-grid" data-md-component="container">
+     <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--primary" data-md-level="0">
+         <label class="md-nav__title md-nav__title--site" for="__drawer">
+          <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
+           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+          </a>
+          <a href="index.html" title="学习笔记">
+           学习笔记
+          </a>
+         </label>
+         <div class="md-nav__source">
+          <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+           <div class="md-source__icon">
+            <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+             <use height="24" width="24" xlink:href="#__github">
+             </use>
+            </svg>
+           </div>
+           <div class="md-source__repository">
+            Personal Blog
+           </div>
+          </a>
+         </div>
+         <ul class="md-nav__list">
+          <li class="md-nav__item">
+           <span class="md-nav__link caption">
+            <span class="caption-text">
+             计算环境索引
+            </span>
+           </span>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_common.html">
+            通用操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_domestic.html">
+            国产操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_common.html">
+            通用数据库
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_domestic.html">
+            国产数据库
+           </a>
+           <ul class="md-nav__list">
+            <li class="md-nav__item">
+             <input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+             <label class="md-nav__link md-nav__link--active" for="__toc">
+              达梦
+             </label>
+             <a class="md-nav__link md-nav__link--active" href="#">
+              达梦
+             </a>
+             <nav class="md-nav md-nav--secondary">
+              <label class="md-nav__title" for="__toc">
+               Contents
+              </label>
+              <ul class="md-nav__list" data-md-scrollfix="">
+               <li class="md-nav__item">
+                <a class="md-nav__link" href="#dm--page-root">
+                 达梦
+                </a>
+                <nav class="md-nav">
+                 <ul class="md-nav__list">
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id2">
+                    软件信息
+                   </a>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id5">
+                    配置
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id6">
+                       配置文件
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id7">
+                       配置读写相关系统函数
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id8">
+                    身份鉴别
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id9">
+                       认证方式
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id10">
+                       安全机制
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id11">
+                          密码复杂度策略
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id12">
+                          登录失败和连接超时
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id13">
+                          登录地址限制
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id14">
+                       操作手册
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id15">
+                          核查：口令复杂度和周期
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id16">
+                          核查：登录失败锁定和会话超时
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id17">
+                          核查：登录地址限制
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#gui">
+                          操作：GUI界面
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#sql">
+                          操作：SQL配置
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id18">
+                    访问控制
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id19">
+                       预置角色
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id20">
+                       权限分配
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id21">
+                    安全审计
+                   </a>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id22">
+                    安全通信
+                   </a>
+                  </li>
+                 </ul>
+                </nav>
+               </li>
+              </ul>
+             </nav>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_domestic.html#id2">
+              谱系分析
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--secondary">
+         <label class="md-nav__title" for="__toc">
+          Contents
+         </label>
+         <ul class="md-nav__list" data-md-scrollfix="">
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="#dm--page-root">
+            达梦
+           </a>
+           <nav class="md-nav">
+            <ul class="md-nav__list">
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id2">
+               软件信息
+              </a>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id5">
+               配置
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id6">
+                  配置文件
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id7">
+                  配置读写相关系统函数
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id8">
+               身份鉴别
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id9">
+                  认证方式
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id10">
+                  安全机制
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id11">
+                     密码复杂度策略
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id12">
+                     登录失败和连接超时
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id13">
+                     登录地址限制
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id14">
+                  操作手册
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id15">
+                     核查：口令复杂度和周期
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id16">
+                     核查：登录失败锁定和会话超时
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id17">
+                     核查：登录地址限制
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#gui">
+                     操作：GUI界面
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#sql">
+                     操作：SQL配置
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id18">
+               访问控制
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id19">
+                  预置角色
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id20">
+                  权限分配
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id21">
+               安全审计
+              </a>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id22">
+               安全通信
+              </a>
+             </li>
+            </ul>
+           </nav>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-content">
+      <article class="md-content__inner md-typeset" role="main">
+       <section id="id1">
+        <h1 id="dm--page-root">
+         <a class="toc-backref" href="#dm--page-root" role="doc-backlink">
+          达梦
+         </a>
+         <a class="headerlink" href="#dm--page-root" title="此标题的永久链接">
+          ¶
+         </a>
+        </h1>
+        <section id="id2">
+         <h2 id="id2">
+          <a class="toc-backref" href="#id24" role="doc-backlink">
+           软件信息
+          </a>
+          <a class="headerlink" href="#id2" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <ul>
+          <li>
+           <p>
+            发行商
+           </p>
+           <blockquote>
+            <div>
+             <ul class="simple">
+              <li>
+               <p>
+                <a class="reference external" href="http://www.dameng.com/">
+                 武汉达梦数据库有限公司
+                </a>
+               </p>
+              </li>
+             </ul>
+            </div>
+           </blockquote>
+          </li>
+         </ul>
+         <img alt="_images/image11.png" class="align-center" src="_images/image11.png"/>
+         <p>
+          DM安装时，默认安装所有系统相关组件，包括数据库作业服务、数据库监控服务、数据库审计服务、数据库插件服务和数据库实例。GUI下，通过“DM服务查看器”可管理数据库启用的服务，Windows操作系统的话则直接去服务里面看。
+         </p>
+         <img alt="_images/image26.png" class="align-center" src="_images/image26.png"/>
+         <hr class="docutils"/>
+         <nav class="contents" id="id4">
+          <p class="topic-title">
+           目录
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             <a class="reference internal" href="#id1" id="id23">
+              达梦
+             </a>
+            </p>
+            <ul>
+             <li>
+              <p>
+               <a class="reference internal" href="#id2" id="id24">
+                软件信息
+               </a>
+              </p>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id5" id="id25">
+                配置
+               </a>
+              </p>
+              <ul>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id6" id="id26">
+                  配置文件
+                 </a>
+                </p>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id7" id="id27">
+                  配置读写相关系统函数
+                 </a>
+                </p>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id8" id="id28">
+                身份鉴别
+               </a>
+              </p>
+              <ul>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id9" id="id29">
+                  认证方式
+                 </a>
+                </p>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id10" id="id30">
+                  安全机制
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id11" id="id31">
+                    密码复杂度策略
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id12" id="id32">
+                    登录失败和连接超时
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id13" id="id33">
+                    登录地址限制
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id14" id="id34">
+                  操作手册
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id15" id="id35">
+                    核查：口令复杂度和周期
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id16" id="id36">
+                    核查：登录失败锁定和会话超时
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id17" id="id37">
+                    核查：登录地址限制
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#gui" id="id38">
+                    操作：GUI界面
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#sql" id="id39">
+                    操作：SQL配置
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id18" id="id40">
+                访问控制
+               </a>
+              </p>
+              <ul>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id19" id="id41">
+                  预置角色
+                 </a>
+                </p>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id20" id="id42">
+                  权限分配
+                 </a>
+                </p>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id21" id="id43">
+                安全审计
+               </a>
+              </p>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id22" id="id44">
+                安全通信
+               </a>
+              </p>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </nav>
+        </section>
+        <hr class="docutils"/>
+        <section id="id5">
+         <h2 id="id5">
+          <a class="toc-backref" href="#id25" role="doc-backlink">
+           配置
+          </a>
+          <a class="headerlink" href="#id5" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id6">
+          <h3 id="id6">
+           <a class="toc-backref" href="#id26" role="doc-backlink">
+            配置文件
+           </a>
+           <a class="headerlink" href="#id6" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           所有系统配置存放在
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             dm.ini
+            </span>
+           </code>
+           中，可直接通过vim等编辑器打开，默认位置在：
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             /opt/dmdbms/data/DAMENG
+            </span>
+           </code>
+           。
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             dm.ini
+            </span>
+           </code>
+           中有一项配置
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             CONFIG_PATH
+            </span>
+           </code>
+           ，可决定数据库启动时读取配置的位置。
+          </p>
+          <p>
+           可通过“DM控制台工具”可视化读取配置文件，并可直接查看各配置的描述。可以通过该工具
+           <strong>
+            修改配置文件
+           </strong>
+           （不是修改系统运行参数），修改的参数在数据库重启后生效。
+          </p>
+          <img alt="_images/image21.png" class="align-center" src="_images/image21.png"/>
+          <div class="admonition important">
+           <p class="admonition-title">
+            重要
+           </p>
+           <p>
+            当
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              dm.ini
+             </span>
+            </code>
+            中的某参数值设置为非法值时（比如设置密码长度参数非法时），系统的自动纠正策略如下：
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              若设置值与参数类型不兼容，则参数实际取值为默认值；
+             </p>
+            </li>
+            <li>
+             <p>
+              若设置值小于参数取值范围的最小值，则实际取值为最小值；
+             </p>
+            </li>
+            <li>
+             <p>
+              若设置值大于参数取值范围的最大值，则实际取值为最大值。
+             </p>
+            </li>
+           </ul>
+          </div>
+         </section>
+         <section id="id7">
+          <h3 id="id7">
+           <a class="toc-backref" href="#id27" role="doc-backlink">
+            配置读写相关系统函数
+           </a>
+           <a class="headerlink" href="#id7" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           读取函数共三个，函数名输入时无视大小写，分别用于读取整形、浮点型和字符型的参数值，读之前查查《DM系统管理员手册》。
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">SF_GET_PARA_VALUE</span><span class="p">((</span><span class="nb">int</span><span class="p">)</span><span class="n">scope</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">ini_para_name</span><span class="p">)</span>
+<span class="c1"># 读取整形参数</span>
+<span class="c1"># scope=1 -&gt; 从dm.ini中读取配置值</span>
+<span class="c1"># scope=2 -&gt; 读取运行状态</span>
+<span class="c1"># ini_para_name -&gt; 参数名</span>
+
+<span class="n">SF_GET_PARA_DOUBLE_VALUE</span><span class="p">((</span><span class="nb">int</span><span class="p">)</span><span class="n">scope</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">ini_para_name</span><span class="p">)</span>
+<span class="c1"># 读取浮点参数</span>
+
+<span class="n">SF_GET_PARA_STRING_VALUE</span><span class="p">((</span><span class="nb">int</span><span class="p">)</span><span class="n">scope</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">ini_para_name</span><span class="p">)</span>
+<span class="c1"># 读取字符参数</span>
+</pre>
+           </div>
+          </div>
+          <img alt="_images/image41.png" class="align-center" src="_images/image41.png"/>
+          <p>
+           相应的，修改函数如下：
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">SP_SET_PARA_VALUE</span><span class="p">((</span><span class="nb">int</span><span class="p">)</span><span class="n">scope</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">ini_para_name</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">value</span><span class="p">)</span>
+<span class="c1"># 修改整形参数</span>
+<span class="c1"># scope=1 -&gt; 同时修改dm.ini中的配置值及运行状态</span>
+<span class="c1"># scope=2 -&gt; 仅修改dm.ini中的配置值</span>
+<span class="c1"># ini_para_name -&gt; 参数名</span>
+
+<span class="n">SP_SET_PARA_DOUBLE_VALUE</span><span class="p">((</span><span class="nb">int</span><span class="p">)</span><span class="n">scope</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">ini_para_name</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">value</span><span class="p">)</span>
+<span class="c1"># 修改浮点参数</span>
+
+<span class="n">SP_SET_PARA_STRING_VALUE</span><span class="p">((</span><span class="nb">int</span><span class="p">)</span><span class="n">scope</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">ini_para_name</span><span class="p">,</span> <span class="p">(</span><span class="n">varchar</span><span class="p">)</span><span class="n">value</span><span class="p">)</span>
+<span class="c1"># 修改字符参数</span>
+</pre>
+           </div>
+          </div>
+          <img alt="_images/image5.png" class="align-center" src="_images/image5.png"/>
+         </section>
+        </section>
+        <section id="id8">
+         <h2 id="id8">
+          <a class="toc-backref" href="#id28" role="doc-backlink">
+           身份鉴别
+          </a>
+          <a class="headerlink" href="#id8" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            sysusers
+           </span>
+          </code>
+          表为达梦数据库最重要的核查对象，记录每个帐户的密码复杂度、登录失败、加密密钥、口令、密码更换周期等。
+         </p>
+         <img alt="_images/image6.png" class="align-center" src="_images/image6.png"/>
+         <section id="id9">
+          <h3 id="id9">
+           <a class="toc-backref" href="#id29" role="doc-backlink">
+            认证方式
+           </a>
+           <a class="headerlink" href="#id9" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           对应
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             sysusers
+            </span>
+           </code>
+           的
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             authent_type
+            </span>
+           </code>
+           列。
+          </p>
+          <p>
+           没法测试，DM开发版不支持配这个（只能选密码验证），但看《DM系统管理员手册》可以发现，就是Oracle的几种认证方式。
+          </p>
+          <img alt="_images/image7.png" class="align-center" src="_images/image7.png"/>
+          <img alt="_images/image8.png" class="align-center" src="_images/image8.png"/>
+         </section>
+         <section id="id10">
+          <h3 id="id10">
+           <a class="toc-backref" href="#id30" role="doc-backlink">
+            安全机制
+           </a>
+           <a class="headerlink" href="#id10" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <section id="id11">
+           <h4 id="id11">
+            <a class="toc-backref" href="#id31" role="doc-backlink">
+             密码复杂度策略
+            </a>
+            <a class="headerlink" href="#id11" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <img alt="_images/image9.png" class="align-center" src="_images/image9.png"/>
+           <p>
+            全局参数对应
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              dm.ini
+             </span>
+            </code>
+            中的
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              PWD_POLICY
+             </span>
+            </code>
+            ，取值为0-31（采用5位二进制数表示flag），其中各位flag的意义如下：
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              0： 无策略；
+             </p>
+            </li>
+            <li>
+             <p>
+              1： 禁止与用户名相同；
+             </p>
+            </li>
+            <li>
+             <p>
+              2： 口令长度不小于9；
+             </p>
+            </li>
+            <li>
+             <p>
+              4： 至少包含一个大写字母（A-Z）；
+             </p>
+            </li>
+            <li>
+             <p>
+              8 ：至少包含一个数字（0－9）；
+             </p>
+            </li>
+            <li>
+             <p>
+              16：至少包含一个标点符号（不得输入半角引号和空格）
+             </p>
+            </li>
+           </ul>
+           <p>
+            若为其他数字，则表示配置值的和，如3表示同时启用第1项和第2项策略。
+           </p>
+           <p>
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              dm.ini
+             </span>
+            </code>
+            提供了单独控制口令复杂度的参数
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              PWD_MIN_LEN
+             </span>
+            </code>
+            ，其有效值为9-32，但仅当PWD_POLICY中的第二位未设置时才生效。
+           </p>
+           <img alt="_images/image10.png" class="align-center" src="_images/image10.png"/>
+           <div class="admonition important">
+            <p class="admonition-title">
+             重要
+            </p>
+            <p>
+             新建用户时遵循系统的口令复杂度参数，但修改用户口令时，实际校验的是
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               sysusers
+              </span>
+             </code>
+             表中该用户的
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               pwd_policy
+              </span>
+             </code>
+             参数，因此要注意核查每个用户的对应参数。
+            </p>
+           </div>
+          </section>
+          <section id="id12">
+           <h4 id="id12">
+            <a class="toc-backref" href="#id32" role="doc-backlink">
+             登录失败和连接超时
+            </a>
+            <a class="headerlink" href="#id12" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            安全机制对应
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              sysusers
+             </span>
+            </code>
+            中的
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              FAILED_NUM
+             </span>
+            </code>
+            、
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              LOCK_TIME
+             </span>
+            </code>
+            、
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              CONN_IDLE_TIME
+             </span>
+            </code>
+            （
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              FAILED_ATTEMPS
+             </span>
+            </code>
+            可能指之前发生的失败次数统计）。
+           </p>
+           <img alt="_images/image15.png" class="align-center" src="_images/image15.png"/>
+           <p>
+            可以直接GUI右键用户修改。
+           </p>
+           <img alt="_images/image14.png" class="align-center" src="_images/image14.png"/>
+          </section>
+          <section id="id13">
+           <h4 id="id13">
+            <a class="toc-backref" href="#id33" role="doc-backlink">
+             登录地址限制
+            </a>
+            <a class="headerlink" href="#id13" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            安全机制对应
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              sysuser
+             </span>
+            </code>
+            表中的
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              allow_addr
+             </span>
+            </code>
+            和
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              not_allow_addr
+             </span>
+            </code>
+            列：
+           </p>
+           <img alt="_images/image17.png" class="align-center" src="_images/image17.png"/>
+          </section>
+         </section>
+         <section id="id14">
+          <h3 id="id14">
+           <a class="toc-backref" href="#id34" role="doc-backlink">
+            操作手册
+           </a>
+           <a class="headerlink" href="#id14" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <section id="id15">
+           <h4 id="id15">
+            <a class="toc-backref" href="#id35" role="doc-backlink">
+             核查：口令复杂度和周期
+            </a>
+            <a class="headerlink" href="#id15" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <div class="highlight-sql notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1">-- 一句话查询口令复杂度和周期</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">PASSWORD</span><span class="p">,</span><span class="w"> </span><span class="n">AUTHENT_TYPE</span><span class="p">,</span><span class="w"> </span><span class="n">PWD_POLICY</span><span class="p">,</span><span class="w"> </span><span class="n">LIFE_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">REUSE_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">REUSE_MAX</span><span class="p">,</span><span class="w"> </span><span class="n">GRACE_TIME</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">d</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span><span class="w"></span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="id16">
+           <h4 id="id16">
+            <a class="toc-backref" href="#id36" role="doc-backlink">
+             核查：登录失败锁定和会话超时
+            </a>
+            <a class="headerlink" href="#id16" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <div class="highlight-sql notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1">-- 一句话查询登录失败锁定和超时</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">FAILED_NUM</span><span class="p">,</span><span class="w"> </span><span class="n">LOCK_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">CONN_IDLE_TIME</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">d</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span><span class="w"></span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="id17">
+           <h4 id="id17">
+            <a class="toc-backref" href="#id37" role="doc-backlink">
+             核查：登录地址限制
+            </a>
+            <a class="headerlink" href="#id17" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <div class="highlight-sql notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1">-- 一句话查询登录地址限制</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">ALLOW_ADDR</span><span class="p">,</span><span class="w"> </span><span class="n">NOT_ALLOW_ADDR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span><span class="w"></span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="gui">
+           <h4 id="gui">
+            <a class="toc-backref" href="#id38" role="doc-backlink">
+             操作：GUI界面
+            </a>
+            <a class="headerlink" href="#gui" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            “DM管理工具”的用户模块可以可视化管理用户
+           </p>
+           <img alt="_images/image18.png" class="align-center" src="_images/image18.png"/>
+           <p>
+            新建用户时，可以配置图中的各项参数，就是对应了
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              sysusers
+             </span>
+            </code>
+            表中的各个列。特别地，如果口令不满足系统的复杂度要求，系统则会报错。
+           </p>
+           <img alt="_images/image19.png" class="align-center" src="_images/image19.png"/>
+          </section>
+          <section id="sql">
+           <h4 id="sql">
+            <a class="toc-backref" href="#id39" role="doc-backlink">
+             操作：SQL配置
+            </a>
+            <a class="headerlink" href="#sql" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            《DM_SQL语言使用手册》第70页中有详细的语法树，遵循了标准的SQL语法。
+           </p>
+           <img alt="_images/image211.png" class="align-center" src="_images/image211.png"/>
+           <img alt="_images/image22.png" class="align-center" src="_images/image22.png"/>
+          </section>
+         </section>
+        </section>
+        <section id="id18">
+         <h2 id="id18">
+          <a class="toc-backref" href="#id40" role="doc-backlink">
+           访问控制
+          </a>
+          <a class="headerlink" href="#id18" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id19">
+          <h3 id="id19">
+           <a class="toc-backref" href="#id41" role="doc-backlink">
+            预置角色
+           </a>
+           <a class="headerlink" href="#id19" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           DM8出厂时，预置几个用户，并预先分配了角色：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             超级管理员用户：SYSDBA
+            </p>
+           </li>
+           <li>
+            <p>
+             审计管理员用户：SYSAUDITOR
+            </p>
+           </li>
+           <li>
+            <p>
+             安全管理员用户：SYSSSO
+            </p>
+           </li>
+           <li>
+            <p>
+             系统管理员用户：SYS
+            </p>
+           </li>
+          </ul>
+          <p>
+           默认情况下，只有对应角色的管理用户才能创建其他用户，如审计角色的管理员可创建新的审计帐户。
+          </p>
+         </section>
+         <section id="id20">
+          <h3 id="id20">
+           <a class="toc-backref" href="#id42" role="doc-backlink">
+            权限分配
+           </a>
+           <a class="headerlink" href="#id20" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           具备相应权限的用户，可以修改同角色用户的系统权限及对象权限。
+          </p>
+          <img alt="_images/image23.png" class="align-center" src="_images/image23.png"/>
+         </section>
+        </section>
+        <section id="id21">
+         <h2 id="id21">
+          <a class="toc-backref" href="#id43" role="doc-backlink">
+           安全审计
+          </a>
+          <a class="headerlink" href="#id21" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          注意dm参数中的
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            ENABLE_AUDIT
+           </span>
+          </code>
+          ，该开关只有审计角色用户可操作。开启后日志记录符合要求。
+         </p>
+         <img alt="_images/image24.png" class="align-center" src="_images/image24.png"/>
+         <p>
+          日志信息存放在
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            SYSAUDITOR.SYSAUDIT
+           </span>
+          </code>
+          中，只有审计角色用户可查看。
+         </p>
+         <img alt="_images/image25.png" class="align-center" src="_images/image25.png"/>
+        </section>
+        <section id="id22">
+         <h2 id="id22">
+          <a class="toc-backref" href="#id44" role="doc-backlink">
+           安全通信
+          </a>
+          <a class="headerlink" href="#id22" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          关注dm参数中的
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            ENABLE_ENCRYPT
+           </span>
+          </code>
+          。目前暂未找到其技术文档。
+         </p>
+         <img alt="_images/image27.png" class="align-center" src="_images/image27.png"/>
+        </section>
+       </section>
+      </article>
+     </div>
+    </div>
+   </main>
+  </div>
+  <footer class="md-footer">
+   <div class="md-footer-nav">
+    <nav class="md-footer-nav__inner md-grid">
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="db_domestic.html" rel="prev" title="国产数据库">
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-back md-footer-nav__button">
+       </i>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Previous
+        </span>
+        国产数据库
+       </span>
+      </div>
+     </a>
+    </nav>
+   </div>
+   <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+     <div class="md-footer-copyright">
+      <div class="md-footer-copyright__highlight">
+       © Copyright 2021, 腿哥牛逼.
+      </div>
+      Created using
+      <a href="http://www.sphinx-doc.org/">
+       Sphinx
+      </a>
+      5.3.0.
+             and
+      <a href="https://github.com/bashtage/sphinx-material/">
+       Material for
+              Sphinx
+      </a>
+     </div>
+     <div class="md-footer-copyright" style="float: right">
+      <a href="https://beian.miit.gov.cn">
+       沪ICP备 2020030506号
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script src="_static/javascripts/application.js">
+  </script>
+  <script>
+   app.initialize({version: "1.0.4", url: {base: ".."}})
+  </script>
+ </body>
+</html>

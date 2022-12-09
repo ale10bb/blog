@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <meta content="Copy to clipboard" name="lang:clipboard.copy"/>
+  <meta content="Copied to clipboard" name="lang:clipboard.copied"/>
+  <meta content="en" name="lang:search.language"/>
+  <meta content="True" name="lang:search.pipeline.stopwords"/>
+  <meta content="True" name="lang:search.pipeline.trimmer"/>
+  <meta content="No matching documents" name="lang:search.result.none"/>
+  <meta content="1 matching document" name="lang:search.result.one"/>
+  <meta content="# matching documents" name="lang:search.result.other"/>
+  <meta content="[\s\-]+" name="lang:search.tokenizer"/>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&amp;display=fallback" rel="stylesheet"/>
+  <style>
+   body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+  </style>
+  <link href="_static/stylesheets/application.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-palette.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-fixes.css" rel="stylesheet"/>
+  <link href="_static/fonts/material-icons.css" rel="stylesheet"/>
+  <meta content="#3f51b5" name="theme-color"/>
+  <script src="_static/javascripts/modernizr.js">
+  </script>
+  <title>
+   PostgreSQL — 学习笔记
+  </title>
+  <link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/material.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
+  </script>
+  <script src="_static/jquery.js">
+  </script>
+  <script src="_static/underscore.js">
+  </script>
+  <script src="_static/_sphinx_javascript_frameworks_compat.js">
+  </script>
+  <script src="_static/doctools.js">
+  </script>
+  <script src="_static/sphinx_highlight.js">
+  </script>
+  <script src="_static/clipboard.min.js">
+  </script>
+  <script src="_static/copybutton.js">
+  </script>
+  <script src="_static/translations.js">
+  </script>
+  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="genindex.html" rel="index" title="索引"/>
+  <link href="search.html" rel="search" title="搜索"/>
+  <link href="redis.html" rel="next" title="Redis"/>
+  <link href="mssql.html" rel="prev" title="MSSQL"/>
+ </head>
+ <body data-md-color-accent="blue" data-md-color-primary="blue-grey" dir="ltr">
+  <svg class="md-svg">
+   <defs data-children-count="0">
+    <svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg">
+     <path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor">
+     </path>
+    </svg>
+   </defs>
+  </svg>
+  <input class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+  <input class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+  <label class="md-overlay" data-md-component="overlay" for="__drawer">
+  </label>
+  <a class="md-skip" href="#pg" tabindex="1">
+   Skip to content
+  </a>
+  <header class="md-header" data-md-component="header">
+   <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
+       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
+      </a>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer">
+      </label>
+     </div>
+     <div class="md-flex__cell md-flex__cell--stretch">
+      <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+       <span class="md-header-nav__topic">
+        学习笔记
+       </span>
+       <span class="md-header-nav__topic">
+        PostgreSQL
+       </span>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--search md-header-nav__button" for="__search">
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+       <label class="md-search__overlay" for="__search">
+       </label>
+       <div class="md-search__inner" role="search">
+        <form action="search.html" class="md-search__form" method="get" name="search">
+         <input autocapitalize="off" autocomplete="off" class="md-search__input" data-md-component="query" data-md-state="active" name="q" placeholder="Search" spellcheck="false" type="text"/>
+         <label class="md-icon md-search__icon" for="__search">
+         </label>
+         <button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+          
+         </button>
+        </form>
+        <div class="md-search__output">
+         <div class="md-search__scrollwrap" data-md-scrollfix="">
+          <div class="md-search-result" data-md-component="result">
+           <div class="md-search-result__meta">
+            Type to start searching
+           </div>
+           <ol class="md-search-result__list">
+           </ol>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <div class="md-header-nav__source">
+       <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+        <div class="md-source__icon">
+         <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <use height="24" width="24" xlink:href="#__github">
+          </use>
+         </svg>
+        </div>
+        <div class="md-source__repository">
+         Personal Blog
+        </div>
+       </a>
+      </div>
+     </div>
+     <script src="_static/javascripts/version_dropdown.js">
+     </script>
+     <script>
+      var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+     </script>
+    </div>
+   </nav>
+  </header>
+  <div class="md-container">
+   <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+     <ul class="md-tabs__list">
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="../index.html">
+        README
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="index.html">
+        CheckList
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="db_common.html">
+        通用数据库
+       </a>
+      </li>
+     </ul>
+    </div>
+   </nav>
+   <main class="md-main">
+    <div class="md-main__inner md-grid" data-md-component="container">
+     <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--primary" data-md-level="0">
+         <label class="md-nav__title md-nav__title--site" for="__drawer">
+          <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
+           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+          </a>
+          <a href="index.html" title="学习笔记">
+           学习笔记
+          </a>
+         </label>
+         <div class="md-nav__source">
+          <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+           <div class="md-source__icon">
+            <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+             <use height="24" width="24" xlink:href="#__github">
+             </use>
+            </svg>
+           </div>
+           <div class="md-source__repository">
+            Personal Blog
+           </div>
+          </a>
+         </div>
+         <ul class="md-nav__list">
+          <li class="md-nav__item">
+           <span class="md-nav__link caption">
+            <span class="caption-text">
+             计算环境索引
+            </span>
+           </span>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_common.html">
+            通用操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_domestic.html">
+            国产操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_common.html">
+            通用数据库
+           </a>
+           <ul class="md-nav__list">
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="mysql.html">
+              MySQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="oracle.html">
+              Oracle
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="mssql.html">
+              MSSQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+             <label class="md-nav__link md-nav__link--active" for="__toc">
+              PostgreSQL
+             </label>
+             <a class="md-nav__link md-nav__link--active" href="#">
+              PostgreSQL
+             </a>
+             <nav class="md-nav md-nav--secondary">
+              <label class="md-nav__title" for="__toc">
+               Contents
+              </label>
+              <ul class="md-nav__list" data-md-scrollfix="">
+               <li class="md-nav__item">
+                <a class="md-nav__link" href="#pg--page-root">
+                 PostgreSQL
+                </a>
+                <nav class="md-nav">
+                 <ul class="md-nav__list">
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id1">
+                    身份鉴别
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id2">
+                       鉴别模型
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id3">
+                       信任认证
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#pg-hba-conf">
+                       pg_hba.conf
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id4">
+                       口令复杂度
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id5">
+                       口令有效期
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id6">
+                       登录失败处理
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id7">
+                       连接超时
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id8">
+                       核查命令
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id9">
+                    访问控制
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id10">
+                       权限模型
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id11">
+                       模式
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id12">
+                       系统权限
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id13">
+                       预置角色
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id14">
+                       核查命令
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id16">
+                    安全审计
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id17">
+                       日志收集器
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id18">
+                          主要变量
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#pg-audit">
+                       pg_audit
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id19">
+                          主要变量
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id21">
+                       核查命令
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id23">
+                    安全通信
+                   </a>
+                  </li>
+                 </ul>
+                </nav>
+               </li>
+              </ul>
+             </nav>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="redis.html">
+              Redis
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db2.html">
+              DB2
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id2">
+              免费工具们
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id3">
+              实验环境搭建
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_domestic.html">
+            国产数据库
+           </a>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--secondary">
+         <label class="md-nav__title" for="__toc">
+          Contents
+         </label>
+         <ul class="md-nav__list" data-md-scrollfix="">
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="#pg--page-root">
+            PostgreSQL
+           </a>
+           <nav class="md-nav">
+            <ul class="md-nav__list">
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id1">
+               身份鉴别
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id2">
+                  鉴别模型
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id3">
+                  信任认证
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#pg-hba-conf">
+                  pg_hba.conf
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id4">
+                  口令复杂度
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id5">
+                  口令有效期
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id6">
+                  登录失败处理
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id7">
+                  连接超时
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id8">
+                  核查命令
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id9">
+               访问控制
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id10">
+                  权限模型
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id11">
+                  模式
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id12">
+                  系统权限
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id13">
+                  预置角色
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id14">
+                  核查命令
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id16">
+               安全审计
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id17">
+                  日志收集器
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id18">
+                     主要变量
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#pg-audit">
+                  pg_audit
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id19">
+                     主要变量
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id21">
+                  核查命令
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id23">
+               安全通信
+              </a>
+             </li>
+            </ul>
+           </nav>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-content">
+      <article class="md-content__inner md-typeset" role="main">
+       <section id="postgresql">
+        <h1 id="pg--page-root">
+         PostgreSQL
+         <a class="headerlink" href="#pg--page-root" title="此标题的永久链接">
+          ¶
+         </a>
+        </h1>
+        <section id="id1">
+         <h2 id="id1">
+          身份鉴别
+          <a class="headerlink" href="#id1" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id2">
+          <h3 id="id2">
+           鉴别模型
+           <a class="headerlink" href="#id2" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL采用一种名为Host Based
+Authentication的方式对所有登录客户端进行身份认证，操作系统中的
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_hba.conf
+            </span>
+           </code>
+           文件定义了允许登录的客户端IP、连接方式等。此外，对于PostgreSQL而言，不同的数据库之间帐户完全独立，
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_hba.conf
+            </span>
+           </code>
+           可以通过database字段控制客户端允许连接哪个数据库。
+          </p>
+          <p>
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_hba.conf
+            </span>
+           </code>
+           中可以存放多行记录，当一个客户端向服务端发起连接请求时，服务端在
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_hba.conf
+            </span>
+           </code>
+           文件中自上而下地匹配每一行记录。第一条同时匹配连接类型、客户端地址、连接用户的记录将被用于执行认证。
+          </p>
+          <div class="admonition important">
+           <p class="admonition-title">
+            重要
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              认证过程没有“落空”或者“后备”的说法：如果
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pg_hba.conf
+               </span>
+              </code>
+              选择了一条记录而且认证失败，那么将不再考虑后面的记录。
+             </p>
+            </li>
+            <li>
+             <p>
+              如果没有匹配的记录，那么访问将被拒绝。
+             </p>
+            </li>
+           </ul>
+          </div>
+          <p>
+           之后服务端采用以下方式验证鉴别信息的有效性：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             如果采用
+             <strong>
+              信任认证
+             </strong>
+             ，服务端不校验客户端的鉴别信息并直接放行。信任认证包含trust和ident两种情况，下方详解。
+            </p>
+           </li>
+           <li>
+            <p>
+             如果采用口令类的认证方式，服务端根据设定的认证方式，将客户端发送的鉴别信息与对应数据库中
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               pg_catalog.pg_authid
+              </span>
+             </code>
+             表中的记录进行比对。
+            </p>
+           </li>
+           <li>
+            <p>
+             如果采用第三方认证（ldap、pam等），服务端向认证提供方进行数据通信以获取认证结果。
+            </p>
+           </li>
+          </ul>
+         </section>
+         <section id="id3">
+          <h3 id="id3">
+           信任认证
+           <a class="headerlink" href="#id3" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL提供了一种信任认证的机制，可以在特定环境下，完全信任客户端向服务端发起的连接，并无需客户端提供鉴别信息。其中trust方式为无条件信任客户端，ident/peer方式为信任客户端的指定用户。
+          </p>
+          <p>
+           ident/peer方式实际上建立了一组“操作系统帐户-数据库帐户”映射，并将这个映射关系保存在服务端的
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_ident.conf
+            </span>
+           </code>
+           文件中，如果客户端当前登录的操作系统帐户位于映射关系内，则可以直接以指定帐户登录数据库。注意
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_ident.conf
+            </span>
+           </code>
+           只保存映射关系，而允许连接哪个数据库由
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_hba.conf
+            </span>
+           </code>
+           控制。
+          </p>
+          <p>
+           此外，ident方式用于校验TCP/IP连接，peer方式用于校验local连接。当客户端向服务端发起TCP/IP的ident连接请求时，服务端从客户端的ident服务器（需要额外安装，默认监听113端口）处获取客户端的当前操作系统用户名。而客户端向服务端发起local的ident连接请求时，服务端直接通过syscall获取用户名。
+          </p>
+          <p>
+           pg_ident.conf默认在$PGDATA目录（
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             /var/lib/postgresql/data/
+            </span>
+           </code>
+           ）下，其每一行格式为：
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">MAPNAME</span> <span class="n">SYSTEM</span><span class="o">-</span><span class="n">USERNAME</span> <span class="n">PG</span><span class="o">-</span><span class="n">USERNAME</span>
+
+<span class="c1"># 实现root-&gt;postgres的映射</span>
+<span class="n">mymap</span>   <span class="n">root</span>            <span class="n">postgres</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           其中MAPNAME仅用作标识，可任意设置名字。之后在
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_hba.conf
+            </span>
+           </code>
+           中使用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             ident
+            </span>
+            <span class="pre">
+             map=MAPNAME
+            </span>
+           </code>
+           的方式调用规则。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image113.png">
+            <img alt="image1" src="_images/image113.png" style="width: 5.76806in; height: 4.20208in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="pg-hba-conf">
+          <h3 id="pg-hba-conf">
+           pg_hba.conf
+           <a class="headerlink" href="#pg-hba-conf" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           pg_hba.conf默认在$PGDATA目录下，其每一行格式为：
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">TYPE</span>     <span class="n">DATABASE</span>    <span class="n">USER</span>        <span class="n">ADDRESS</span>        <span class="n">AUTH</span><span class="o">-</span><span class="n">METHOD</span> <span class="p">[</span><span class="n">auth</span><span class="o">-</span><span class="n">options</span><span class="p">]</span>
+
+<span class="c1"># 允许postgres通过 Unix Socket 免密码登录</span>
+<span class="n">local</span>    <span class="n">postgres</span>    <span class="n">postgres</span>                   <span class="n">trust</span>
+
+<span class="c1"># 允许postgres通过loop地址登录</span>
+<span class="n">host</span>     <span class="n">postgres</span>    <span class="n">postgres</span>    <span class="mf">127.0.0.1</span><span class="o">/</span><span class="mi">32</span>   <span class="n">md5</span>
+
+<span class="c1"># postgres在指定地址，操作系统当前帐户为root时，允许免密码登录</span>
+<span class="n">host</span>     <span class="n">postgres</span>    <span class="n">postgres</span>    <span class="mf">10.10.20.30</span><span class="o">/</span><span class="mi">32</span> <span class="n">ident</span> <span class="nb">map</span><span class="o">=</span><span class="n">mymap</span>
+
+<span class="c1"># 允许postgres通过指定地址，采用SSL登录</span>
+<span class="n">hostssl</span>  <span class="n">postgres</span>    <span class="n">postgres</span>    <span class="mf">10.10.10.0</span><span class="o">/</span><span class="mi">24</span>  <span class="n">scram</span><span class="o">-</span><span class="n">sha</span><span class="o">-</span><span class="mi">256</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           <a class="reference internal" href="_images/image210.png">
+            <img alt="image2" src="_images/image210.png" style="width: 5.76806in; height: 3.83611in;"/>
+           </a>
+          </p>
+          <p>
+           type可选值如下：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             local：匹配使用 Unix 域套接字的连接。
+            </p>
+           </li>
+           <li>
+            <p>
+             host：匹配使用 TCP/IP 建立的连接（同时允许SSL或非SSL）。
+            </p>
+           </li>
+           <li>
+            <p>
+             hostssl：匹配使用SSL加密的 TCP/IP 建立的连接。
+            </p>
+           </li>
+           <li>
+            <p>
+             hostnossl：匹配不使用SSL加密的 TCP/IP 建立的连接。
+            </p>
+           </li>
+           <li>
+            <p>
+             hostgssenc：匹配使用GSSAPI加密建立的TCP/IP连接。
+            </p>
+           </li>
+           <li>
+            <p>
+             hostnogssenc：匹配不使用GSSAPI加密建立的TCP/IP连接。
+            </p>
+           </li>
+          </ul>
+          <p>
+           auth-method可选值如下：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             trust：无条件地允许连接。
+            </p>
+           </li>
+           <li>
+            <p>
+             reject：无条件地拒绝连接。
+            </p>
+           </li>
+           <li>
+            <p>
+             scram-sha-256：执行SCRAM-SHA-256认证来验证用户的口令。
+            </p>
+           </li>
+           <li>
+            <p>
+             md5：执行SCRAM-SHA-256或MD5认证来验证用户的口令。
+            </p>
+           </li>
+           <li>
+            <p>
+             password：使用未加密的口令进行认证。
+             <strong>
+              （不应使用该方式）
+             </strong>
+            </p>
+           </li>
+           <li>
+            <p>
+             gss：用 GSSAPI 认证用户。
+            </p>
+           </li>
+           <li>
+            <p>
+             sspi：用 SSPI 来认证用户。只在 Windows 上可用。
+            </p>
+           </li>
+           <li>
+            <p>
+             ident：通过联系客户端的 ident
+服务器获取客户端的操作系统名，并且检查它是否匹配被请求的数据库用户名。Ident
+认证只能在 TCIP/IP 连接上使用。当为本地连接指定这种认证方式时，将用
+peer 认证来替代。
+            </p>
+           </li>
+           <li>
+            <p>
+             peer：从操作系统获得客户端的操作系统用户，并且检查它是否匹配被请求的数据库用户名。这只对本地连接可用。
+            </p>
+           </li>
+           <li>
+            <p>
+             ldap：使用LDAP服务器认证。
+            </p>
+           </li>
+           <li>
+            <p>
+             radius：用 RADIUS 服务器认证。
+            </p>
+           </li>
+           <li>
+            <p>
+             cert：使用 SSL 客户端证书认证。
+            </p>
+           </li>
+           <li>
+            <p>
+             pam：使用操作系统提供的可插入认证模块服务（PAM）认证。
+            </p>
+           </li>
+           <li>
+            <p>
+             bsd：使用由操作系统提供的 BSD 认证服务进行认证。
+            </p>
+           </li>
+          </ul>
+         </section>
+         <section id="id4">
+          <h3 id="id4">
+           口令复杂度
+           <a class="headerlink" href="#id4" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL在contrib中预编译了一个插件passwordcheck，并预置了复杂度策略，如果要调整策略的话必须修改
+           <a class="reference external" href="https://github.com/postgres/postgres/blob/master/contrib/passwordcheck/passwordcheck.c">
+            contrib/passwordcheck/passwordcheck.c
+           </a>
+           ，并重新编译（没人会这么干吧）。预置的复杂度策略为：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             最少8个字符
+            </p>
+           </li>
+           <li>
+            <p>
+             必须包含数字和字母
+            </p>
+           </li>
+           <li>
+            <p>
+             不能含有用户名
+            </p>
+           </li>
+          </ul>
+          <p>
+           核查时只需要在
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_settings
+            </span>
+           </code>
+           表中查看
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             shared_preload_libraries
+            </span>
+           </code>
+           变量，确认是否包含passwordcheck即可。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image32.png">
+            <img alt="image3" src="_images/image32.png" style="width: 5.76806in; height: 1.46111in;"/>
+           </a>
+          </p>
+          <p>
+           修改有两种方法（都需要重启）：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             在system变量
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               shared_preload_libraries
+              </span>
+             </code>
+             的最后附加passwordcheck；
+            </p>
+           </li>
+           <li>
+            <p>
+             在postgresql.conf文件中修改
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               shared_preload_libraries
+              </span>
+             </code>
+             参数，增加passwordcheck；
+            </p>
+           </li>
+          </ul>
+         </section>
+         <section id="id5">
+          <h3 id="id5">
+           口令有效期
+           <a class="headerlink" href="#id5" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL没有口令复杂度全局默认值，必须在创建每个帐户时手动设置
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             valid
+            </span>
+            <span class="pre">
+             until
+            </span>
+           </code>
+           值。核查时只需查看
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             pg_shadow
+            </span>
+           </code>
+           表即可。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image44.png">
+            <img alt="image4" src="_images/image44.png" style="width: 5.76806in; height: 1.48958in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="id6">
+          <h3 id="id6">
+           登录失败处理
+           <a class="headerlink" href="#id6" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL在contrib中预编译了插件
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             auth_delay
+            </span>
+           </code>
+           ，对于登录失败的连接行为，服务端延迟一段时间之后返回结果。加载该插件之后设置系统变量
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             auth_delay.milliseconds
+            </span>
+           </code>
+           可以实现登录延时。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image53.png">
+            <img alt="image5" src="_images/image53.png" style="width: 5.76806in; height: 1.33819in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="id7">
+          <h3 id="id7">
+           连接超时
+           <a class="headerlink" href="#id7" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           查看配置文件或系统变量中的
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             authentication_timeout
+            </span>
+           </code>
+           参数。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image63.png">
+            <img alt="image6" src="_images/image63.png" style="width: 5.76806in; height: 2.37292in;"/>
+           </a>
+          </p>
+          <div class="admonition important">
+           <p class="admonition-title">
+            重要
+           </p>
+           <p>
+            PostgreSQL没有空闲会话超时功能。
+           </p>
+          </div>
+         </section>
+         <section id="id8">
+          <h3 id="id8">
+           核查命令
+           <a class="headerlink" href="#id8" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="highlight-sql notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1">--查看数据库的帐户、口令加密、口令过期</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_catalog</span><span class="p">.</span><span class="n">pg_shadow</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">--查看shared_preload_libraries配置内容</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'shared_preload_libraries'</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">--查看auth_delay配置内容</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%auth_delay%'</span><span class="p">;</span><span class="w"></span>
+</pre>
+           </div>
+          </div>
+         </section>
+        </section>
+        <section id="id9">
+         <h2 id="id9">
+          访问控制
+          <a class="headerlink" href="#id9" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id10">
+          <h3 id="id10">
+           权限模型
+           <a class="headerlink" href="#id10" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL中，帐户与角色的概念等同，帐户可以视作拥有登录权限的角色，所有授权的主体均为角色级。PostgreSQL的权限分为系统级别权限和对象级别权限，其中系统级别权限包括LOGIN、CREATEDB、CREATEROLE、PASSWORD等一些强大的命令，对象级别权限包括SELECT、INSERT、UPDATE、DELETE、RULE、REFERENCES、TRIGGER、CREATE、TEMPORARY、EXECUTE、USAGE等对象操作权限。
+          </p>
+          <p>
+           PostgreSQL的各权限可以直接授予，也可以通过角色继承。继承的概念为：使用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             grant
+            </span>
+            <span class="pre">
+             roleA
+            </span>
+            <span class="pre">
+             to
+            </span>
+            <span class="pre">
+             roleB
+            </span>
+           </code>
+           命令，将角色A赋予角色B之后，角色B将会继承角色A的相应权限。其中每个角色有一个与继承相关的“Inherit”属性，控制其继承权限的方式。在上述情况下，如果角色B的该属性为“True”，那么角色B将自动叠加角色A的所有权限，反之角色B必须通过
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             set
+            </span>
+            <span class="pre">
+             role
+            </span>
+            <span class="pre">
+             roleA
+            </span>
+           </code>
+           命令手动切换角色后，方能使用继承过来的权限。
+          </p>
+          <div class="admonition important">
+           <p class="admonition-title">
+            重要
+           </p>
+           <p>
+            所有系统级别权限（LOGIN、CREATEDB、CREATEROLE、PASSWORD等）均无法自动继承，必须进行切换角色操作。
+           </p>
+          </div>
+          <p>
+           此外，进行赋权操作时，可以控制目标角色是否能将权限进行转授。注意授予转授权限时用的命令为
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             WITH
+            </span>
+            <span class="pre">
+             GRANT
+            </span>
+            <span class="pre">
+             OPTION
+            </span>
+           </code>
+           ，授予转授角色时用的命令为
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             WITH
+            </span>
+            <span class="pre">
+             ADMIN
+            </span>
+            <span class="pre">
+             OPTION
+            </span>
+           </code>
+           ，两者功能相同。
+          </p>
+         </section>
+         <section id="id11">
+          <h3 id="id11">
+           模式
+           <a class="headerlink" href="#id11" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL中，数据库的下一级对象固定为模式（Schema），模式包含表、视图、索引、存储过程等。创建模式时，必须为其设置一个所有者角色。所有者角色和SUPERUSER权限具有模式的完全控制权，而其他角色必须得到授权后才可访问模式中的内容。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image73.png">
+            <img alt="image7" src="_images/image73.png" style="width: 5.76806in; height: 1.31528in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="id12">
+          <h3 id="id12">
+           系统权限
+           <a class="headerlink" href="#id12" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <table>
+           <thead>
+            <tr class="row-odd">
+             <th class="head">
+              <p>
+               权限名
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               描述
+              </p>
+             </th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="row-even">
+             <td>
+              <p>
+               LOGIN
+              </p>
+             </td>
+             <td>
+              <p>
+               具有登录权限
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               SUPERUSER
+              </p>
+             </td>
+             <td>
+              <p>
+               超级用户，具有登录以外的所有系统权限
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               REPLICATION
+              </p>
+             </td>
+             <td>
+              <p>
+               拥有REPLICATION权限（即角色能启动复制）
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               CREATEDB
+              </p>
+             </td>
+             <td>
+              <p>
+               创建数据库权限
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               CREATEROLE
+              </p>
+             </td>
+             <td>
+              <p>
+               创建role权限
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               PASSWORD
+              </p>
+             </td>
+             <td>
+              <p>
+               设置密码
+              </p>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </section>
+         <section id="id13">
+          <h3 id="id13">
+           预置角色
+           <a class="headerlink" href="#id13" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL提供一组默认角色，
+他们可以访问特定的、通常需要的特权功能和信息。 管理员可以将这些角色
+GRANT 给用户或其环境中的其他角色，
+为这些用户提供对指定功能和信息的访问权限。这些默认角色默认都是不可登录的。
+          </p>
+          <table>
+           <thead>
+            <tr class="row-odd">
+             <th class="head">
+              <p>
+               角色名
+              </p>
+             </th>
+             <th class="head">
+              <p>
+               描述
+              </p>
+             </th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr class="row-even">
+             <td>
+              <p>
+               read_all_settings
+              </p>
+             </td>
+             <td>
+              <p>
+               阅读所有配置变量，
+即使那些通常只对超级用户可见的配置变量
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               pg_read_all_stats
+              </p>
+             </td>
+             <td>
+              <p>
+               阅读
+所有pg_stat_*视图并使用各种统计相关的扩
+展，甚至那些通常只对超级用户可见的扩展
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               pg_stat_scan_tables
+              </p>
+             </td>
+             <td>
+              <p>
+               执行可能对表进行可能需要很长时间ACCESS
+SHARE锁定的监视功能
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               pg_signal_backend
+              </p>
+             </td>
+             <td>
+              <p>
+               给其他后端发送信号(比如:
+取消查询、终止)
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               pg_monitor
+              </p>
+             </td>
+             <td>
+              <p>
+               读取/执行各种监视视图和函数
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               pg_read_server_files
+              </p>
+             </td>
+             <td>
+              <p>
+               读取数据库服务器的文件
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               pg_write_server_files
+              </p>
+             </td>
+             <td>
+              <p>
+               向数据库服务器文件系统写入
+              </p>
+             </td>
+            </tr>
+            <tr class="row-odd">
+             <td>
+              <p>
+               pg_execute_server_program
+              </p>
+             </td>
+             <td>
+              <p>
+               执行数据库服务器上的文件
+              </p>
+             </td>
+            </tr>
+            <tr class="row-even">
+             <td>
+              <p>
+               public
+              </p>
+             </td>
+             <td>
+              <p>
+               （隐藏）指代所有角色
+              </p>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </section>
+         <section id="id14">
+          <span id="id15">
+          </span>
+          <h3 id="id14">
+           核查命令
+           <a class="headerlink" href="#id14" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="highlight-sql notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1">-- 直接看5张权限视图就行</span>
+<span class="c1">-- 看不完的，非常长</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_table_grants</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_column_grants</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_routine_grants</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_usage_grants</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_udt_grants</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">--需要特别注意public被授予的权限，应尽量回收不必要的表权限、视图权限和函数权限</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_table_grants</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">grantee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'PUBLIC'</span><span class="p">;</span><span class="w"></span>
+</pre>
+           </div>
+          </div>
+         </section>
+        </section>
+        <section id="id16">
+         <h2 id="id16">
+          安全审计
+          <a class="headerlink" href="#id16" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id17">
+          <h3 id="id17">
+           日志收集器
+           <a class="headerlink" href="#id17" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           PostgreSQL自带日志收集器功能，日志存放在操作系统文件中。日志相关参数都可以通过变量修改，如果配置有效，能够起到完善的安全审计作用，只是无法实现按需设置审计对象。但对于分布式架构来说，日志内容会分散在各个节点上，无法判断某个操作是在哪个节点上执行的。所以，日志收集器不适用于PG的分布式架构。
+          </p>
+          <section id="id18">
+           <h4 id="id18">
+            主要变量
+            <a class="headerlink" href="#id18" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            日志收集器的变量一共30多个，主要的变量如下：
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                logging_collector
+               </span>
+              </code>
+              （是否开启日志收集功能），
+              <strong>
+               默认关闭
+              </strong>
+              ；
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_line_prefix
+               </span>
+              </code>
+              （日志字段）；推荐配置为’%m %p %u %d %r %h’（用户、时间、数据库、IP地址）；
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_directory
+               </span>
+              </code>
+              （日志文件位置），默认为$PGDATA/log；
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_statement
+               </span>
+              </code>
+              （记录哪些SQL语句）；
+             </p>
+             <ul>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  none
+                 </span>
+                </code>
+                ：不记录；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  ddl
+                 </span>
+                </code>
+                ：记录所有数据定义命令，比如CREATE,ALTER,和DROP 语句；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  mod
+                 </span>
+                </code>
+                ：记录所有ddl语句，加上数据修改语句INSERT,UPDATE等；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  all
+                 </span>
+                </code>
+                ：记录所有执行的语句；
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_rotation_age
+               </span>
+              </code>
+              （单个日志文件的rotate周期），默认1天；
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_rotation_size
+               </span>
+              </code>
+              （单个日志文件的rotate大小），默认10MB；
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_connections
+               </span>
+              </code>
+              （是否记录连接日志）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_disconnections
+               </span>
+              </code>
+              （是否记录连接断开日志）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                log_destination
+               </span>
+              </code>
+              （日志输出位置），包括stderr、csvlog、syslog、eventlog(Windows)；
+             </p>
+            </li>
+           </ul>
+           <p>
+            <a class="reference internal" href="_images/image83.png">
+             <img alt="image8" src="_images/image83.png" style="width: 5.76806in; height: 4.95139in;"/>
+            </a>
+           </p>
+          </section>
+         </section>
+         <section id="pg-audit">
+          <h3 id="pg-audit">
+           pg_audit
+           <a class="headerlink" href="#pg-audit" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           日志收集器有一个缺点，即一旦开启就会收集所有符合要求的日志。无法根据实际审计需求，指定需要审计的对象。因此pgaudit项目组开发了一个独立的审计插件，能够由管理员通过插件设置自行定义审计对象。
+          </p>
+          <p>
+           pgaudit提供了会话审计和对象审计两种功能，其中：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             会话审计和日志收集器功能类似，可针对特定类型的操作进行日志记录，其审计对象为数据库全局。其主要变量为pgaudit.log。
+            </p>
+           </li>
+           <li>
+            <p>
+             对象审计可以对特定审计对象的特定操作进行日志记录。对于pgaudit而言，对象审计由一个特殊的“审计角色”来实现。配置审计功能时，通过
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               pgaudit.role
+              </span>
+             </code>
+             变量绑定一个特殊的角色，之后pgaudit会针对该角色所拥有的所有对象权限进行审计。比如，向审计角色赋予tableA的select权限后，所有针对tableA的select操作都会记录日志。
+            </p>
+           </li>
+          </ul>
+          <div class="admonition important">
+           <p class="admonition-title">
+            重要
+           </p>
+           <p>
+            pg_audit代替的功能为
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              log_statement
+             </span>
+            </code>
+            ，其产生的审计日志还是发送至日志收集器。因此依然需要打开日志收集器，并合理配置
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              log_line_prefix
+             </span>
+            </code>
+            、
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              log_destination
+             </span>
+            </code>
+            等参数。
+           </p>
+          </div>
+          <p>
+           PostgreSQL默认不包含pg_audit插件，需自行下载
+           <a class="reference external" href="https://github.com/pgaudit/pgaudit">
+            pgaudit/pgaudit
+           </a>
+           ，加入contrib后重新编译。此外，Debian/Ubuntu/CentOS的官方repo中包含少量预编译的pgaudit软件包，如果数据库版本匹配的话可直接下载安装。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image92.png">
+            <img alt="image9" src="_images/image92.png" style="width: 5.76806in; height: 2.54444in;"/>
+           </a>
+          </p>
+          <section id="id19">
+           <span id="id20">
+           </span>
+           <h4 id="id19">
+            主要变量
+            <a class="headerlink" href="#id19" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <ul class="simple">
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.log
+               </span>
+              </code>
+              （会话审计）；设置内容可以包括操作符如“ALL, -MISC”，具体值如下：
+             </p>
+             <ul>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  READ
+                 </span>
+                </code>
+                ：SELECT 和COPY 操作；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  WRITE
+                 </span>
+                </code>
+                ：INSERT, UPDATE, DELETE, TRUNCATE等操作；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  FUNCTION
+                 </span>
+                </code>
+                ：函数调用和 DO 块；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  ROLE
+                 </span>
+                </code>
+                : 与角色和特权相关的语句: GRANT、REVOKE、CREATE/ALTER/DROP ROLE；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  DDL
+                 </span>
+                </code>
+                ：不包含在ROLE类中的所有DDL；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  MISC
+                 </span>
+                </code>
+                ：其他的一些命令, 比如DISCARD、FETCH、CHECKPOINT、VACUUM等；
+               </p>
+              </li>
+              <li>
+               <p>
+                <code class="docutils literal notranslate">
+                 <span class="pre">
+                  ALL
+                 </span>
+                </code>
+                ：所有操作；
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.log_catalog
+               </span>
+              </code>
+              （是否记录对pg_catalog的日志）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.log_client
+               </span>
+              </code>
+              （日志是否对客户端进程可见）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.log_level
+               </span>
+              </code>
+              （log_client的级别）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.log_parameter
+               </span>
+              </code>
+              （在每条日志后额外输出的字段）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.log_relation
+               </span>
+              </code>
+              （是否应该为SELECT或DML语句中引用的每个关系(表、视图等)创建单独的日志条目）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.log_statement_once
+               </span>
+              </code>
+              （操作包含子语句时，是否记录每个子语句的条目）
+             </p>
+            </li>
+            <li>
+             <p>
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                pgaudit.role
+               </span>
+              </code>
+              （对象审计的绑定角色）
+             </p>
+            </li>
+           </ul>
+          </section>
+         </section>
+         <section id="id21">
+          <span id="id22">
+          </span>
+          <h3 id="id21">
+           核查命令
+           <a class="headerlink" href="#id21" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="highlight-sql notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1">-- 查看日志收集器的具体参数配置</span>
+<span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">setting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'log%'</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 查看是否部署了pgaudit插件</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_available_extensions</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%audit%'</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 查看pgaudit插件的具体参数配置</span>
+<span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">setting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'pgaudit%'</span><span class="p">;</span><span class="w"></span>
+</pre>
+           </div>
+          </div>
+         </section>
+        </section>
+        <section id="id23">
+         <h2 id="id23">
+          安全通信
+          <a class="headerlink" href="#id23" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          PostgreSQL预编译了OpenSSL模块，可用于通信SSL/TLS连接。若要开启SSL，需要在conf文件中配置
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            ca_file
+           </span>
+          </code>
+          、
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            cert_file
+           </span>
+          </code>
+          、
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            key_file
+           </span>
+          </code>
+          等参数，加载有效的SSL证书。注意相关文件的权限不能超过600，否则PostgreSQL将拒绝加载证书并中止启动过程。此外，也可以设置SSL/TLS的协议、算法等安全性参数。
+         </p>
+         <p>
+          <a class="reference internal" href="_images/image103.png">
+           <img alt="image10" src="_images/image103.png" style="width: 5.65049in; height: 3.75866in;"/>
+          </a>
+         </p>
+         <p>
+          配置成功之后，在查询中输入
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            show
+           </span>
+           <span class="pre">
+            ssl
+           </span>
+          </code>
+          即可查看SSL状态。之后就可以修改
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            pg_hba.conf
+           </span>
+          </code>
+          ，限制客户端仅可通过SSL登录（hostssl）。
+         </p>
+        </section>
+       </section>
+      </article>
+     </div>
+    </div>
+   </main>
+  </div>
+  <footer class="md-footer">
+   <div class="md-footer-nav">
+    <nav class="md-footer-nav__inner md-grid">
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="mssql.html" rel="prev" title="MSSQL">
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-back md-footer-nav__button">
+       </i>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Previous
+        </span>
+        MSSQL
+       </span>
+      </div>
+     </a>
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="redis.html" rel="next" title="Redis">
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Next
+        </span>
+        Redis
+       </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-forward md-footer-nav__button">
+       </i>
+      </div>
+     </a>
+    </nav>
+   </div>
+   <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+     <div class="md-footer-copyright">
+      <div class="md-footer-copyright__highlight">
+       © Copyright 2021, 腿哥牛逼.
+      </div>
+      Created using
+      <a href="http://www.sphinx-doc.org/">
+       Sphinx
+      </a>
+      5.3.0.
+             and
+      <a href="https://github.com/bashtage/sphinx-material/">
+       Material for
+              Sphinx
+      </a>
+     </div>
+     <div class="md-footer-copyright" style="float: right">
+      <a href="https://beian.miit.gov.cn">
+       沪ICP备 2020030506号
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script src="_static/javascripts/application.js">
+  </script>
+  <script>
+   app.initialize({version: "1.0.4", url: {base: ".."}})
+  </script>
+ </body>
+</html>

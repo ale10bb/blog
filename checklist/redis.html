@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <meta content="Copy to clipboard" name="lang:clipboard.copy"/>
+  <meta content="Copied to clipboard" name="lang:clipboard.copied"/>
+  <meta content="en" name="lang:search.language"/>
+  <meta content="True" name="lang:search.pipeline.stopwords"/>
+  <meta content="True" name="lang:search.pipeline.trimmer"/>
+  <meta content="No matching documents" name="lang:search.result.none"/>
+  <meta content="1 matching document" name="lang:search.result.one"/>
+  <meta content="# matching documents" name="lang:search.result.other"/>
+  <meta content="[\s\-]+" name="lang:search.tokenizer"/>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&amp;display=fallback" rel="stylesheet"/>
+  <style>
+   body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+  </style>
+  <link href="_static/stylesheets/application.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-palette.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-fixes.css" rel="stylesheet"/>
+  <link href="_static/fonts/material-icons.css" rel="stylesheet"/>
+  <meta content="#3f51b5" name="theme-color"/>
+  <script src="_static/javascripts/modernizr.js">
+  </script>
+  <title>
+   Redis — 学习笔记
+  </title>
+  <link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/material.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
+  </script>
+  <script src="_static/jquery.js">
+  </script>
+  <script src="_static/underscore.js">
+  </script>
+  <script src="_static/_sphinx_javascript_frameworks_compat.js">
+  </script>
+  <script src="_static/doctools.js">
+  </script>
+  <script src="_static/sphinx_highlight.js">
+  </script>
+  <script src="_static/clipboard.min.js">
+  </script>
+  <script src="_static/copybutton.js">
+  </script>
+  <script src="_static/translations.js">
+  </script>
+  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="genindex.html" rel="index" title="索引"/>
+  <link href="search.html" rel="search" title="搜索"/>
+  <link href="db2.html" rel="next" title="DB2"/>
+  <link href="pg.html" rel="prev" title="PostgreSQL"/>
+ </head>
+ <body data-md-color-accent="blue" data-md-color-primary="blue-grey" dir="ltr">
+  <svg class="md-svg">
+   <defs data-children-count="0">
+    <svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg">
+     <path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor">
+     </path>
+    </svg>
+   </defs>
+  </svg>
+  <input class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+  <input class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+  <label class="md-overlay" data-md-component="overlay" for="__drawer">
+  </label>
+  <a class="md-skip" href="#redis" tabindex="1">
+   Skip to content
+  </a>
+  <header class="md-header" data-md-component="header">
+   <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
+       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
+      </a>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer">
+      </label>
+     </div>
+     <div class="md-flex__cell md-flex__cell--stretch">
+      <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+       <span class="md-header-nav__topic">
+        学习笔记
+       </span>
+       <span class="md-header-nav__topic">
+        Redis
+       </span>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--search md-header-nav__button" for="__search">
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+       <label class="md-search__overlay" for="__search">
+       </label>
+       <div class="md-search__inner" role="search">
+        <form action="search.html" class="md-search__form" method="get" name="search">
+         <input autocapitalize="off" autocomplete="off" class="md-search__input" data-md-component="query" data-md-state="active" name="q" placeholder="Search" spellcheck="false" type="text"/>
+         <label class="md-icon md-search__icon" for="__search">
+         </label>
+         <button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+          
+         </button>
+        </form>
+        <div class="md-search__output">
+         <div class="md-search__scrollwrap" data-md-scrollfix="">
+          <div class="md-search-result" data-md-component="result">
+           <div class="md-search-result__meta">
+            Type to start searching
+           </div>
+           <ol class="md-search-result__list">
+           </ol>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <div class="md-header-nav__source">
+       <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+        <div class="md-source__icon">
+         <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <use height="24" width="24" xlink:href="#__github">
+          </use>
+         </svg>
+        </div>
+        <div class="md-source__repository">
+         Personal Blog
+        </div>
+       </a>
+      </div>
+     </div>
+     <script src="_static/javascripts/version_dropdown.js">
+     </script>
+     <script>
+      var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+     </script>
+    </div>
+   </nav>
+  </header>
+  <div class="md-container">
+   <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+     <ul class="md-tabs__list">
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="../index.html">
+        README
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="index.html">
+        CheckList
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="db_common.html">
+        通用数据库
+       </a>
+      </li>
+     </ul>
+    </div>
+   </nav>
+   <main class="md-main">
+    <div class="md-main__inner md-grid" data-md-component="container">
+     <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--primary" data-md-level="0">
+         <label class="md-nav__title md-nav__title--site" for="__drawer">
+          <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
+           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+          </a>
+          <a href="index.html" title="学习笔记">
+           学习笔记
+          </a>
+         </label>
+         <div class="md-nav__source">
+          <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+           <div class="md-source__icon">
+            <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+             <use height="24" width="24" xlink:href="#__github">
+             </use>
+            </svg>
+           </div>
+           <div class="md-source__repository">
+            Personal Blog
+           </div>
+          </a>
+         </div>
+         <ul class="md-nav__list">
+          <li class="md-nav__item">
+           <span class="md-nav__link caption">
+            <span class="caption-text">
+             计算环境索引
+            </span>
+           </span>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_common.html">
+            通用操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_domestic.html">
+            国产操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_common.html">
+            通用数据库
+           </a>
+           <ul class="md-nav__list">
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="mysql.html">
+              MySQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="oracle.html">
+              Oracle
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="mssql.html">
+              MSSQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="pg.html">
+              PostgreSQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+             <label class="md-nav__link md-nav__link--active" for="__toc">
+              Redis
+             </label>
+             <a class="md-nav__link md-nav__link--active" href="#">
+              Redis
+             </a>
+             <nav class="md-nav md-nav--secondary">
+              <label class="md-nav__title" for="__toc">
+               Contents
+              </label>
+              <ul class="md-nav__list" data-md-scrollfix="">
+               <li class="md-nav__item">
+                <a class="md-nav__link" href="#redis--page-root">
+                 Redis
+                </a>
+                <nav class="md-nav">
+                 <ul class="md-nav__list">
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id2">
+                    身份鉴别
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id3">
+                       Redis密码
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#acl">
+                       ACL认证
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id4">
+                       会话超时
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id5">
+                       保护模式
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id6">
+                    访问控制
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id7">
+                       命令重命名（6.0前）
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#acl-6-0">
+                       ACL（6.0后）
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id8">
+                    安全审计
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#redis-log">
+                       Redis log
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#acl-log">
+                       越权操作日志ACL LOG
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#monitor">
+                       Monitor
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id9">
+                    安全通信
+                   </a>
+                  </li>
+                 </ul>
+                </nav>
+               </li>
+              </ul>
+             </nav>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db2.html">
+              DB2
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id2">
+              免费工具们
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id3">
+              实验环境搭建
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_domestic.html">
+            国产数据库
+           </a>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--secondary">
+         <label class="md-nav__title" for="__toc">
+          Contents
+         </label>
+         <ul class="md-nav__list" data-md-scrollfix="">
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="#redis--page-root">
+            Redis
+           </a>
+           <nav class="md-nav">
+            <ul class="md-nav__list">
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id2">
+               身份鉴别
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id3">
+                  Redis密码
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#acl">
+                  ACL认证
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id4">
+                  会话超时
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id5">
+                  保护模式
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id6">
+               访问控制
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id7">
+                  命令重命名（6.0前）
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#acl-6-0">
+                  ACL（6.0后）
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id8">
+               安全审计
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#redis-log">
+                  Redis log
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#acl-log">
+                  越权操作日志ACL LOG
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#monitor">
+                  Monitor
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id9">
+               安全通信
+              </a>
+             </li>
+            </ul>
+           </nav>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-content">
+      <article class="md-content__inner md-typeset" role="main">
+       <section id="redis">
+        <h1 id="redis--page-root">
+         <a class="toc-backref" href="#redis--page-root" role="doc-backlink">
+          Redis
+         </a>
+         <a class="headerlink" href="#redis--page-root" title="此标题的永久链接">
+          ¶
+         </a>
+        </h1>
+        <ul>
+         <li>
+          <p>
+           维护者
+          </p>
+          <blockquote>
+           <div>
+            <ul class="simple">
+             <li>
+              <p>
+               Redis Labs
+              </p>
+             </li>
+            </ul>
+           </div>
+          </blockquote>
+         </li>
+         <li>
+          <p>
+           是否免费
+          </p>
+          <blockquote>
+           <div>
+            <ul class="simple">
+             <li>
+              <p>
+               Redis：免费&amp;开源
+              </p>
+             </li>
+             <li>
+              <p>
+               Redis Enterprise Software：收费&amp;服务
+              </p>
+             </li>
+            </ul>
+           </div>
+          </blockquote>
+         </li>
+         <li>
+          <p>
+           Latest Release
+          </p>
+          <blockquote>
+           <div>
+            <ul class="simple">
+             <li>
+              <p>
+               <a class="reference external" href="https://redis.io/download">
+                redis.io
+               </a>
+              </p>
+             </li>
+            </ul>
+           </div>
+          </blockquote>
+         </li>
+        </ul>
+        <hr class="docutils"/>
+        <nav class="contents" id="id1">
+         <p class="topic-title">
+          目录
+         </p>
+         <ul class="simple">
+          <li>
+           <p>
+            <a class="reference internal" href="#redis" id="id10">
+             Redis
+            </a>
+           </p>
+           <ul>
+            <li>
+             <p>
+              <a class="reference internal" href="#id2" id="id11">
+               身份鉴别
+              </a>
+             </p>
+             <ul>
+              <li>
+               <p>
+                <a class="reference internal" href="#id3" id="id12">
+                 Redis密码
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#acl" id="id13">
+                 ACL认证
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id4" id="id14">
+                 会话超时
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#id5" id="id15">
+                 保护模式
+                </a>
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <a class="reference internal" href="#id6" id="id16">
+               访问控制
+              </a>
+             </p>
+             <ul>
+              <li>
+               <p>
+                <a class="reference internal" href="#id7" id="id17">
+                 命令重命名（6.0前）
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#acl-6-0" id="id18">
+                 ACL（6.0后）
+                </a>
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <a class="reference internal" href="#id8" id="id19">
+               安全审计
+              </a>
+             </p>
+             <ul>
+              <li>
+               <p>
+                <a class="reference internal" href="#redis-log" id="id20">
+                 Redis log
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#acl-log" id="id21">
+                 越权操作日志ACL LOG
+                </a>
+               </p>
+              </li>
+              <li>
+               <p>
+                <a class="reference internal" href="#monitor" id="id22">
+                 Monitor
+                </a>
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              <a class="reference internal" href="#id9" id="id23">
+               安全通信
+              </a>
+             </p>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </nav>
+        <hr class="docutils"/>
+        <section id="id2">
+         <h2 id="id2">
+          <a class="toc-backref" href="#id11" role="doc-backlink">
+           身份鉴别
+          </a>
+          <a class="headerlink" href="#id2" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          Redis在设计之初就没有注重用户鉴权及访问控制，导致其安全性天生不符合等保要求。但相对地，Redis一直在向极致效率和极致性能发展。Redis配置非常简单，所有参数均集中在一个conf文件。
+         </p>
+         <p>
+          如果业务需求一般的话，甚至不需要自定义配置，使用默认配置直接启动都可以，基本实现了开箱即用。
+         </p>
+         <section id="id3">
+          <h3 id="id3">
+           <a class="toc-backref" href="#id12" role="doc-backlink">
+            Redis密码
+           </a>
+           <a class="headerlink" href="#id3" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           6.0版本之前的Redis仅靠配置文件的
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             requirepass
+            </span>
+           </code>
+           参数实现鉴别认证，且pass为明文保存在配置文件中。设置了pass参数后，客户端在连接数据库时，必须进行认证操作
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             AUTH
+            </span>
+            <span class="pre">
+             pass
+            </span>
+           </code>
+           。特别地，Redis多节点同步的情况下，需要在每个从节点中额外配置
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             masterauth
+            </span>
+           </code>
+           参数。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image114.png">
+            <img alt="image1" src="_images/image114.png" style="width: 5.76806in; height: 1.42986in;"/>
+           </a>
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image213.png">
+            <img alt="image2" src="_images/image213.png" style="width: 5.76806in; height: 1.08056in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="acl">
+          <h3 id="acl">
+           <a class="toc-backref" href="#id13" role="doc-backlink">
+            ACL认证
+           </a>
+           <a class="headerlink" href="#acl" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           Redis发展到6.0版本后，维护者终于憋出来一个半残废的ACL功能，可以为每个ACL帐户设置独立的口令（口令采用SHA256方式保存）。妥善配置ACL帐户后，客户端采用
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             AUTH
+            </span>
+            <span class="pre">
+             user
+            </span>
+            <span class="pre">
+             pass
+            </span>
+           </code>
+           的方式进行身份认证。Redis多节点同步的情况下，可在每个从节点中配置
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             masteruser
+            </span>
+           </code>
+           及
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             masterauth
+            </span>
+           </code>
+           参数，实现不同从节点的独立鉴权。
+          </p>
+          <p>
+           为了保持向下兼容性，Redis预置default帐户，
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             requirepass
+            </span>
+           </code>
+           参数及
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             AUTH
+            </span>
+            <span class="pre">
+             pass
+            </span>
+           </code>
+           命令依然有效。但实际上，
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             requirepass
+            </span>
+           </code>
+           参数设置的是default帐户的口令，
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             AUTH
+            </span>
+            <span class="pre">
+             pass
+            </span>
+           </code>
+           等同于
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             AUTH
+            </span>
+            <span class="pre">
+             default
+            </span>
+            <span class="pre">
+             pass
+            </span>
+           </code>
+           。
+          </p>
+         </section>
+         <section id="id4">
+          <h3 id="id4">
+           <a class="toc-backref" href="#id14" role="doc-backlink">
+            会话超时
+           </a>
+           <a class="headerlink" href="#id4" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           conf文件中配置
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             timeout
+            </span>
+           </code>
+           参数即可。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image33.png">
+            <img alt="image3" src="_images/image33.png" style="width: 5.76806in; height: 0.87847in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="id5">
+          <h3 id="id5">
+           <a class="toc-backref" href="#id15" role="doc-backlink">
+            保护模式
+           </a>
+           <a class="headerlink" href="#id5" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           Redis自带了一个保护机制，防止管理员误操作导致的数据泄露。当Redis未设置密码且绑定了所有网络接口，则自动启动保护模式，仅允许环回地址及Unix Socket访问。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image45.png">
+            <img alt="image4" src="_images/image45.png" style="width: 5.76806in; height: 3.30069in;"/>
+           </a>
+          </p>
+         </section>
+        </section>
+        <section id="id6">
+         <h2 id="id6">
+          <a class="toc-backref" href="#id16" role="doc-backlink">
+           访问控制
+          </a>
+          <a class="headerlink" href="#id6" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          很可惜，6.0版本之前的Redis没有任何访问控制机制，一切全靠配置文件的pass参数。
+         </p>
+         <section id="id7">
+          <h3 id="id7">
+           <a class="toc-backref" href="#id17" role="doc-backlink">
+            命令重命名（6.0前）
+           </a>
+           <a class="headerlink" href="#id7" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           在配置文件中可以重命名系统命令，参数格式为
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             rename-command
+            </span>
+            <span class="pre">
+             &lt;cmd&gt;
+            </span>
+            <span class="pre">
+             &lt;dstStr&gt;
+            </span>
+           </code>
+           。比如将
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             CONFIG
+            </span>
+           </code>
+           命令重命名为
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             b840fc02d524045429941cc15f59e41cb7be6c52
+            </span>
+           </code>
+           ，勉强起到部分访问控制作用。
+          </p>
+          <div class="admonition hint">
+           <p class="admonition-title">
+            提示
+           </p>
+           <p>
+            如果将命令重命名为空，则等同于禁用该命令。
+           </p>
+          </div>
+         </section>
+         <section id="acl-6-0">
+          <h3 id="acl-6-0">
+           <a class="toc-backref" href="#id18" role="doc-backlink">
+            ACL（6.0后）
+           </a>
+           <a class="headerlink" href="#acl-6-0" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           6.0版本后的Redis提供了ACL功能，具体配置方法可参照
+           <a class="reference external" href="https://redis.io/commands/acl-setuser">
+            官方文档
+           </a>
+           。可以为每个用户独立限制其允许使用的命令，限制允许访问的key（业务数据）。在数据库中输入
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             ACL
+            </span>
+            <span class="pre">
+             LIST
+            </span>
+           </code>
+           可查看ACL帐户列表，其参数为：user/用户名/用户状态(on/off)/密码/键权限/命令权限。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image54.png">
+            <img alt="image5" src="_images/image54.png" style="width: 5.76806in; height: 1.34653in;"/>
+           </a>
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image64.png">
+            <img alt="image6" src="_images/image64.png" style="width: 5.76806in; height: 2.11597in;"/>
+           </a>
+          </p>
+          <p>
+           如前文所述，为了保持向下兼容性，Redis存在默认帐户default。该帐户不得删除，可通过
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             requirepass
+            </span>
+           </code>
+           参数设置口令，可以对其设置ACL策略，甚至去除所有权限。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image74.png">
+            <img alt="image7" src="_images/image74.png" style="width: 5.76806in; height: 1.35764in;"/>
+           </a>
+          </p>
+          <p>
+           特别地，在缺省参数创建帐户时（
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             ACL
+            </span>
+            <span class="pre">
+             SETUSER
+            </span>
+            <span class="pre">
+             test
+            </span>
+           </code>
+           ），该帐户默认有所有命令权限、没有键权限、没有密码、状态off。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image84.png">
+            <img alt="image8" src="_images/image84.png" style="width: 5.76806in; height: 1.56319in;"/>
+           </a>
+          </p>
+         </section>
+        </section>
+        <section id="id8">
+         <h2 id="id8">
+          <a class="toc-backref" href="#id19" role="doc-backlink">
+           安全审计
+          </a>
+          <a class="headerlink" href="#id8" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          很可惜，Redis甚至没有称得上安全审计的机制。
+         </p>
+         <section id="redis-log">
+          <h3 id="redis-log">
+           <a class="toc-backref" href="#id20" role="doc-backlink">
+            Redis log
+           </a>
+           <a class="headerlink" href="#redis-log" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           Redis默认记录服务器日志，日志级别为
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             notice
+            </span>
+           </code>
+           （能够记录大部分系统事件，但任何级别都不能记录操作）。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image93.png">
+            <img alt="image9" src="_images/image93.png" style="width: 5.76806in; height: 4.575in;"/>
+           </a>
+          </p>
+          <p>
+           如果没有在conf中配置的话，默认输出到
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             /dev/null
+            </span>
+           </code>
+           。因此需要配置
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             logfile
+            </span>
+           </code>
+           参数，实现日志的本地保存。并可以配置输出日志到syslog。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image104.png">
+            <img alt="image10" src="_images/image104.png" style="width: 5.76806in; height: 3.99583in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="acl-log">
+          <h3 id="acl-log">
+           <a class="toc-backref" href="#id21" role="doc-backlink">
+            越权操作日志ACL LOG
+           </a>
+           <a class="headerlink" href="#acl-log" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           仅记录ACL鉴权失败（用户越权操作）的日志，仅记录一级命令，如对
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             ACL
+            </span>
+            <span class="pre">
+             LIST
+            </span>
+           </code>
+           的越权操作仅记录”ACL”。ACL LOG以链表形式存放在内存中，不写文件，无法做到日志持久化。
+          </p>
+          <p>
+           ACL日志的字段包括：类型（key或者command）、客户端IP、时间戳、用户、一级操作。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image115.png">
+            <img alt="image11" src="_images/image115.png" style="width: 5.76806in; height: 3.73125in;"/>
+           </a>
+          </p>
+          <p>
+           conf中可以设置这个链表的最大长度（日志最大数量）
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image121.png">
+            <img alt="image12" src="_images/image121.png" style="width: 5.76806in; height: 1.55694in;"/>
+           </a>
+          </p>
+         </section>
+         <section id="monitor">
+          <h3 id="monitor">
+           <a class="toc-backref" href="#id22" role="doc-backlink">
+            Monitor
+           </a>
+           <a class="headerlink" href="#monitor" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           Monitor是Redis的一个命令，能够记录所有对Redis的操作，对应实现函数为
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             redis-cli.c-&gt;cliReadReply()
+            </span>
+           </code>
+           。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image131.png">
+            <img alt="image13" src="_images/image131.png" style="width: 5.76806in; height: 5.33125in;"/>
+           </a>
+          </p>
+          <p>
+           该命令默认仅能回显对服务器的所有操作，不记录用户，不写日志文件，且必须保持Monitor的终端打开，不能起到审计作用。Monitor的回显内容包括：时间戳、会话id、会话端口、命令内容。
+          </p>
+          <p>
+           <a class="reference internal" href="_images/image142.png">
+            <img alt="image14" src="_images/image142.png" style="width: 5.76806in; height: 2.89861in;"/>
+           </a>
+          </p>
+         </section>
+        </section>
+        <section id="id9">
+         <h2 id="id9">
+          <a class="toc-backref" href="#id23" role="doc-backlink">
+           安全通信
+          </a>
+          <a class="headerlink" href="#id9" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          Redis支持TLS/SSL通信加密，也支持X509双向认证。只需要查看conf文件中关于TLS/SSL的相关参数即可（注意观察端口参数是
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            port
+           </span>
+          </code>
+          还是
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            tls-port
+           </span>
+          </code>
+          ）
+         </p>
+         <p>
+          <a class="reference internal" href="_images/image151.png">
+           <img alt="image15" src="_images/image151.png" style="width: 5.76806in; height: 3.67708in;"/>
+          </a>
+         </p>
+        </section>
+       </section>
+      </article>
+     </div>
+    </div>
+   </main>
+  </div>
+  <footer class="md-footer">
+   <div class="md-footer-nav">
+    <nav class="md-footer-nav__inner md-grid">
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="pg.html" rel="prev" title="PostgreSQL">
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-back md-footer-nav__button">
+       </i>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Previous
+        </span>
+        PostgreSQL
+       </span>
+      </div>
+     </a>
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="db2.html" rel="next" title="DB2">
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Next
+        </span>
+        DB2
+       </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-forward md-footer-nav__button">
+       </i>
+      </div>
+     </a>
+    </nav>
+   </div>
+   <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+     <div class="md-footer-copyright">
+      <div class="md-footer-copyright__highlight">
+       © Copyright 2021, 腿哥牛逼.
+      </div>
+      Created using
+      <a href="http://www.sphinx-doc.org/">
+       Sphinx
+      </a>
+      5.3.0.
+             and
+      <a href="https://github.com/bashtage/sphinx-material/">
+       Material for
+              Sphinx
+      </a>
+     </div>
+     <div class="md-footer-copyright" style="float: right">
+      <a href="https://beian.miit.gov.cn">
+       沪ICP备 2020030506号
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script src="_static/javascripts/application.js">
+  </script>
+  <script>
+   app.initialize({version: "1.0.4", url: {base: ".."}})
+  </script>
+ </body>
+</html>

@@ -1,0 +1,2830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <meta content="Copy to clipboard" name="lang:clipboard.copy"/>
+  <meta content="Copied to clipboard" name="lang:clipboard.copied"/>
+  <meta content="en" name="lang:search.language"/>
+  <meta content="True" name="lang:search.pipeline.stopwords"/>
+  <meta content="True" name="lang:search.pipeline.trimmer"/>
+  <meta content="No matching documents" name="lang:search.result.none"/>
+  <meta content="1 matching document" name="lang:search.result.one"/>
+  <meta content="# matching documents" name="lang:search.result.other"/>
+  <meta content="[\s\-]+" name="lang:search.tokenizer"/>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&amp;display=fallback" rel="stylesheet"/>
+  <style>
+   body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+  </style>
+  <link href="_static/stylesheets/application.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-palette.css" rel="stylesheet"/>
+  <link href="_static/stylesheets/application-fixes.css" rel="stylesheet"/>
+  <link href="_static/fonts/material-icons.css" rel="stylesheet"/>
+  <meta content="#3f51b5" name="theme-color"/>
+  <script src="_static/javascripts/modernizr.js">
+  </script>
+  <title>
+   MSSQL — 学习笔记
+  </title>
+  <link href="_static/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/material.css" rel="stylesheet" type="text/css"/>
+  <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
+  </script>
+  <script src="_static/jquery.js">
+  </script>
+  <script src="_static/underscore.js">
+  </script>
+  <script src="_static/_sphinx_javascript_frameworks_compat.js">
+  </script>
+  <script src="_static/doctools.js">
+  </script>
+  <script src="_static/sphinx_highlight.js">
+  </script>
+  <script src="_static/clipboard.min.js">
+  </script>
+  <script src="_static/copybutton.js">
+  </script>
+  <script src="_static/translations.js">
+  </script>
+  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="genindex.html" rel="index" title="索引"/>
+  <link href="search.html" rel="search" title="搜索"/>
+  <link href="pg.html" rel="next" title="PostgreSQL"/>
+  <link href="oracle.html" rel="prev" title="Oracle"/>
+ </head>
+ <body data-md-color-accent="blue" data-md-color-primary="blue-grey" dir="ltr">
+  <svg class="md-svg">
+   <defs data-children-count="0">
+    <svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg">
+     <path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor">
+     </path>
+    </svg>
+   </defs>
+  </svg>
+  <input class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+  <input class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+  <label class="md-overlay" data-md-component="overlay" for="__drawer">
+  </label>
+  <a class="md-skip" href="#mssql" tabindex="1">
+   Skip to content
+  </a>
+  <header class="md-header" data-md-component="header">
+   <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
+       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
+      </a>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer">
+      </label>
+     </div>
+     <div class="md-flex__cell md-flex__cell--stretch">
+      <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+       <span class="md-header-nav__topic">
+        学习笔记
+       </span>
+       <span class="md-header-nav__topic">
+        MSSQL
+       </span>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <label class="md-icon md-icon--search md-header-nav__button" for="__search">
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+       <label class="md-search__overlay" for="__search">
+       </label>
+       <div class="md-search__inner" role="search">
+        <form action="search.html" class="md-search__form" method="get" name="search">
+         <input autocapitalize="off" autocomplete="off" class="md-search__input" data-md-component="query" data-md-state="active" name="q" placeholder="Search" spellcheck="false" type="text"/>
+         <label class="md-icon md-search__icon" for="__search">
+         </label>
+         <button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+          
+         </button>
+        </form>
+        <div class="md-search__output">
+         <div class="md-search__scrollwrap" data-md-scrollfix="">
+          <div class="md-search-result" data-md-component="result">
+           <div class="md-search-result__meta">
+            Type to start searching
+           </div>
+           <ol class="md-search-result__list">
+           </ol>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="md-flex__cell md-flex__cell--shrink">
+      <div class="md-header-nav__source">
+       <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+        <div class="md-source__icon">
+         <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <use height="24" width="24" xlink:href="#__github">
+          </use>
+         </svg>
+        </div>
+        <div class="md-source__repository">
+         Personal Blog
+        </div>
+       </a>
+      </div>
+     </div>
+     <script src="_static/javascripts/version_dropdown.js">
+     </script>
+     <script>
+      var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+     </script>
+    </div>
+   </nav>
+  </header>
+  <div class="md-container">
+   <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+     <ul class="md-tabs__list">
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="../index.html">
+        README
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="index.html">
+        CheckList
+       </a>
+      </li>
+      <li class="md-tabs__item">
+       <a class="md-tabs__link" href="db_common.html">
+        通用数据库
+       </a>
+      </li>
+     </ul>
+    </div>
+   </nav>
+   <main class="md-main">
+    <div class="md-main__inner md-grid" data-md-component="container">
+     <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--primary" data-md-level="0">
+         <label class="md-nav__title md-nav__title--site" for="__drawer">
+          <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
+           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+          </a>
+          <a href="index.html" title="学习笔记">
+           学习笔记
+          </a>
+         </label>
+         <div class="md-nav__source">
+          <a class="md-source" data-md-source="github" href="https://github.com/ale10bb/blog/" title="Go to repository">
+           <div class="md-source__icon">
+            <svg height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+             <use height="24" width="24" xlink:href="#__github">
+             </use>
+            </svg>
+           </div>
+           <div class="md-source__repository">
+            Personal Blog
+           </div>
+          </a>
+         </div>
+         <ul class="md-nav__list">
+          <li class="md-nav__item">
+           <span class="md-nav__link caption">
+            <span class="caption-text">
+             计算环境索引
+            </span>
+           </span>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_common.html">
+            通用操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="os_domestic.html">
+            国产操作系统
+           </a>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_common.html">
+            通用数据库
+           </a>
+           <ul class="md-nav__list">
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="mysql.html">
+              MySQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="oracle.html">
+              Oracle
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+             <label class="md-nav__link md-nav__link--active" for="__toc">
+              MSSQL
+             </label>
+             <a class="md-nav__link md-nav__link--active" href="#">
+              MSSQL
+             </a>
+             <nav class="md-nav md-nav--secondary">
+              <label class="md-nav__title" for="__toc">
+               Contents
+              </label>
+              <ul class="md-nav__list" data-md-scrollfix="">
+               <li class="md-nav__item">
+                <a class="md-nav__link" href="#mssql--page-root">
+                 MSSQL
+                </a>
+                <nav class="md-nav">
+                 <ul class="md-nav__list">
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id1">
+                    软件信息
+                   </a>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id3">
+                    身份鉴别
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id4">
+                       鉴别模型
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id5">
+                       安全机制
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id6">
+                          口令策略&amp;登录失败处理策略
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id7">
+                          连接超时
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id8">
+                       操作手册
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id9">
+                          连接数据库
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id10">
+                          核查：身份鉴别策略
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id11">
+                    访问控制
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id12">
+                       权限模型
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id13">
+                          隐式继承
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id14">
+                          显式赋权
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id15">
+                       权限级别
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id16">
+                          服务器级
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id17">
+                          数据库级
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id18">
+                          架构级
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id19">
+                       操作手册
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id20">
+                          核查：分配的权限
+                         </a>
+                        </li>
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id21">
+                          操作：常见的管理命令
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id22">
+                    安全审计
+                   </a>
+                   <nav class="md-nav">
+                    <ul class="md-nav__list">
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id23">
+                       内置错误日志
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id24">
+                       默认审核跟踪
+                      </a>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#id25">
+                       自定义审核规范
+                      </a>
+                      <nav class="md-nav">
+                       <ul class="md-nav__list">
+                        <li class="md-nav__item">
+                         <a class="md-nav__link" href="#id26">
+                          审核策略清单
+                         </a>
+                        </li>
+                       </ul>
+                      </nav>
+                     </li>
+                     <li class="md-nav__item">
+                      <a class="md-nav__link" href="#c2">
+                       C2审核跟踪
+                      </a>
+                     </li>
+                    </ul>
+                   </nav>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id27">
+                    剩余信息保护
+                   </a>
+                  </li>
+                  <li class="md-nav__item">
+                   <a class="md-nav__link" href="#id28">
+                    安全通信
+                   </a>
+                  </li>
+                 </ul>
+                </nav>
+               </li>
+              </ul>
+             </nav>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="pg.html">
+              PostgreSQL
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="redis.html">
+              Redis
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db2.html">
+              DB2
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id2">
+              免费工具们
+             </a>
+            </li>
+            <li class="md-nav__item">
+             <a class="md-nav__link" href="db_common.html#id3">
+              实验环境搭建
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="db_domestic.html">
+            国产数据库
+           </a>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+      <div class="md-sidebar__scrollwrap">
+       <div class="md-sidebar__inner">
+        <nav class="md-nav md-nav--secondary">
+         <label class="md-nav__title" for="__toc">
+          Contents
+         </label>
+         <ul class="md-nav__list" data-md-scrollfix="">
+          <li class="md-nav__item">
+           <a class="md-nav__link" href="#mssql--page-root">
+            MSSQL
+           </a>
+           <nav class="md-nav">
+            <ul class="md-nav__list">
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id1">
+               软件信息
+              </a>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id3">
+               身份鉴别
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id4">
+                  鉴别模型
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id5">
+                  安全机制
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id6">
+                     口令策略&amp;登录失败处理策略
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id7">
+                     连接超时
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id8">
+                  操作手册
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id9">
+                     连接数据库
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id10">
+                     核查：身份鉴别策略
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id11">
+               访问控制
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id12">
+                  权限模型
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id13">
+                     隐式继承
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id14">
+                     显式赋权
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id15">
+                  权限级别
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id16">
+                     服务器级
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id17">
+                     数据库级
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id18">
+                     架构级
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id19">
+                  操作手册
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id20">
+                     核查：分配的权限
+                    </a>
+                   </li>
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id21">
+                     操作：常见的管理命令
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id22">
+               安全审计
+              </a>
+              <nav class="md-nav">
+               <ul class="md-nav__list">
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id23">
+                  内置错误日志
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id24">
+                  默认审核跟踪
+                 </a>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#id25">
+                  自定义审核规范
+                 </a>
+                 <nav class="md-nav">
+                  <ul class="md-nav__list">
+                   <li class="md-nav__item">
+                    <a class="md-nav__link" href="#id26">
+                     审核策略清单
+                    </a>
+                   </li>
+                  </ul>
+                 </nav>
+                </li>
+                <li class="md-nav__item">
+                 <a class="md-nav__link" href="#c2">
+                  C2审核跟踪
+                 </a>
+                </li>
+               </ul>
+              </nav>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id27">
+               剩余信息保护
+              </a>
+             </li>
+             <li class="md-nav__item">
+              <a class="md-nav__link" href="#id28">
+               安全通信
+              </a>
+             </li>
+            </ul>
+           </nav>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+     <div class="md-content">
+      <article class="md-content__inner md-typeset" role="main">
+       <section id="mssql">
+        <h1 id="mssql--page-root">
+         <a class="toc-backref" href="#mssql--page-root" role="doc-backlink">
+          MSSQL
+         </a>
+         <a class="headerlink" href="#mssql--page-root" title="此标题的永久链接">
+          ¶
+         </a>
+        </h1>
+        <section id="id1">
+         <h2 id="id1">
+          <a class="toc-backref" href="#id30" role="doc-backlink">
+           软件信息
+          </a>
+          <a class="headerlink" href="#id1" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <ul>
+          <li>
+           <p>
+            发行商
+           </p>
+           <blockquote>
+            <div>
+             <ul class="simple">
+              <li>
+               <p>
+                Microsoft
+               </p>
+              </li>
+             </ul>
+            </div>
+           </blockquote>
+          </li>
+          <li>
+           <p>
+            是否免费
+           </p>
+           <blockquote>
+            <div>
+             <ul>
+              <li>
+               <p>
+                SQL Server Express：免费&amp;受限
+               </p>
+               <blockquote>
+                <div>
+                 <ul class="simple">
+                  <li>
+                   <p>
+                    Up to 1 physical processor
+                   </p>
+                  </li>
+                  <li>
+                   <p>
+                    Up to 1 GB memory
+                   </p>
+                  </li>
+                  <li>
+                   <p>
+                    Up to 10 GB storage
+                   </p>
+                  </li>
+                 </ul>
+                </div>
+               </blockquote>
+              </li>
+              <li>
+               <p>
+                SQL Server：收费
+               </p>
+              </li>
+              <li>
+               <p>
+                Azure：收费（常规云服务）
+               </p>
+              </li>
+             </ul>
+            </div>
+           </blockquote>
+          </li>
+          <li>
+           <p>
+            Latest Service Packs (SP) and Cumulative Updates (CU)
+           </p>
+           <blockquote>
+            <div>
+             <ul class="simple">
+              <li>
+               <p>
+                <a class="reference external" href="https://sqlserverbuilds.blogspot.com/">
+                 blogspot
+                </a>
+               </p>
+              </li>
+             </ul>
+            </div>
+           </blockquote>
+          </li>
+         </ul>
+         <hr class="docutils"/>
+         <nav class="contents" id="id2">
+          <p class="topic-title">
+           目录
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             <a class="reference internal" href="#mssql" id="id29">
+              MSSQL
+             </a>
+            </p>
+            <ul>
+             <li>
+              <p>
+               <a class="reference internal" href="#id1" id="id30">
+                软件信息
+               </a>
+              </p>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id3" id="id31">
+                身份鉴别
+               </a>
+              </p>
+              <ul>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id4" id="id32">
+                  鉴别模型
+                 </a>
+                </p>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id5" id="id33">
+                  安全机制
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id6" id="id34">
+                    口令策略&amp;登录失败处理策略
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id7" id="id35">
+                    连接超时
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id8" id="id36">
+                  操作手册
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id9" id="id37">
+                    连接数据库
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id10" id="id38">
+                    核查：身份鉴别策略
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id11" id="id39">
+                访问控制
+               </a>
+              </p>
+              <ul>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id12" id="id40">
+                  权限模型
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id13" id="id41">
+                    隐式继承
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id14" id="id42">
+                    显式赋权
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id15" id="id43">
+                  权限级别
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id16" id="id44">
+                    服务器级
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id17" id="id45">
+                    数据库级
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id18" id="id46">
+                    架构级
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id19" id="id47">
+                  操作手册
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id20" id="id48">
+                    核查：分配的权限
+                   </a>
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id21" id="id49">
+                    操作：常见的管理命令
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id22" id="id50">
+                安全审计
+               </a>
+              </p>
+              <ul>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id23" id="id51">
+                  内置错误日志
+                 </a>
+                </p>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id24" id="id52">
+                  默认审核跟踪
+                 </a>
+                </p>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#id25" id="id53">
+                  自定义审核规范
+                 </a>
+                </p>
+                <ul>
+                 <li>
+                  <p>
+                   <a class="reference internal" href="#id26" id="id54">
+                    审核策略清单
+                   </a>
+                  </p>
+                 </li>
+                </ul>
+               </li>
+               <li>
+                <p>
+                 <a class="reference internal" href="#c2" id="id55">
+                  C2审核跟踪
+                 </a>
+                </p>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id27" id="id56">
+                剩余信息保护
+               </a>
+              </p>
+             </li>
+             <li>
+              <p>
+               <a class="reference internal" href="#id28" id="id57">
+                安全通信
+               </a>
+              </p>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </nav>
+        </section>
+        <hr class="docutils"/>
+        <section id="id3">
+         <h2 id="id3">
+          <a class="toc-backref" href="#id31" role="doc-backlink">
+           身份鉴别
+          </a>
+          <a class="headerlink" href="#id3" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id4">
+          <h3 id="id4">
+           <a class="toc-backref" href="#id32" role="doc-backlink">
+            鉴别模型
+           </a>
+           <a class="headerlink" href="#id4" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           SQL Server 2016及以前的版本只可在Windows操作系统中安装。从2017版本开始，SQL Server同时提供了Windows版和Linux版。在各数据库实例的服务器属性中，可查看该实例启用的身份验证模式。常见的MSSQL认证方式如下：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             Windows认证：（仅Windows版）使用SSO机制，使用有效的Windows操作系统帐户或AD域帐户登录后，可直接连接数据库。
+            </p>
+           </li>
+           <li>
+            <p>
+             SQL Server认证：使用数据库的登录名及口令进行认证。
+            </p>
+           </li>
+          </ul>
+          <img alt="_images/image12.png" class="align-center" src="_images/image12.png"/>
+          <p>
+           MSSQL将“帐户”的概念拆分成两部分，分别为服务器级别的登录名和数据库级别的用户。其中服务器级别的登录名决定用户是否能够连接数据库实例（身份鉴别功能），数据库级别的用户决定是否能够访问对应数据库（访问控制功能）。每个数据库有自己独立的用户，可在服务器级别的登录名和各数据库级别的用户之间建立映射关系，实现精确到数据库级别的访问控制。
+          </p>
+          <p>
+           显然地，只有服务器级别的登录名需要设置用户名和口令，同时鉴别信息复杂度策略和定期更换策略也针对服务器级别的登录名。
+          </p>
+          <div class="admonition important">
+           <p class="admonition-title">
+            重要
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              在Windows认证的情况下，登录名中实际设置了Windows操作系统的帐户名或用户组，如
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                BUILTIN\Administrators
+               </span>
+              </code>
+              、
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                BUILTIN\Users
+               </span>
+              </code>
+              ，用于实现Windows操作系统与登录名的映射。
+             </p>
+            </li>
+            <li>
+             <p>
+              为了满足等保要求，应删除类似于
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                BUILTIN\Users
+               </span>
+              </code>
+              的用户组，仅保留必要的操作系统帐户。
+             </p>
+            </li>
+           </ul>
+          </div>
+          <img alt="_images/image28.png" class="align-center" src="_images/image28.png"/>
+          <p>
+           对于每个登录名，有两个设置与是否允许登录相关：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             是否允许连接到数据库引擎(connect) 。设置deny connect对服务器sysadmin角色的登录名无效，对其他登录名可起到拒绝登录的作用。
+            </p>
+           </li>
+           <li>
+            <p>
+             是否启用登录(login)。设置deny login对所有登录名均起到拒绝登录的作用。
+            </p>
+           </li>
+          </ul>
+          <img alt="_images/image3.png" class="align-center" src="_images/image3.png"/>
+         </section>
+         <section id="id5">
+          <h3 id="id5">
+           <a class="toc-backref" href="#id33" role="doc-backlink">
+            安全机制
+           </a>
+           <a class="headerlink" href="#id5" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <section id="id6">
+           <h4 id="id6">
+            <a class="toc-backref" href="#id34" role="doc-backlink">
+             口令策略&amp;登录失败处理策略
+            </a>
+            <a class="headerlink" href="#id6" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            MSSQL可为每个登录名独立开启鉴别信息复杂度策略和口令过期策略。
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              强制实施密码策略
+             </p>
+             <ul>
+              <li>
+               <p>
+                Windows版：引用本地安全策略中的“密码必须符合复杂性要求”、“密码长度最小值”、“帐户锁定阈值”、“帐户锁定时间”。（设置了弱策略也引用）
+               </p>
+              </li>
+              <li>
+               <p>
+                Linux版：（固定策略）口令不得包含用户名，密码最少为8个字符，必须包含三种元素。
+                <strong>
+                 无登录失败处理功能
+                </strong>
+                。
+               </p>
+              </li>
+             </ul>
+            </li>
+            <li>
+             <p>
+              强制密码过期
+             </p>
+             <ul>
+              <li>
+               <p>
+                Windows版：引用本地安全策略中的“密码最长使用期限”。
+               </p>
+              </li>
+              <li>
+               <p>
+                Linux版：
+                <strong>
+                 勾选无效
+                </strong>
+                。（无该功能）
+               </p>
+              </li>
+             </ul>
+            </li>
+           </ul>
+           <img alt="_images/image42.png" class="align-center" src="_images/image42.png"/>
+          </section>
+          <section id="id7">
+           <h4 id="id7">
+            <a class="toc-backref" href="#id35" role="doc-backlink">
+             连接超时
+            </a>
+            <a class="headerlink" href="#id7" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            在“服务器属性-高级”中可以配置。
+           </p>
+           <img alt="_images/image51.png" class="align-center" src="_images/image51.png"/>
+           <div class="admonition hint">
+            <p class="admonition-title">
+             提示
+            </p>
+            <p>
+             MSSQL没有空闲会话超时的功能。
+            </p>
+           </div>
+          </section>
+         </section>
+         <section id="id8">
+          <h3 id="id8">
+           <a class="toc-backref" href="#id36" role="doc-backlink">
+            操作手册
+           </a>
+           <a class="headerlink" href="#id8" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <section id="id9">
+           <h4 id="id9">
+            <a class="toc-backref" href="#id37" role="doc-backlink">
+             连接数据库
+            </a>
+            <a class="headerlink" href="#id9" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            使用SSMS工具连接数据库时需要注意，当数据库使用了非常规端口时，IP/域名和端口之间采用逗号分割，而不是冒号。
+           </p>
+           <img alt="_images/login.png" class="align-center" src="_images/login.png"/>
+          </section>
+          <section id="id10">
+           <h4 id="id10">
+            <a class="toc-backref" href="#id38" role="doc-backlink">
+             核查：身份鉴别策略
+            </a>
+            <a class="headerlink" href="#id10" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <div class="highlight-sql notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1">-- 查看用户是否设置口令及口令策略</span>
+<span class="c1">-- is_policy_checked 强制实施密码策略（1启用）</span>
+<span class="c1">-- is_expiration_checked：强制密码过期</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">type_desc</span><span class="p">,</span><span class="w"></span>
+<span class="w">       </span><span class="k">CASE</span><span class="w"> </span><span class="n">PWDCOMPARE</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span><span class="n">password_hash</span><span class="p">)</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'null'</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">'not_null'</span><span class="w"> </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">PASSWORD</span><span class="p">,</span><span class="w"></span>
+<span class="w">       </span><span class="n">is_policy_checked</span><span class="p">,</span><span class="w"> </span><span class="n">is_expiration_checked</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sql_logins</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">is_disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 查看登录超时</span>
+<span class="n">sp_configure</span><span class="w"> </span><span class="s1">'remote login time'</span><span class="p">;</span><span class="w"></span>
+</pre>
+            </div>
+           </div>
+           <img alt="_images/image61.png" class="align-center" src="_images/image61.png"/>
+          </section>
+         </section>
+        </section>
+        <section id="id11">
+         <h2 id="id11">
+          <a class="toc-backref" href="#id39" role="doc-backlink">
+           访问控制
+          </a>
+          <a class="headerlink" href="#id11" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id12">
+          <h3 id="id12">
+           <a class="toc-backref" href="#id40" role="doc-backlink">
+            权限模型
+           </a>
+           <a class="headerlink" href="#id12" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           微软官方提供一个
+           <a class="reference external" href="https://aka.ms/sql-permissions-poster">
+            PDF文件
+           </a>
+           ，描述MSSQL整体的权限模型。MSSQL的权限共4个等级：服务器级 &gt; 数据库级 &gt; 架构级 &gt; 对象级。
+          </p>
+          <p>
+           MSSQL中，一条完整的SQL语句应为如下结构：
+          </p>
+          <p>
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             SELECT
+            </span>
+            <span class="pre">
+             *
+            </span>
+            <span class="pre">
+             FROM
+            </span>
+            <span class="pre">
+             [db_name].[schema_name].[object_name]
+            </span>
+           </code>
+          </p>
+          <p>
+           其中，新建数据库连接时，可以设置“默认数据库”参数，作用为：当
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             [db_name]
+            </span>
+           </code>
+           缺省时，使用该参数自动填入。
+          </p>
+          <p>
+           此外，新建[登录名-&gt;数据库用户]映射时，可以设置“默认架构”参数，作用为：当
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             [schema_name]
+            </span>
+           </code>
+           缺省时，使用该参数自动填入。
+          </p>
+          <div class="admonition hint">
+           <p class="admonition-title">
+            提示
+           </p>
+           <ol class="arabic simple">
+            <li>
+             <p>
+              这份文件啃下来就可以出去吹牛了。
+             </p>
+            </li>
+            <li>
+             <p>
+              下面全是对这份文件的解释。
+             </p>
+            </li>
+           </ol>
+          </div>
+          <section id="id13">
+           <h4 id="id13">
+            <a class="toc-backref" href="#id41" role="doc-backlink">
+             隐式继承
+            </a>
+            <a class="headerlink" href="#id13" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            MSSQL的权限具有隐式继承关系：
+           </p>
+           <p>
+            1、Control类权限隐式继承。如：当一个登录名被赋予sysadmin（或被显式赋予
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              Control
+             </span>
+             <span class="pre">
+              Server
+             </span>
+            </code>
+            权限），则其自动获得所有数据库、架构和对象的Control权限。
+           </p>
+           <p>
+            2、Select/Update/Insert/Delete/Execute/View等权限隐式继承。如：当一个数据库用户被授予
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              Select
+             </span>
+            </code>
+            权限，则其自动获得数据库下所有架构和对象的Select权限。
+           </p>
+           <img alt="_images/image111.png" class="align-center" src="_images/image111.png"/>
+           <div class="admonition important">
+            <p class="admonition-title">
+             重要
+            </p>
+            <p>
+             测评时需要着重注意系统Control权限的分配，应做到最小化。如果无法避免分配Control权限，应在必要时显式阻止Control的继承。默认情况下，如果不加阻止的话，所有sysadmin角色的登录名都具有所有数据库的控制权。
+            </p>
+           </div>
+          </section>
+          <section id="id14">
+           <h4 id="id14">
+            <a class="toc-backref" href="#id42" role="doc-backlink">
+             显式赋权
+            </a>
+            <a class="headerlink" href="#id14" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            MSSQL提供了“安全对象”功能，可视为DAC。优先级为“显式赋权（安全对象）&gt; 隐式继承（内置角色）”。
+           </p>
+           <p>
+            数据库中的每个对象都具有“安全对象”的标签（如：登录名-属性-安全对象），可以精细化控制访问策略。如：
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              在服务器层面新建登录名，并赋予更改任意服务器审核的权限，就可以赋予该登录名审计日志设置和查看权限，也就是可以作为安全审计员。
+             </p>
+            </li>
+            <li>
+             <p>
+              在各业务数据库层面拒绝sa的
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                Control
+               </span>
+               <span class="pre">
+                Database
+               </span>
+              </code>
+              权限，sa就失去了对应数据库及子对象的Control权限。
+             </p>
+            </li>
+           </ul>
+          </section>
+         </section>
+         <section id="id15">
+          <h3 id="id15">
+           <a class="toc-backref" href="#id43" role="doc-backlink">
+            权限级别
+           </a>
+           <a class="headerlink" href="#id15" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <section id="id16">
+           <h4 id="id16">
+            <a class="toc-backref" href="#id44" role="doc-backlink">
+             服务器级
+            </a>
+            <a class="headerlink" href="#id16" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            服务器级的权限主要通过服务器角色（如sysadmin角色）来控制，这些服务器角色预置在MSSQL中且不能修改。每个登录名可绑定一个或多个服务器角色，可视为RBAC的权限分配模型。
+           </p>
+           <p>
+            一般而言，服务器角色都具有一些强大的全局权限，在赋权时需要格外谨慎。如果没有特殊需求，对登录名分配public服务器角色即可。public的默认权限为
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              VIEW
+             </span>
+             <span class="pre">
+              ANY
+             </span>
+             <span class="pre">
+              DATABASE
+             </span>
+            </code>
+            （列出数据库）及
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              CONNECT
+             </span>
+            </code>
+            。
+           </p>
+           <img alt="_images/image71.png" class="align-center" src="_images/image71.png"/>
+          </section>
+          <section id="id17">
+           <h4 id="id17">
+            <a class="toc-backref" href="#id45" role="doc-backlink">
+             数据库级
+            </a>
+            <a class="headerlink" href="#id17" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            对MSSQL数据库而言，登录名不能直接访问数据库对象，它需要和被访问数据库的数据库用户进行映射，然后使用数据库用户的权限来进行操作。实际上，数据库级以及其下属的架构级、对象级的权限主体均为数据库用户。MSSQL通过这个机制，可实现同一个登录名具备不同数据库的不同权限。在各登录名的“映射数据库”中可以看到开启映射的数据库，映射的对应数据库用户，以及数据库用户的数据库级别角色。
+           </p>
+           <div class="admonition hint">
+            <p class="admonition-title">
+             提示
+            </p>
+            <p>
+             每个数据库有一个隐藏guest用户，默认不具备任何权限，可理解为默认拒绝访问。如果登录名使用
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               USE
+              </span>
+              <span class="pre">
+               database
+              </span>
+             </code>
+             语句访问的数据库中没有设置映射，此登录名就与guest用户相关联。
+            </p>
+           </div>
+           <img alt="_images/image81.png" class="align-center" src="_images/image81.png"/>
+           <p>
+            MSSQL具有数据库角色的概念，其作用域为当前数据库。数据库角色用于控制各数据库用户对数据库的读写行为，其粒度达到整个数据库的增删改查的级别（相对权限还是较高）。微软预置了一些常见角色，此外数据库管理员可根据实际需求自行创建新的数据库角色。
+           </p>
+           <table>
+            <thead>
+             <tr class="row-odd">
+              <th class="head">
+               <p>
+                数据库角色
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                说明
+               </p>
+              </th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr class="row-even">
+              <td>
+               <p>
+                db_owner
+               </p>
+              </td>
+              <td>
+               <p>
+                数据库完全控制权，可以执
+行数据库的所有配置和维护活动，可以删除数据库。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                db_securityadmin
+               </p>
+              </td>
+              <td>
+               <p>
+                可以修改自定义角色的角色成员资格和管理权限。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                db_accessadmin
+               </p>
+              </td>
+              <td>
+               <p>
+                可以为登录名添加或删除数据库访问权限。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                db_backupoperator
+               </p>
+              </td>
+              <td>
+               <p>
+                可以备份数据库。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                db_ddladmin
+               </p>
+              </td>
+              <td>
+               <p>
+                可以在数据库中运行任何数据定义语言 (DDL) 命令。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                db_datawriter
+               </p>
+              </td>
+              <td>
+               <p>
+                可以在所有用户表中添加、删除或更改数据。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                db_datareader
+               </p>
+              </td>
+              <td>
+               <p>
+                可以从所有用户表中读取所有数据。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                db_denydatawriter
+               </p>
+              </td>
+              <td>
+               <p>
+                不
+能添加、修改或删除数据库内用户表中的任何数据。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                db_denydatareader
+               </p>
+              </td>
+              <td>
+               <p>
+                不能读取数据库内用户表中的任何数据。
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                public（隐藏）
+               </p>
+              </td>
+              <td>
+               <p>
+                不具备
+任何权限。（所有数据库用户默认具有public角色）
+               </p>
+              </td>
+             </tr>
+            </tbody>
+           </table>
+          </section>
+          <section id="id18">
+           <h4 id="id18">
+            <a class="toc-backref" href="#id46" role="doc-backlink">
+             架构级
+            </a>
+            <a class="headerlink" href="#id18" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            微软推荐在架构级别进行权限控制。数据库架构包含一组数据库对象，如表、视图和存储过程，可以理解为数据库内的名空间。不同的架构中，表、视图和存储过程可以重名。在创建数据库表的时候，必须要给它指定一个架构（可以使用自定义架构），不指定时默认使用dbo架构。
+           </p>
+           <p>
+            每个数据库架构必须设置属主，属主具有数据库架构的完全控制权，且优先级高于数据库级角色。默认情况下，创建数据库用户时自动创建一个同名架构，并指定其为架构属主，之后可以手动设置架构属主为某一个数据库角色或者某一个独立数据库用户。如果设置架构数据为数据库角色，则该角色下属的所有数据库用户均视为该架构的属主。
+           </p>
+           <div class="admonition note">
+            <p class="admonition-title">
+             备注
+            </p>
+            <p>
+             权限举例：用户A被赋予
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               db_denydatareader
+              </span>
+             </code>
+             角色（无法读数据库内容），同时被赋予架构B的属主，那么用户A能够对架构B中的表/视图/存储过程进行读写，但不能对数据库中的其他内容进行读。
+            </p>
+           </div>
+           <img alt="_images/image91.png" class="align-center" src="_images/image91.png"/>
+           <p>
+            默认情况下，数据库角色
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              public
+             </span>
+            </code>
+            不拥有任何架构。可以根据业务需求，将部分公用表/存储过程放在一个公用架构中，并赋予
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              public
+             </span>
+            </code>
+            ，实现数据的公用。
+           </p>
+           <img alt="_images/image101.png" class="align-center" src="_images/image101.png"/>
+          </section>
+         </section>
+         <section id="id19">
+          <h3 id="id19">
+           <a class="toc-backref" href="#id47" role="doc-backlink">
+            操作手册
+           </a>
+           <a class="headerlink" href="#id19" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <section id="id20">
+           <h4 id="id20">
+            <a class="toc-backref" href="#id48" role="doc-backlink">
+             核查：分配的权限
+            </a>
+            <a class="headerlink" href="#id20" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            如果使用SSMS工具连接数据库的话，直接右键每个主体（登录名、数据库用户），查看其角色和权限即可。或者可以输入SQL命令查询。
+           </p>
+           <div class="highlight-sql notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1">-- 查看服务器角色列表</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_helpsrvrole</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 查看服务器角色的所有权限（两者皆可）</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">fn_builtin_permissions</span><span class="p">(</span><span class="s1">'SERVER'</span><span class="p">)</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">permission_name</span><span class="p">;</span><span class="w"></span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_srvrolepermission</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 查看服务器角色成员信息</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_helpsrvrolemember</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">server_role_members</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 查看某数据库角色或数据库用户拥有的架构：</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">schemas</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">principal_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DATABASE_PRINCIPAL_ID</span><span class="p">(</span><span class="s1">'public'</span><span class="p">)</span><span class="w"></span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="id21">
+           <h4 id="id21">
+            <a class="toc-backref" href="#id49" role="doc-backlink">
+             操作：常见的管理命令
+            </a>
+            <a class="headerlink" href="#id21" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <p>
+            同样地，能使用SSMS的话就会方便很多。
+           </p>
+           <div class="highlight-sql notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1">-- 创建登录名</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="n">loginName</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pass'</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 打开数据库</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">databaseName</span><span class="p">;</span><span class="w"></span>
+<span class="c1">-- 创建登录名与数据库用户的映射</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">userName</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="n">loginName</span><span class="p">;</span><span class="w"></span>
+<span class="c1">-- 新建数据库角色</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span><span class="w"></span>
+<span class="c1">-- 将用户添加到角色中</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_addrolemember</span><span class="w"> </span><span class="s1">'ProgramerRole'</span><span class="p">,</span><span class="w"> </span><span class="s1">'userName'</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 授予角色创建表、创建存储过程、创建视图的权限</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="p">,</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="p">,</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">-- 授予角色dbo架构的权限</span>
+<span class="c1">-- EXECUTE和ALTER用于执行、修改、删除存储过程</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">EXECUTE</span><span class="p">,</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="p">::</span><span class="n">dbo</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span><span class="w"></span>
+</pre>
+            </div>
+           </div>
+          </section>
+         </section>
+        </section>
+        <section id="id22">
+         <h2 id="id22">
+          <a class="toc-backref" href="#id50" role="doc-backlink">
+           安全审计
+          </a>
+          <a class="headerlink" href="#id22" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <section id="id23">
+          <h3 id="id23">
+           <a class="toc-backref" href="#id51" role="doc-backlink">
+            内置错误日志
+           </a>
+           <a class="headerlink" href="#id23" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           MSSQL默认开启着错误日志，位置在“服务器-管理-SQL Server日志”中。内容如下：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             SQL SERVER 的启动参数，以及认证模式，内存分配模式。
+            </p>
+           </li>
+           <li>
+            <p>
+             每个数据库是否能够被正常打开。如果不能，原因是什么
+            </p>
+           </li>
+           <li>
+            <p>
+             数据库损坏相关的错误
+            </p>
+           </li>
+           <li>
+            <p>
+             数据库备份与恢复动作记录
+            </p>
+           </li>
+           <li>
+            <p>
+             DBCC CHECKDB记录
+            </p>
+           </li>
+           <li>
+            <p>
+             内存相关的错误和警告
+            </p>
+           </li>
+           <li>
+            <p>
+             SQL调度出现异常时的警告。一般SERVER Hang 会伴随着有这些警告
+            </p>
+           </li>
+           <li>
+            <p>
+             SQL I/O操作遇到长时间延迟的警告
+            </p>
+           </li>
+           <li>
+            <p>
+             SQL在运行过程中遇到的其他级别比较高的错误
+            </p>
+           </li>
+           <li>
+            <p>
+             SQL内部的访问越界错误（Access Violation）
+            </p>
+           </li>
+           <li>
+            <p>
+             SQL服务关闭时间
+            </p>
+           </li>
+           <li>
+            <p>
+             SQL SERVER版本，以及windows和processor基本信息。
+            </p>
+           </li>
+          </ul>
+          <img alt="_images/image13.png" class="align-center" src="_images/image13.png"/>
+          <p>
+           默认状态下，错误日志会在
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             MSSQL/LOG
+            </span>
+           </code>
+           文件夹中存放7个。在日志文件达到大小上限或服务器重启时，自动进行一次rotate。可在数据库中执行
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             EXEC
+            </span>
+            <span class="pre">
+             sp_cycle_errorlog
+            </span>
+           </code>
+           （仅服务器角色sysadmin具有权限），强制进行一次日志rotate。
+          </p>
+         </section>
+         <section id="id24">
+          <h3 id="id24">
+           <a class="toc-backref" href="#id52" role="doc-backlink">
+            默认审核跟踪
+           </a>
+           <a class="headerlink" href="#id24" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           SQL Server 2005之后引入默认审核跟踪策略，针对重要事件进行审核跟踪。日志属性为：事件、用户、主机名、事件ID、登录名、时间、数据库名、对象名、服务器级别日志详细信息。但默认审核跟踪的日志文件只记录5个，每个文件大小最大为20M，且不允许修改配置。在“数据库-Facets-服务器审核-DefaultTraceEnabled”可以查看默认审核跟踪的状态。
+          </p>
+          <p>
+           审核跟踪日志将写入
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             $程序目录\mssql\data
+            </span>
+           </code>
+           或
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             $程序目录\mssql$instancename\data
+            </span>
+           </code>
+           ，文件名的格式为
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             audittrace_yyyymmddhhmmss.trc
+            </span>
+           </code>
+           。可通过
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             ::fn_trace_gettable('/path/to/log.trc',
+            </span>
+            <span class="pre">
+             default)
+            </span>
+           </code>
+           装载日志文件。
+          </p>
+          <img alt="_images/image141.png" class="align-center" src="_images/image141.png"/>
+          <p>
+           微软提供SQL Server Profiler工具，可用于查看数据库的审核跟踪文件。在SQL Server Management Studio的工具菜单中也有SQL Server Profiler的快捷方式。
+          </p>
+          <img alt="_images/image16.png" class="align-center" src="_images/image16.png"/>
+         </section>
+         <section id="id25">
+          <h3 id="id25">
+           <a class="toc-backref" href="#id53" role="doc-backlink">
+            自定义审核规范
+           </a>
+           <a class="headerlink" href="#id25" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <p>
+           SQL Server 2008开始引入了自定义审核规范功能及自定义审核的功能，管理员可根据实际业务需求自行设置审核策略，不再需要在C2审核跟踪和默认审核跟踪之间二选一。自定义审核需要依次在服务器中设置两个参数，其中：
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             在实例级安全选项和数据库级安全选项分别设置“审核规范”，用于指定审核的对象及类型。
+            </p>
+           </li>
+           <li>
+            <p>
+             在实例级安全选项中设置“审核”，用于设置审核是否启用、审核文件存放路径、审核文件大小限制、审核日志写入失败时的动作（生产环境不得选“关闭服务器”）。
+            </p>
+           </li>
+          </ul>
+          <img alt="_images/image171.png" class="align-center" src="_images/image171.png"/>
+          <img alt="_images/image181.png" class="align-center" src="_images/image181.png"/>
+          <section id="id26">
+           <h4 id="id26">
+            <a class="toc-backref" href="#id54" role="doc-backlink">
+             审核策略清单
+            </a>
+            <a class="headerlink" href="#id26" title="此标题的永久链接">
+             ¶
+            </a>
+           </h4>
+           <table>
+            <thead>
+             <tr class="row-odd">
+              <th class="head">
+               <p>
+                事件
+               </p>
+              </th>
+              <th class="head">
+               <p>
+                说明
+               </p>
+              </th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr class="row-even">
+              <td>
+               <p>
+                APPLIC
+ATION_ROLE_CHANGE_PASSWORD_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                更改应用程序角色的密码
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                AUDIT_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                创建、修改或删除任何审核时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                BACKUP_RESTORE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                发出备份或还原命令时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                BATCH_COMPLETED_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                每当任何批处理文本、存储过程
+或事务管理操作执行完成时触发事件
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                BATCH_STARTED_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                每当任何批
+处理文本、存储过程或事务管理操作
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                BROKER_LOGIN_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                报告与 Service Broker
+传输安全性相关的审核消息（等效于
+Audit Broker Login Event Class）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                DATABASE_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                创建、更改或删除数据库时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DATABASE_LOGOUT_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                在包含数据库用户注销某一数据库时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                DATABASE_MIRRORING_LOGIN_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                报告与数
+据库镜像传输安全性相关的审核消息
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DATABASE_OBJECT_ACCESS_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                访问数据库
+对象（如消息类型、程序集和协定）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                DATABASE_OBJECT_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                针对数据库对象执行 CREATE、ALTER
+或 DROP 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DATABA
+SE_OBJECT_OWNERSHIP_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                在数据库范围内更改对象所有者时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                DATABAS
+E_OBJECT_PERMISSION_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                针对数据库对象发出 GRANT、REVOKE
+或 DENY 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DATABASE_OPERATION_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                对于任何数据库的任何操作时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                DATABASE_OWNERSHIP_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                使用 ALTER AUTHORIZATION
+语句更改数据库的所有者时（等效于
+Audit Change Database Owner
+Event Class）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DATABASE_PERMISSION_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                SQL Server
+中的任何主体针对某语句权限发出
+GRANT、REVOKE 或 DENY
+语句时（等效于 Audit Database
+Scope GDR Event Class）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                DATABASE_PRINCIPAL_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                在数据库中创建、更
+改或删除主体（如用户）时（等效于
+Audit Database Principal
+Management Event Class、Audit
+Add DB Principal）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DATABA
+SE_PRINCIPAL_IMPERSONATION_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                数据库范围内存在模拟操作（如
+EXECUTE AS &lt;principal&gt; 或
+SETPRINCIPAL）时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                D
+ATABASE_ROLE_MEMBER_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                向数据库
+角色添加登录名或从中删除登录名时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DBCC_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                主体发出任何 DBCC 命令时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                FAIL
+ED_DATABASE_AUTHENTICATION_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                某个主体尝试登录到数据库并且失败
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                FAILED_LOGIN_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                主体尝试登录到 SQL Server
+，但是失败
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                FULLTEXT_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                发生了全文搜索事件
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                LOGIN_CHANGE_PASSWORD_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                通过 ALTER LOGIN 语句或
+sp_password
+存储过程更改登录密码时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                LOGOUT_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                指示主体已注销 SQL
+Server（等效于 Audit Logout
+Event Class）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SCHEMA_OBJECT_ACCESS_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                每
+次在架构中使用对象权限时（等效于
+Audit Schema Object Access Event
+Class）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SCHEMA_OBJECT_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                针对架构执行 CREATE、ALTER 或
+DROP 操作时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SCHE
+MA_OBJECT_OWNERSHIP_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                检查更改架构对象的所有者的权限时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SCHEM
+A_OBJECT_PERMISSION_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                对架构对象执行 GRANT、DENY 或
+REVOKE 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SERVER_OBJECT_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                针对服务器对象执行 CREATE、ALTER
+或 DROP 操作时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SERV
+ER_OBJECT_OWNERSHIP_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                服务
+器范围中的对象的所有者发生更改时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SERVE
+R_OBJECT_PERMISSION_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                任何主体针对某服务器对象权限发出
+GRANT、REVOKE、或 DENY 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SERVER_OPERATION_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                使用安全审核操作（如使更
+改设置、资源、外部访问或授权）时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SERVER_PERMISSION_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                针对获取服务器范围内的权限而发出
+GRANT、REVOKE 或 DENY 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SERVER_PRINCIPAL_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                创建
+、更改或删除服务器主体时（等效于
+Audit Login GDR Event Class）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SERV
+ER_PRINCIPAL_IMPERSONATION_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                服务器范围内发生模拟（如 EXECUTE
+AS &lt;login&gt;）时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SERVER_ROLE_MEMBER_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                向固定服务器角色添加
+登录名或从中删除登录名时（等效于
+Audit Add Login to Server Role
+事件类）
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SERVER_STATE_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                修改 SQL Server 服务状态时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SUCCESSF
+UL_DATABASE_AUTHENTICATION_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                指示主体已成功登录到数据库
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                SUCCESSFUL_LOGIN_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                指示主体已成功登录到 SQL Server
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                TRACE_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                检查 ALTER TRACE 权限的所有语句
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                TRANSACTION_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                由 BEGIN TRANSACTION、ROLLBACK
+TRANSACTION 和 COMMIT
+TRANSACTION操作引发
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                USER_CHANGE_PASSWORD_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                使用 ALTER USER
+语句更改数据库用户的密码时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                USER_DEFINED_AUDIT_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                使用 自定义的sp_audit_write
+(Transact-SQL) 引发
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                SELECT
+               </p>
+              </td>
+              <td>
+               <p>
+                发出 SELECT 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                UPDATE
+               </p>
+              </td>
+              <td>
+               <p>
+                发出 UPDATE 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                INSERT
+               </p>
+              </td>
+              <td>
+               <p>
+                发出 INSERT 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                DELETE
+               </p>
+              </td>
+              <td>
+               <p>
+                发出 DELETE 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                EXECUTE
+               </p>
+              </td>
+              <td>
+               <p>
+                发出 EXECUTE 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                RECEIVE
+               </p>
+              </td>
+              <td>
+               <p>
+                发出 RECEIVE 语句时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-even">
+              <td>
+               <p>
+                REFERENCES
+               </p>
+              </td>
+              <td>
+               <p>
+                检查 REFERENCES 权限时
+               </p>
+              </td>
+             </tr>
+             <tr class="row-odd">
+              <td>
+               <p>
+                AUDIT_CHANGE_GROUP
+               </p>
+              </td>
+              <td>
+               <p>
+                发出以
+下命令之一时将引发此事件：CREATE
+SERVER AUDIT、ALTER SERVER
+AUDIT、DROP SERVER AUDIT、CREATE
+SERVER AUDIT
+SPECIFICATION、ALTER SERVER
+AUDIT SPECIFICATION、DROP SERVER
+AUDIT SPECIFICATION、CREATE
+DATABASE AUDIT
+SPECIFICATION、ALTER DATABASE
+AUDIT SPECIFICATION、DROP
+DATABASE AUDIT SPECIFICATION
+               </p>
+              </td>
+             </tr>
+            </tbody>
+           </table>
+          </section>
+         </section>
+         <section id="c2">
+          <h3 id="c2">
+           <a class="toc-backref" href="#id55" role="doc-backlink">
+            C2审核跟踪
+           </a>
+           <a class="headerlink" href="#c2" title="此标题的永久链接">
+            ¶
+           </a>
+          </h3>
+          <div class="admonition warning">
+           <p class="admonition-title">
+            警告
+           </p>
+           <p>
+            原则上不应指导用户启用C2审核跟踪。原因如下：
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              C2审核会记录对数据库的所有操作及数据库的所有状态，会对服务器的性能产生较大影响。
+             </p>
+            </li>
+            <li>
+             <p>
+              C2审核日志会占用大量磁盘空间。
+             </p>
+            </li>
+            <li>
+             <p>
+              在C2审核日志无法写入的情况下（如磁盘满），SQL Server实例将被强制关闭。
+             </p>
+            </li>
+           </ul>
+          </div>
+          <img alt="_images/image191.png" class="align-center" src="_images/image191.png"/>
+         </section>
+        </section>
+        <section id="id27">
+         <h2 id="id27">
+          <a class="toc-backref" href="#id56" role="doc-backlink">
+           剩余信息保护
+          </a>
+          <a class="headerlink" href="#id27" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          MSSQL提供
+          <a class="reference external" href="https://docs.microsoft.com/zh-cn/sql/database-engine/configure-windows/common-criteria-compliance-enabled-server-configuration-option?view=sql-server-ver15">
+           通用准则
+          </a>
+          选项。
+         </p>
+         <img alt="_images/image20.png" class="align-center" src="_images/image20.png"/>
+        </section>
+        <section id="id28">
+         <h2 id="id28">
+          <a class="toc-backref" href="#id57" role="doc-backlink">
+           安全通信
+          </a>
+          <a class="headerlink" href="#id28" title="此标题的永久链接">
+           ¶
+          </a>
+         </h2>
+         <p>
+          SQL Server 2005版本开始，默认自签发了SSL证书，并对鉴别信息采用加密（TLS）方式传输，但不对之后的通信进行加密。只有当客户端主动要求使用SSL方式连接时，MSSQL才对会话进行全程加密。
+         </p>
+         <img alt="_images/image212.png" class="align-center" src="_images/image212.png"/>
+         <p>
+          可在数据库实例配置“强制加密”参数。启用强制加密功能后，MSSQL强制对会话进行全程加密。如果客户端不支持服务器的TLS版本或算法套件，则服务器将拒绝连接。配置位置如下：
+         </p>
+         <ul class="simple">
+          <li>
+           <p>
+            Windows版：SQL Server Configuration Manager-SQL Server网络配置-各实例协议-TCP/IP
+           </p>
+          </li>
+          <li>
+           <p>
+            Linux版：/var/opt/mssql/mssql.conf-[network]-forceencryption
+           </p>
+          </li>
+         </ul>
+         <img alt="_images/image221.png" class="align-center" src="_images/image221.png"/>
+         <p>
+          MSSQL默认启用SSLv3-TLSv1.1版本的协议，启用所有算法套件（Nessus一扫就是一堆问题）。SQL Server 2016版本开始原生支持TLSv1.2。SQL Server 2008之后的版本可以通过安装补丁的方式引入TLSv1.2的支持，可以在微软的
+          <a class="reference external" href="https://support.microsoft.com/zh-cn/help/3135244/tls-1-2-support-for-microsoft-sql-server">
+           技术文档
+          </a>
+          中查阅相关资料。如果要限制SSL协议版本及算法套件，需要在注册表中设置Protocols及CipherSuites项。其路径位于：
+         </p>
+         <p>
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols
+           </span>
+          </code>
+         </p>
+         <img alt="_images/image231.png" class="align-center" src="_images/image231.png"/>
+        </section>
+       </section>
+      </article>
+     </div>
+    </div>
+   </main>
+  </div>
+  <footer class="md-footer">
+   <div class="md-footer-nav">
+    <nav class="md-footer-nav__inner md-grid">
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="oracle.html" rel="prev" title="Oracle">
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-back md-footer-nav__button">
+       </i>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Previous
+        </span>
+        Oracle
+       </span>
+      </div>
+     </a>
+     <a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="pg.html" rel="next" title="PostgreSQL">
+      <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+       <span class="md-flex__ellipsis">
+        <span class="md-footer-nav__direction">
+         Next
+        </span>
+        PostgreSQL
+       </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+       <i class="md-icon md-icon--arrow-forward md-footer-nav__button">
+       </i>
+      </div>
+     </a>
+    </nav>
+   </div>
+   <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+     <div class="md-footer-copyright">
+      <div class="md-footer-copyright__highlight">
+       © Copyright 2021, 腿哥牛逼.
+      </div>
+      Created using
+      <a href="http://www.sphinx-doc.org/">
+       Sphinx
+      </a>
+      5.3.0.
+             and
+      <a href="https://github.com/bashtage/sphinx-material/">
+       Material for
+              Sphinx
+      </a>
+     </div>
+     <div class="md-footer-copyright" style="float: right">
+      <a href="https://beian.miit.gov.cn">
+       沪ICP备 2020030506号
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script src="_static/javascripts/application.js">
+  </script>
+  <script>
+   app.initialize({version: "1.0.4", url: {base: ".."}})
+  </script>
+ </body>
+</html>
