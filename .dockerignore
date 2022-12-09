@@ -1,7 +1,7 @@
 .git*
 .vscode
 .venv
-build
+_build
 LICENSE
 make.bat
 README.md

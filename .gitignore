@@ -1,3 +1,3 @@
-.venv
-.vscode
-/build/temp
+/.venv*
+/.vscode
+_build

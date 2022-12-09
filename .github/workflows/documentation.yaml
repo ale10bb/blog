@@ -1,0 +1,29 @@
+name: Docs
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          pip install sphinx sphinx-material sphinx-markdown-tables sphinx-copybutton recommonmark
+      - name: Sphinx build
+        run: |
+          sphinx-build -M html index _build/temp/index 
+          mv _build/temp/index/html _build/html 
+          sphinx-build -M html checklist _build/temp/checklist 
+          mv _build/temp/checklist/html _build/html/checklist 
+          rm _build/html/.buildinfo _build/html/checklist/.buildinfo _build/html/objects.inv _build/html/checklist/objects.inv
+          awk -F'</urlset>' '{printf $1}' _build/html/sitemap.xml > _build/sitemap.xml
+          awk -F'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' '{printf $2}' _build/html/checklist/sitemap.xml >> _build/sitemap.xml
+          mv _build/sitemap.xml _build/html/sitemap.xml && rm _build/html/checklist/sitemap.xml 
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/html/
+          force_orphan: true

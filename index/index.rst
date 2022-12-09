@@ -53,7 +53,7 @@ repo地址：
 build from src
 ^^^^^^^^^^^^^^^^
 
-你可以自行安装requirements后编译，编译输出位于 ``build\html`` 。
+你可以自行安装requirements后编译，编译输出位于 ``_build\html`` 。
 
 .. code-block:: 
 
