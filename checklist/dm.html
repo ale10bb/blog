@@ -44,12 +44,6 @@
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
-  <script src="_static/jquery.js">
-  </script>
-  <script src="_static/underscore.js">
-  </script>
-  <script src="_static/_sphinx_javascript_frameworks_compat.js">
-  </script>
   <script src="_static/doctools.js">
   </script>
   <script src="_static/sphinx_highlight.js">
@@ -60,7 +54,7 @@
   </script>
   <script src="_static/translations.js">
   </script>
-  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="_static/favicon.png" rel="icon"/>
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="db_domestic.html" rel="prev" title="国产数据库"/>
@@ -86,7 +80,6 @@
     <div class="md-flex navheader">
      <div class="md-flex__cell md-flex__cell--shrink">
       <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
-       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
       </a>
      </div>
      <div class="md-flex__cell md-flex__cell--shrink">
@@ -188,7 +181,7 @@
         <nav class="md-nav md-nav--primary" data-md-level="0">
          <label class="md-nav__title md-nav__title--site" for="__drawer">
           <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
-           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+           <img alt=" logo" height="48" src="_static/" width="48"/>
           </a>
           <a href="index.html" title="学习笔记">
            学习笔记
@@ -1156,9 +1149,9 @@
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 一句话查询口令复杂度和周期</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">PASSWORD</span><span class="p">,</span><span class="w"> </span><span class="n">AUTHENT_TYPE</span><span class="p">,</span><span class="w"> </span><span class="n">PWD_POLICY</span><span class="p">,</span><span class="w"> </span><span class="n">LIFE_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">REUSE_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">REUSE_MAX</span><span class="p">,</span><span class="w"> </span><span class="n">GRACE_TIME</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">d</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">PASSWORD</span><span class="p">,</span><span class="w"> </span><span class="n">AUTHENT_TYPE</span><span class="p">,</span><span class="w"> </span><span class="n">PWD_POLICY</span><span class="p">,</span><span class="w"> </span><span class="n">LIFE_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">REUSE_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">REUSE_MAX</span><span class="p">,</span><span class="w"> </span><span class="n">GRACE_TIME</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">d</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -1175,9 +1168,9 @@
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 一句话查询登录失败锁定和超时</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">FAILED_NUM</span><span class="p">,</span><span class="w"> </span><span class="n">LOCK_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">CONN_IDLE_TIME</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">d</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">FAILED_NUM</span><span class="p">,</span><span class="w"> </span><span class="n">LOCK_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">CONN_IDLE_TIME</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">d</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -1194,8 +1187,8 @@
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 一句话查询登录地址限制</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">ALLOW_ADDR</span><span class="p">,</span><span class="w"> </span><span class="n">NOT_ALLOW_ADDR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">USERNAME</span><span class="p">,</span><span class="w"> </span><span class="n">ALLOW_ADDR</span><span class="p">,</span><span class="w"> </span><span class="n">NOT_ALLOW_ADDR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">SYSUSERS</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ACCOUNT_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">USER_ID</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -1388,7 +1381,7 @@
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      5.3.0.
+      6.1.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for

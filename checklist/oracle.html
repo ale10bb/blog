@@ -44,12 +44,6 @@
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
-  <script src="_static/jquery.js">
-  </script>
-  <script src="_static/underscore.js">
-  </script>
-  <script src="_static/_sphinx_javascript_frameworks_compat.js">
-  </script>
   <script src="_static/doctools.js">
   </script>
   <script src="_static/sphinx_highlight.js">
@@ -60,7 +54,7 @@
   </script>
   <script src="_static/translations.js">
   </script>
-  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="_static/favicon.png" rel="icon"/>
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="mssql.html" rel="next" title="MSSQL"/>
@@ -87,7 +81,6 @@
     <div class="md-flex navheader">
      <div class="md-flex__cell md-flex__cell--shrink">
       <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
-       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
       </a>
      </div>
      <div class="md-flex__cell md-flex__cell--shrink">
@@ -189,7 +182,7 @@
         <nav class="md-nav md-nav--primary" data-md-level="0">
          <label class="md-nav__title md-nav__title--site" for="__drawer">
           <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
-           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+           <img alt=" logo" height="48" src="_static/" width="48"/>
           </a>
           <a href="index.html" title="学习笔记">
            学习笔记
@@ -1441,7 +1434,7 @@
             <div class="highlight">
              <pre><span></span><span class="c1"># name和pass不可省略</span>
 <span class="c1"># 要是省略了还登录成功，说明用了其他方式</span>
-sqlplus name/pass @host:port/sid
+sqlplus<span class="w"> </span>name/pass<span class="w"> </span>@host:port/sid
 </pre>
             </div>
            </div>
@@ -1869,10 +1862,10 @@ sqlplus name/pass @host:port/sid
           </ul>
           <div class="highlight-bash notranslate">
            <div class="highlight">
-            <pre><span></span>SQLNET.AUTHENTICATION_SERVICES <span class="o">=</span> <span class="o">(</span>beq<span class="o">)</span>
-<span class="nv">tcp_validnode_checking</span> <span class="o">=</span> YES
-<span class="nv">tcp_invited_nodes</span> <span class="o">=</span> <span class="o">(</span><span class="m">192</span>.168.0.1,ip2,ip3…..<span class="o">)</span> <span class="c1"># 允许登录IP地址</span>
-TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class="m">1</span>.1.1.2<span class="o">)</span> <span class="c1"># 禁止登录IP地址</span>
+            <pre><span></span>SQLNET.AUTHENTICATION_SERVICES<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>beq<span class="o">)</span>
+<span class="nv">tcp_validnode_checking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>YES
+<span class="nv">tcp_invited_nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">192</span>.168.0.1,ip2,ip3…..<span class="o">)</span><span class="w"> </span><span class="c1"># 允许登录IP地址</span>
+TCP.EXCLUDED_NODES<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="m">1</span>.1.1.2<span class="o">)</span><span class="w"> </span><span class="c1"># 禁止登录IP地址</span>
 </pre>
            </div>
           </div>
@@ -1948,16 +1941,16 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 查看密码文件中设置的帐户</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">V$PWFILE_USERS</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">V$PWFILE_USERS</span><span class="p">;</span>
 
 <span class="c1">-- 查看操作系统认证相关参数</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="n">REMOTE_OS_AUTHENT</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="n">REMOTE_OS_AUTHENT</span><span class="p">;</span>
 
 <span class="c1">-- 核查默认口令的帐户</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">account_status</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_USERS_WITH_DEFPWD</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">u</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">account_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">username</span><span class="o">=</span><span class="n">u</span><span class="p">.</span><span class="n">username</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">account_status</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_USERS_WITH_DEFPWD</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="w"> </span><span class="n">u</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">account_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'OPEN'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">username</span><span class="o">=</span><span class="n">u</span><span class="p">.</span><span class="n">username</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -1974,14 +1967,14 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 查看profile的配置参数</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_PROFILES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">RESOURCE_TYPE</span><span class="o">=</span><span class="s1">'PASSWORD'</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_PROFILES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">RESOURCE_TYPE</span><span class="o">=</span><span class="s1">'KERNEL'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_PROFILES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">RESOURCE_TYPE</span><span class="o">=</span><span class="s1">'PASSWORD'</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_PROFILES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">RESOURCE_TYPE</span><span class="o">=</span><span class="s1">'KERNEL'</span><span class="p">;</span>
 
 <span class="c1">-- 查看每个数据库帐户的profile设置情况</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_USERS</span><span class="p">;</span>
 
 <span class="c1">-- 查看是否开启资源限制</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="n">resource_limit</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="n">resource_limit</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2009,14 +2002,14 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
             <div class="highlight">
              <pre><span></span><span class="c1">-- 开启密码文件认证</span>
 <span class="c1">-- 注：该参数为只读属性，只允许写入配置文件(SCOPE=SPFILE)。重启实例后生效</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">REMOTE_LOGIN_PASSWORDFILE</span><span class="o">=</span><span class="k">EXCLUSIVE</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">SPFILE</span><span class="p">;</span><span class="w"></span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">REMOTE_LOGIN_PASSWORDFILE</span><span class="o">=</span><span class="k">EXCLUSIVE</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">SPFILE</span><span class="p">;</span>
 
 <span class="c1">-- 开启操作系统认证</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">REMOTE_OS_AUTHENT</span><span class="o">=</span><span class="k">TRUE</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">SPFILE</span><span class="p">;</span><span class="w"></span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">REMOTE_OS_AUTHENT</span><span class="o">=</span><span class="k">TRUE</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">SPFILE</span><span class="p">;</span>
 
 <span class="c1">-- 创建外部认证帐户，其密码字段显示为EXTERNAL</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">ops$cv</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="n">EXTERNALLY</span><span class="p">;</span><span class="w"></span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ops$cv</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">ops$cv</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="n">EXTERNALLY</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ops$cv</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2033,7 +2026,7 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 修改登录失败次数限制</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="n">PROFILE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="n">FAILED_LOGIN_ATTEMPTS</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"></span>
+<span class="k">ALTER</span><span class="w"> </span><span class="n">PROFILE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="n">FAILED_LOGIN_ATTEMPTS</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -3211,13 +3204,13 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
            </p>
            <div class="highlight-sql notranslate">
             <div class="highlight">
-             <pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">table_name</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">'PUBLIC'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">privilege</span><span class="o">=</span><span class="s1">'EXECUTE'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">   </span><span class="s1">'UTL_FILE'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UTL_TCP'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UTL_HTTP'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UTL_SMTP'</span><span class="p">,</span><span class="w"> </span><span class="s1">'DBMS_LOB'</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="s1">'DBMS_SYS_SQL'</span><span class="p">,</span><span class="w"> </span><span class="s1">'DBMS_JOB'</span><span class="p">,</span><span class="s1">'DBMS_ADVISOR'</span><span class="p">,</span><span class="s1">'DBMS_CRYPTO'</span><span class="p">,</span><span class="s1">'DBMS_JAVA'</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="s1">'DBMS_JAVA_TEST'</span><span class="p">,</span><span class="s1">'DBMS_JOB'</span><span class="p">,</span><span class="s1">'DBMS_LDAP'</span><span class="p">,</span><span class="s1">'DBMS_LOB'</span><span class="p">,</span><span class="s1">'DBMS_OBFUSCATION_TOOLKIT'</span><span class="p">,</span><span class="s1">'DBMS_RANDOM'</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
+             <pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">'PUBLIC'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">privilege</span><span class="o">=</span><span class="s1">'EXECUTE'</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span>
+<span class="w">   </span><span class="s1">'UTL_FILE'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UTL_TCP'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UTL_HTTP'</span><span class="p">,</span><span class="w"> </span><span class="s1">'UTL_SMTP'</span><span class="p">,</span><span class="w"> </span><span class="s1">'DBMS_LOB'</span><span class="p">,</span>
+<span class="w">   </span><span class="s1">'DBMS_SYS_SQL'</span><span class="p">,</span><span class="w"> </span><span class="s1">'DBMS_JOB'</span><span class="p">,</span><span class="s1">'DBMS_ADVISOR'</span><span class="p">,</span><span class="s1">'DBMS_CRYPTO'</span><span class="p">,</span><span class="s1">'DBMS_JAVA'</span><span class="p">,</span>
+<span class="w">   </span><span class="s1">'DBMS_JAVA_TEST'</span><span class="p">,</span><span class="s1">'DBMS_JOB'</span><span class="p">,</span><span class="s1">'DBMS_LDAP'</span><span class="p">,</span><span class="s1">'DBMS_LOB'</span><span class="p">,</span><span class="s1">'DBMS_OBFUSCATION_TOOLKIT'</span><span class="p">,</span><span class="s1">'DBMS_RANDOM'</span>
+<span class="p">);</span>
 </pre>
             </div>
            </div>
@@ -3234,31 +3227,31 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 查看帐户或角色被授予的权限清单</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_sys_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">'user'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_sys_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">'user'</span><span class="p">;</span>
 
 <span class="c1">-- 查询数据库角色列表</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_roles</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_roles</span><span class="p">;</span>
 
 <span class="c1">-- 查询某角色或某帐户拥有的角色</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_role_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">'user'</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">GRANTEE</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_role_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">grantee</span><span class="o">=</span><span class="s1">'user'</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">GRANTEE</span><span class="p">;</span>
 
 <span class="c1">-- 查询DBA角色被赋予哪个帐户</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_role_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTED_ROLE</span><span class="o">=</span><span class="s1">'DBA'</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">GRANTEE</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_role_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTED_ROLE</span><span class="o">=</span><span class="s1">'DBA'</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">GRANTEE</span><span class="p">;</span>
 
 <span class="c1">-- 查询当前登录帐户拥有的权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_sys_privs</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_sys_privs</span><span class="p">;</span>
 
 <span class="c1">-- 查询当前帐户被赋予的角色：</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_role_privs</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">user_role_privs</span><span class="p">;</span>
 
 <span class="c1">-- 一句话查询某个帐户拥有的所有系统权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_SYS_PRIVS</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'TEST_USER'</span><span class="w"></span>
-<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_SYS_PRIVS</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">GRANTED_ROLE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_ROLE_PRIVS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'TEST_USER'</span><span class="p">);</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_SYS_PRIVS</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'TEST_USER'</span>
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_SYS_PRIVS</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">GRANTED_ROLE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_ROLE_PRIVS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'TEST_USER'</span><span class="p">);</span>
 </pre>
             </div>
            </div>
@@ -3280,26 +3273,26 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 查询某个帐户拥有的被直接授予的对象权限：</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'user'</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_col_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'user'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'user'</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_col_privs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'user'</span><span class="p">;</span>
 
 <span class="c1">-- 查询某个帐户拥有的表</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">dba_tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">owner</span><span class="o">=</span><span class="s1">'user'</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">dba_tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">owner</span><span class="o">=</span><span class="s1">'user'</span><span class="p">;</span>
 
 <span class="c1">-- 一句话查询某个帐户拥有的所有表权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'SYS'</span><span class="w"></span>
-<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="k">IN</span><span class="w"></span>
-<span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">GRANTED_ROLE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_ROLE_PRIVS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'SYS'</span><span class="p">);</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'SYS'</span>
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">dba_tab_privs</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="k">IN</span>
+<span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">GRANTED_ROLE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DBA_ROLE_PRIVS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'SYS'</span><span class="p">);</span>
 
 <span class="c1">-- 检查普通用户对审计表的权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">GRANTEE</span><span class="p">,</span><span class="w"> </span><span class="n">PRIVILEGE</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_TAB_PRIVS</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="o">=</span><span class="s1">'AUD$'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">'DELETE_CATALOG_ROLE'</span><span class="p">);</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">GRANTEE</span><span class="p">,</span><span class="w"> </span><span class="n">PRIVILEGE</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DBA_TAB_PRIVS</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="o">=</span><span class="s1">'AUD$'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">GRANTEE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">'DELETE_CATALOG_ROLE'</span><span class="p">);</span>
 </pre>
             </div>
            </div>
@@ -3317,25 +3310,25 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
           <div class="highlight-sql notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1">-- 创建数据库帐户</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">userA</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">passA</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">userA</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">passA</span><span class="p">;</span>
 
 <span class="c1">-- 允许roleA下的所有帐户连接</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">roleA</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">roleA</span><span class="p">;</span>
 
 <span class="c1">-- 赋予角色</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">CONNECT</span><span class="p">,</span><span class="w"> </span><span class="n">RESOURCE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CONNECT</span><span class="p">,</span><span class="w"> </span><span class="n">RESOURCE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span>
 
 <span class="c1">-- 赋予单个权限</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span>
 
 <span class="c1">-- 赋予权限并可转授</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="n">ALERT</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">ADMIN</span><span class="w"> </span><span class="k">OPTION</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">ALERT</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">ADMIN</span><span class="w"> </span><span class="k">OPTION</span><span class="p">;</span>
 
 <span class="c1">-- 移除权限</span>
-<span class="k">REVOKE</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span><span class="w"></span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span>
 
 <span class="c1">-- 赋予列权限（列权限只有INSERT和UPDATE）</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">INSERT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">INSERT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">userA</span><span class="p">;</span>
 </pre>
            </div>
           </div>
@@ -4010,21 +4003,21 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
 <span class="k">SHOW</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="n">audit</span><span class="p">;</span><span class="w"> </span><span class="c1">-- sqlplus执行</span>
 
 <span class="c1">-- 查看审计策略</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_stmt_audit_opts</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_priv_audit_opts</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_obj_audit_opts</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_stmt_audit_opts</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_priv_audit_opts</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_obj_audit_opts</span><span class="p">;</span>
 
 <span class="c1">-- 查看审计记录条数</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">userid</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">aud$</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">userid</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">userid</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">aud$</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">userid</span><span class="p">;</span>
 
 <span class="c1">-- 查看审计记录内容（DB模式下）</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AUD$</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_audit_trail</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AUD$</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dba_audit_trail</span><span class="p">;</span>
 
 <span class="c1">-- 查看日志存储空间</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">owner</span><span class="p">,</span><span class="w"> </span><span class="n">segment_name</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="w"> </span><span class="n">mb</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">dba_segments</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">segment_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'AUD$'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">owner</span><span class="p">,</span><span class="w"> </span><span class="n">segment_name</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="w"> </span><span class="n">mb</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">dba_segments</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">segment_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'AUD$'</span><span class="p">;</span>
 </pre>
            </div>
           </div>
@@ -4041,16 +4034,16 @@ TCP.EXCLUDED_NODES <span class="o">=</span> <span class="o">(</span><span class=
           <div class="highlight-sql notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1">-- 修改审计相关变量</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">audit_trail</span><span class="o">=</span><span class="s1">'OS'</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span><span class="w"></span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">audit_sys_operations</span><span class="o">=</span><span class="k">TRUE</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span><span class="w"></span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">audit_trail</span><span class="o">=</span><span class="s1">'OS'</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">audit_sys_operations</span><span class="o">=</span><span class="k">TRUE</span><span class="w"> </span><span class="k">SCOPE</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span>
 
 <span class="c1">-- 维护审计策略</span>
 <span class="c1">-- 全局语句审核</span>
-<span class="n">AUDIT</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">ACCESS</span><span class="p">;</span><span class="w"></span>
-<span class="n">AUDIT</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="k">WHENEVER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="n">SUCCESSFUL</span><span class="p">;</span><span class="w"></span>
-<span class="n">NOAUDIT</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">TABLE</span><span class="p">;</span><span class="w"></span>
+<span class="n">AUDIT</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">ACCESS</span><span class="p">;</span>
+<span class="n">AUDIT</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="k">WHENEVER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="n">SUCCESSFUL</span><span class="p">;</span>
+<span class="n">NOAUDIT</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">TABLE</span><span class="p">;</span>
 <span class="c1">-- 针对特定帐户的语句审核</span>
-<span class="n">AUDIT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">userA</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">ACCESS</span><span class="p">;</span><span class="w"></span>
+<span class="n">AUDIT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">tableA</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">userA</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">ACCESS</span><span class="p">;</span>
 </pre>
            </div>
           </div>
@@ -4306,7 +4299,7 @@ LISTENER =
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      5.3.0.
+      6.1.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for

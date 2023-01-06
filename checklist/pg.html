@@ -44,12 +44,6 @@
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
-  <script src="_static/jquery.js">
-  </script>
-  <script src="_static/underscore.js">
-  </script>
-  <script src="_static/_sphinx_javascript_frameworks_compat.js">
-  </script>
   <script src="_static/doctools.js">
   </script>
   <script src="_static/sphinx_highlight.js">
@@ -60,7 +54,7 @@
   </script>
   <script src="_static/translations.js">
   </script>
-  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="_static/favicon.png" rel="icon"/>
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="redis.html" rel="next" title="Redis"/>
@@ -87,7 +81,6 @@
     <div class="md-flex navheader">
      <div class="md-flex__cell md-flex__cell--shrink">
       <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
-       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
       </a>
      </div>
      <div class="md-flex__cell md-flex__cell--shrink">
@@ -189,7 +182,7 @@
         <nav class="md-nav md-nav--primary" data-md-level="0">
          <label class="md-nav__title md-nav__title--site" for="__drawer">
           <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
-           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+           <img alt=" logo" height="48" src="_static/" width="48"/>
           </a>
           <a href="index.html" title="学习笔记">
            学习笔记
@@ -1096,13 +1089,13 @@ peer 认证来替代。
           <div class="highlight-sql notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1">--查看数据库的帐户、口令加密、口令过期</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_catalog</span><span class="p">.</span><span class="n">pg_shadow</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_catalog</span><span class="p">.</span><span class="n">pg_shadow</span><span class="p">;</span>
 
 <span class="c1">--查看shared_preload_libraries配置内容</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'shared_preload_libraries'</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'shared_preload_libraries'</span><span class="p">;</span>
 
 <span class="c1">--查看auth_delay配置内容</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%auth_delay%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%auth_delay%'</span><span class="p">;</span>
 </pre>
            </div>
           </div>
@@ -1463,14 +1456,14 @@ SHARE锁定的监视功能
            <div class="highlight">
             <pre><span></span><span class="c1">-- 直接看5张权限视图就行</span>
 <span class="c1">-- 看不完的，非常长</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_table_grants</span><span class="p">;</span><span class="w"></span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_column_grants</span><span class="p">;</span><span class="w"></span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_routine_grants</span><span class="p">;</span><span class="w"></span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_usage_grants</span><span class="p">;</span><span class="w"></span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_udt_grants</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_table_grants</span><span class="p">;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_column_grants</span><span class="p">;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_routine_grants</span><span class="p">;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_usage_grants</span><span class="p">;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_udt_grants</span><span class="p">;</span>
 
 <span class="c1">--需要特别注意public被授予的权限，应尽量回收不必要的表权限、视图权限和函数权限</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_table_grants</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">grantee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'PUBLIC'</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">role_table_grants</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">grantee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'PUBLIC'</span><span class="p">;</span>
 </pre>
            </div>
           </div>
@@ -1894,13 +1887,13 @@ SHARE锁定的监视功能
           <div class="highlight-sql notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1">-- 查看日志收集器的具体参数配置</span>
-<span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">setting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'log%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">setting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'log%'</span><span class="p">;</span>
 
 <span class="c1">-- 查看是否部署了pgaudit插件</span>
-<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_available_extensions</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%audit%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_available_extensions</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'%audit%'</span><span class="p">;</span>
 
 <span class="c1">-- 查看pgaudit插件的具体参数配置</span>
-<span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">setting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'pgaudit%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">setting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_settings</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">'pgaudit%'</span><span class="p">;</span>
 </pre>
            </div>
           </div>
@@ -2007,7 +2000,7 @@ SHARE锁定的监视功能
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      5.3.0.
+      6.1.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for

@@ -44,12 +44,6 @@
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
-  <script src="_static/jquery.js">
-  </script>
-  <script src="_static/underscore.js">
-  </script>
-  <script src="_static/_sphinx_javascript_frameworks_compat.js">
-  </script>
   <script src="_static/doctools.js">
   </script>
   <script src="_static/sphinx_highlight.js">
@@ -60,7 +54,7 @@
   </script>
   <script src="_static/translations.js">
   </script>
-  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="_static/favicon.png" rel="icon"/>
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="db_domestic.html" rel="next" title="国产数据库"/>
@@ -87,7 +81,6 @@
     <div class="md-flex navheader">
      <div class="md-flex__cell md-flex__cell--shrink">
       <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
-       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
       </a>
      </div>
      <div class="md-flex__cell md-flex__cell--shrink">
@@ -189,7 +182,7 @@
         <nav class="md-nav md-nav--primary" data-md-level="0">
          <label class="md-nav__title md-nav__title--site" for="__drawer">
           <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
-           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+           <img alt=" logo" height="48" src="_static/" width="48"/>
           </a>
           <a href="index.html" title="学习笔记">
            学习笔记
@@ -1210,14 +1203,14 @@
           <div class="highlight-bash notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1"># 在操作系统中核查配置</span>
-db2 attach to db2apm
+db2<span class="w"> </span>attach<span class="w"> </span>to<span class="w"> </span>db2apm
 
 <span class="c1"># 核查配置</span>
-db2 get dbm cfg <span class="p">|</span> grep AUTHENTICATION
+db2<span class="w"> </span>get<span class="w"> </span>dbm<span class="w"> </span>cfg<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>AUTHENTICATION
 
--- 列出所有帐户
--- SERVER认证方式下，可直接通过db2命令连接数据库并执行命令
-db2 <span class="s2">"SELETE authid FROM sysibmadm.authorizationids WHERE authidtype = 'U'"</span>
+--<span class="w"> </span>列出所有帐户
+--<span class="w"> </span>SERVER认证方式下，可直接通过db2命令连接数据库并执行命令
+db2<span class="w"> </span><span class="s2">"SELETE authid FROM sysibmadm.authorizationids WHERE authidtype = 'U'"</span>
 </pre>
            </div>
           </div>
@@ -1249,7 +1242,7 @@ db2 <span class="s2">"SELETE authid FROM sysibmadm.authorizationids WHERE authid
           </p>
           <div class="highlight-bash notranslate">
            <div class="highlight">
-            <pre><span></span>db2 <span class="s2">"SELECT SUBSTR(tabname, 1, 20) FROM syscat.tables WHERE tabschema='SYSCAT' AND tabname LIKE '%AUTH'"</span>
+            <pre><span></span>db2<span class="w"> </span><span class="s2">"SELECT SUBSTR(tabname, 1, 20) FROM syscat.tables WHERE tabschema='SYSCAT' AND tabname LIKE '%AUTH'"</span>
 </pre>
            </div>
           </div>
@@ -1643,7 +1636,7 @@ ADM或DBADM权限
           <div class="highlight-bash notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1"># DB2查看连接帐户权限</span>
-db2 <span class="s2">"SELECT * FROM syscat.dbauth WHERE GRANTEETYPE = 'U'"</span>
+db2<span class="w"> </span><span class="s2">"SELECT * FROM syscat.dbauth WHERE GRANTEETYPE = 'U'"</span>
 </pre>
            </div>
           </div>
@@ -1660,7 +1653,7 @@ db2 <span class="s2">"SELECT * FROM syscat.dbauth WHERE GRANTEETYPE = 'U'"</span
           <div class="highlight-bash notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1"># 在操作系统层面，把SYSCTRL权限授予db2test帐户</span>
-db2 update dbm cfg using SYSCTRL_GROUP group1
+db2<span class="w"> </span>update<span class="w"> </span>dbm<span class="w"> </span>cfg<span class="w"> </span>using<span class="w"> </span>SYSCTRL_GROUP<span class="w"> </span>group1
 db2stop
 db2start
 </pre>
@@ -1669,16 +1662,16 @@ db2start
           <div class="highlight-sql notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1">-- DBADM权限授予db2test</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="n">DBADM</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">db2test</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">DBADM</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">db2test</span><span class="p">;</span>
 
 <span class="c1">-- 撤销db2test用户的DBADM权限</span>
-<span class="k">REVOKE</span><span class="w"> </span><span class="n">DBADM</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">db2test</span><span class="p">;</span><span class="w"></span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="n">DBADM</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">db2test</span><span class="p">;</span>
 
 <span class="c1">-- 把EMPLOYEE表的SELECT权限授予HERON</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">HERON</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">HERON</span><span class="p">;</span>
 
 <span class="c1">-- 撤销HERON的SELECT权限</span>
-<span class="k">REVOKE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="n">HERON</span><span class="p">;</span><span class="w"></span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="n">HERON</span><span class="p">;</span>
 </pre>
            </div>
           </div>
@@ -2084,7 +2077,7 @@ db2start
           </p>
           <div class="highlight-bash notranslate">
            <div class="highlight">
-            <pre><span></span>db2audit extract delasc delimiter ! category audit database sample status failure
+            <pre><span></span>db2audit<span class="w"> </span>extract<span class="w"> </span>delasc<span class="w"> </span>delimiter<span class="w"> </span>!<span class="w"> </span>category<span class="w"> </span>audit<span class="w"> </span>database<span class="w"> </span>sample<span class="w"> </span>status<span class="w"> </span>failure
 </pre>
            </div>
           </div>
@@ -2102,7 +2095,7 @@ db2start
            <div class="highlight">
             <pre><span></span><span class="c1"># 查看db2审计状态</span>
 <span class="c1"># 只有SYSADM权限的帐户可以使用该命令</span>
-db2audit describe
+db2audit<span class="w"> </span>describe
 </pre>
            </div>
           </div>
@@ -2182,7 +2175,7 @@ db2audit describe
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      5.3.0.
+      6.1.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for

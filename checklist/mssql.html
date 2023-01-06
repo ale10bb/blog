@@ -44,12 +44,6 @@
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
-  <script src="_static/jquery.js">
-  </script>
-  <script src="_static/underscore.js">
-  </script>
-  <script src="_static/_sphinx_javascript_frameworks_compat.js">
-  </script>
   <script src="_static/doctools.js">
   </script>
   <script src="_static/sphinx_highlight.js">
@@ -60,7 +54,7 @@
   </script>
   <script src="_static/translations.js">
   </script>
-  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="_static/favicon.png" rel="icon"/>
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="pg.html" rel="next" title="PostgreSQL"/>
@@ -87,7 +81,6 @@
     <div class="md-flex navheader">
      <div class="md-flex__cell md-flex__cell--shrink">
       <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
-       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
       </a>
      </div>
      <div class="md-flex__cell md-flex__cell--shrink">
@@ -189,7 +182,7 @@
         <nav class="md-nav md-nav--primary" data-md-level="0">
          <label class="md-nav__title md-nav__title--site" for="__drawer">
           <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
-           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+           <img alt=" logo" height="48" src="_static/" width="48"/>
           </a>
           <a href="index.html" title="学习笔记">
            学习笔记
@@ -1233,14 +1226,14 @@
              <pre><span></span><span class="c1">-- 查看用户是否设置口令及口令策略</span>
 <span class="c1">-- is_policy_checked 强制实施密码策略（1启用）</span>
 <span class="c1">-- is_expiration_checked：强制密码过期</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">type_desc</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="k">CASE</span><span class="w"> </span><span class="n">PWDCOMPARE</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span><span class="n">password_hash</span><span class="p">)</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'null'</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">'not_null'</span><span class="w"> </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">PASSWORD</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="n">is_policy_checked</span><span class="p">,</span><span class="w"> </span><span class="n">is_expiration_checked</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sql_logins</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">is_disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">type_desc</span><span class="p">,</span>
+<span class="w">       </span><span class="k">CASE</span><span class="w"> </span><span class="n">PWDCOMPARE</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span><span class="n">password_hash</span><span class="p">)</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'null'</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">'not_null'</span><span class="w"> </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">PASSWORD</span><span class="p">,</span>
+<span class="w">       </span><span class="n">is_policy_checked</span><span class="p">,</span><span class="w"> </span><span class="n">is_expiration_checked</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sql_logins</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">is_disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="c1">-- 查看登录超时</span>
-<span class="n">sp_configure</span><span class="w"> </span><span class="s1">'remote login time'</span><span class="p">;</span><span class="w"></span>
+<span class="n">sp_configure</span><span class="w"> </span><span class="s1">'remote login time'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -1699,22 +1692,22 @@
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 查看服务器角色列表</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_helpsrvrole</span><span class="p">;</span><span class="w"></span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_helpsrvrole</span><span class="p">;</span>
 
 <span class="c1">-- 查看服务器角色的所有权限（两者皆可）</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">fn_builtin_permissions</span><span class="p">(</span><span class="s1">'SERVER'</span><span class="p">)</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">permission_name</span><span class="p">;</span><span class="w"></span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_srvrolepermission</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">fn_builtin_permissions</span><span class="p">(</span><span class="s1">'SERVER'</span><span class="p">)</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">permission_name</span><span class="p">;</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_srvrolepermission</span><span class="p">;</span>
 
 <span class="c1">-- 查看服务器角色成员信息</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_helpsrvrolemember</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">server_role_members</span><span class="p">;</span><span class="w"></span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_helpsrvrolemember</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">server_role_members</span><span class="p">;</span>
 
 <span class="c1">-- 查看某数据库角色或数据库用户拥有的架构：</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">schemas</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">principal_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DATABASE_PRINCIPAL_ID</span><span class="p">(</span><span class="s1">'public'</span><span class="p">)</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">schemas</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">principal_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DATABASE_PRINCIPAL_ID</span><span class="p">(</span><span class="s1">'public'</span><span class="p">)</span>
 </pre>
             </div>
            </div>
@@ -1734,23 +1727,23 @@
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 创建登录名</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="n">loginName</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pass'</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="n">loginName</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pass'</span><span class="p">;</span>
 
 <span class="c1">-- 打开数据库</span>
-<span class="n">USE</span><span class="w"> </span><span class="n">databaseName</span><span class="p">;</span><span class="w"></span>
+<span class="n">USE</span><span class="w"> </span><span class="n">databaseName</span><span class="p">;</span>
 <span class="c1">-- 创建登录名与数据库用户的映射</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="n">userName</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="n">loginName</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">userName</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="n">loginName</span><span class="p">;</span>
 <span class="c1">-- 新建数据库角色</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span>
 <span class="c1">-- 将用户添加到角色中</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_addrolemember</span><span class="w"> </span><span class="s1">'ProgramerRole'</span><span class="p">,</span><span class="w"> </span><span class="s1">'userName'</span><span class="p">;</span><span class="w"></span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_addrolemember</span><span class="w"> </span><span class="s1">'ProgramerRole'</span><span class="p">,</span><span class="w"> </span><span class="s1">'userName'</span><span class="p">;</span>
 
 <span class="c1">-- 授予角色创建表、创建存储过程、创建视图的权限</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="p">,</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="p">,</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="p">,</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="p">,</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span>
 
 <span class="c1">-- 授予角色dbo架构的权限</span>
 <span class="c1">-- EXECUTE和ALTER用于执行、修改、删除存储过程</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">EXECUTE</span><span class="p">,</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="p">::</span><span class="n">dbo</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">EXECUTE</span><span class="p">,</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">schema</span><span class="p">::</span><span class="n">dbo</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">ProgramerRole</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2806,7 +2799,7 @@ DATABASE AUDIT SPECIFICATION
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      5.3.0.
+      6.1.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for

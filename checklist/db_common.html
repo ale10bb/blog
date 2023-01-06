@@ -44,12 +44,6 @@
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
-  <script src="_static/jquery.js">
-  </script>
-  <script src="_static/underscore.js">
-  </script>
-  <script src="_static/_sphinx_javascript_frameworks_compat.js">
-  </script>
   <script src="_static/doctools.js">
   </script>
   <script src="_static/sphinx_highlight.js">
@@ -60,7 +54,7 @@
   </script>
   <script src="_static/translations.js">
   </script>
-  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="_static/favicon.png" rel="icon"/>
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="mysql.html" rel="next" title="MySQL"/>
@@ -87,7 +81,6 @@
     <div class="md-flex navheader">
      <div class="md-flex__cell md-flex__cell--shrink">
       <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
-       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
       </a>
      </div>
      <div class="md-flex__cell md-flex__cell--shrink">
@@ -184,7 +177,7 @@
         <nav class="md-nav md-nav--primary" data-md-level="0">
          <label class="md-nav__title md-nav__title--site" for="__drawer">
           <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
-           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+           <img alt=" logo" height="48" src="_static/" width="48"/>
           </a>
           <a href="index.html" title="学习笔记">
            学习笔记
@@ -434,77 +427,77 @@
          </h2>
          <div class="highlight-yaml notranslate">
           <div class="highlight">
-           <pre><span></span><span class="linenos"> 1</span><span class="c1"># 如果 Docker Compose 版本太老，需修改yaml的版本</span><span class="w"></span>
-<span class="linenos"> 2</span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"3.6"</span><span class="w"></span>
-<span class="linenos"> 3</span><span class="nt">services</span><span class="p">:</span><span class="w"></span>
-<span class="linenos"> 4</span><span class="w">   </span><span class="nt">mysql8-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos"> 5</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8</span><span class="w"></span>
-<span class="linenos"> 6</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql8-test</span><span class="w"></span>
-<span class="linenos"> 7</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos"> 8</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">33068:3306</span><span class="w"></span>
-<span class="linenos"> 9</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">10</span><span class="w">         </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span><span class="w"></span>
+           <pre><span></span><span class="linenos"> 1</span><span class="c1"># 如果 Docker Compose 版本太老，需修改yaml的版本</span>
+<span class="linenos"> 2</span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"3.6"</span>
+<span class="linenos"> 3</span><span class="nt">services</span><span class="p">:</span>
+<span class="linenos"> 4</span><span class="w">   </span><span class="nt">mysql8-test</span><span class="p">:</span>
+<span class="linenos"> 5</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8</span>
+<span class="linenos"> 6</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql8-test</span>
+<span class="linenos"> 7</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos"> 8</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">33068:3306</span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
+<span class="linenos">10</span><span class="w">         </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span>
 <span class="linenos">11</span>
-<span class="linenos">12</span><span class="w">   </span><span class="nt">mysql57-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">13</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:5.7</span><span class="w"></span>
-<span class="linenos">14</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql57-test</span><span class="w"></span>
-<span class="linenos">15</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">16</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">33067:3306</span><span class="w"></span>
-<span class="linenos">17</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">18</span><span class="w">         </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">   </span><span class="nt">mysql57-test</span><span class="p">:</span>
+<span class="linenos">13</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:5.7</span>
+<span class="linenos">14</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql57-test</span>
+<span class="linenos">15</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos">16</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">33067:3306</span>
+<span class="linenos">17</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
+<span class="linenos">18</span><span class="w">         </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span>
 <span class="linenos">19</span>
-<span class="linenos">20</span><span class="w">   </span><span class="nt">oracle11-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">21</span><span class="w">      </span><span class="c1"># 初始化要2-3分钟，请耐心等待</span><span class="w"></span>
-<span class="linenos">22</span><span class="w">      </span><span class="c1"># 初始化时，为SYS生成随机密码，需通过docker logs查看</span><span class="w"></span>
-<span class="linenos">23</span><span class="w">      </span><span class="c1"># 实例名xe</span><span class="w"></span>
-<span class="linenos">24</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">datagrip/oracle:11.2.0.2-xe</span><span class="w"></span>
-<span class="linenos">25</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oracle11-test</span><span class="w"></span>
-<span class="linenos">26</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">27</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15211:1521</span><span class="w"></span>
-<span class="linenos">28</span><span class="w">      </span><span class="c1"># 必须要1gb的共享内存才能成功启动</span><span class="w"></span>
-<span class="linenos">29</span><span class="w">      </span><span class="nt">shm_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1gb</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">   </span><span class="nt">oracle11-test</span><span class="p">:</span>
+<span class="linenos">21</span><span class="w">      </span><span class="c1"># 初始化要2-3分钟，请耐心等待</span>
+<span class="linenos">22</span><span class="w">      </span><span class="c1"># 初始化时，为SYS生成随机密码，需通过docker logs查看</span>
+<span class="linenos">23</span><span class="w">      </span><span class="c1"># 实例名xe</span>
+<span class="linenos">24</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">datagrip/oracle:11.2.0.2-xe</span>
+<span class="linenos">25</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oracle11-test</span>
+<span class="linenos">26</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos">27</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15211:1521</span>
+<span class="linenos">28</span><span class="w">      </span><span class="c1"># 必须要1gb的共享内存才能成功启动</span>
+<span class="linenos">29</span><span class="w">      </span><span class="nt">shm_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1gb</span>
 <span class="linenos">30</span>
-<span class="linenos">31</span><span class="w">   </span><span class="nt">mssql19-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">32</span><span class="w">      </span><span class="c1"># 容器大概要占用1gb的内存</span><span class="w"></span>
-<span class="linenos">33</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mcr.microsoft.com/mssql/server:2019-latest</span><span class="w"></span>
-<span class="linenos">34</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mssql19-test</span><span class="w"></span>
-<span class="linenos">35</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">36</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">14339:1433</span><span class="w"></span>
-<span class="linenos">37</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">38</span><span class="w">         </span><span class="nt">ACCEPT_EULA</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Y</span><span class="w"></span>
-<span class="linenos">39</span><span class="w">         </span><span class="nt">SA_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span><span class="w"></span>
-<span class="linenos">40</span><span class="w">         </span><span class="nt">MSSQL_PID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Express</span><span class="w"></span>
+<span class="linenos">31</span><span class="w">   </span><span class="nt">mssql19-test</span><span class="p">:</span>
+<span class="linenos">32</span><span class="w">      </span><span class="c1"># 容器大概要占用1gb的内存</span>
+<span class="linenos">33</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mcr.microsoft.com/mssql/server:2019-latest</span>
+<span class="linenos">34</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mssql19-test</span>
+<span class="linenos">35</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos">36</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">14339:1433</span>
+<span class="linenos">37</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
+<span class="linenos">38</span><span class="w">         </span><span class="nt">ACCEPT_EULA</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Y</span>
+<span class="linenos">39</span><span class="w">         </span><span class="nt">SA_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span>
+<span class="linenos">40</span><span class="w">         </span><span class="nt">MSSQL_PID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Express</span>
 <span class="linenos">41</span>
-<span class="linenos">42</span><span class="w">   </span><span class="nt">redis6-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">43</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:6</span><span class="w"></span>
-<span class="linenos">44</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis6-test</span><span class="w"></span>
-<span class="linenos">45</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">46</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6376:6379</span><span class="w"></span>
+<span class="linenos">42</span><span class="w">   </span><span class="nt">redis6-test</span><span class="p">:</span>
+<span class="linenos">43</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:6</span>
+<span class="linenos">44</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis6-test</span>
+<span class="linenos">45</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos">46</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6376:6379</span>
 <span class="linenos">47</span>
-<span class="linenos">48</span><span class="w">   </span><span class="nt">redis5-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">49</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:5</span><span class="w"></span>
-<span class="linenos">50</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis5-test</span><span class="w"></span>
-<span class="linenos">51</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">52</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6375:6379</span><span class="w"></span>
+<span class="linenos">48</span><span class="w">   </span><span class="nt">redis5-test</span><span class="p">:</span>
+<span class="linenos">49</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:5</span>
+<span class="linenos">50</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis5-test</span>
+<span class="linenos">51</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos">52</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6375:6379</span>
 <span class="linenos">53</span>
-<span class="linenos">54</span><span class="w">   </span><span class="nt">db2_11-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">55</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ibmcom/db2</span><span class="w"></span>
-<span class="linenos">56</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db2_11-test</span><span class="w"></span>
-<span class="linenos">57</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">58</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50000:50000</span><span class="w"></span>
-<span class="linenos">59</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">60</span><span class="w">         </span><span class="nt">LICENSE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">accept</span><span class="w"></span>
-<span class="linenos">61</span><span class="w">         </span><span class="nt">DB2INST1_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span><span class="w"></span>
-<span class="linenos">62</span><span class="w">         </span><span class="nt">DBNAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">testDB</span><span class="w"></span>
-<span class="linenos">63</span><span class="w">      </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="linenos">54</span><span class="w">   </span><span class="nt">db2_11-test</span><span class="p">:</span>
+<span class="linenos">55</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ibmcom/db2</span>
+<span class="linenos">56</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db2_11-test</span>
+<span class="linenos">57</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos">58</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50000:50000</span>
+<span class="linenos">59</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
+<span class="linenos">60</span><span class="w">         </span><span class="nt">LICENSE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">accept</span>
+<span class="linenos">61</span><span class="w">         </span><span class="nt">DB2INST1_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span>
+<span class="linenos">62</span><span class="w">         </span><span class="nt">DBNAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">testDB</span>
+<span class="linenos">63</span><span class="w">      </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="linenos">64</span>
-<span class="linenos">65</span><span class="w">   </span><span class="nt">pg-test</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">66</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w"></span>
-<span class="linenos">67</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w"></span>
-<span class="linenos">68</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">69</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432:5432</span><span class="w"></span>
-<span class="linenos">70</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="linenos">71</span><span class="w">         </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span><span class="w"></span>
+<span class="linenos">65</span><span class="w">   </span><span class="nt">pg-test</span><span class="p">:</span>
+<span class="linenos">66</span><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="linenos">67</span><span class="w">      </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="linenos">68</span><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<span class="linenos">69</span><span class="w">         </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432:5432</span>
+<span class="linenos">70</span><span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
+<span class="linenos">71</span><span class="w">         </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-PW-123456</span>
 </pre>
           </div>
          </div>
@@ -558,7 +551,7 @@
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      5.3.0.
+      6.1.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for

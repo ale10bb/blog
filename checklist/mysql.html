@@ -44,12 +44,6 @@
   <link href="_static/copybutton.css" rel="stylesheet" type="text/css"/>
   <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
   </script>
-  <script src="_static/jquery.js">
-  </script>
-  <script src="_static/underscore.js">
-  </script>
-  <script src="_static/_sphinx_javascript_frameworks_compat.js">
-  </script>
   <script src="_static/doctools.js">
   </script>
   <script src="_static/sphinx_highlight.js">
@@ -60,7 +54,7 @@
   </script>
   <script src="_static/translations.js">
   </script>
-  <link href="_static/favicon.png" rel="shortcut icon"/>
+  <link href="_static/favicon.png" rel="icon"/>
   <link href="genindex.html" rel="index" title="索引"/>
   <link href="search.html" rel="search" title="搜索"/>
   <link href="oracle.html" rel="next" title="Oracle"/>
@@ -87,7 +81,6 @@
     <div class="md-flex navheader">
      <div class="md-flex__cell md-flex__cell--shrink">
       <a class="md-header-nav__button md-logo" href="index.html" title="学习笔记">
-       <img alt="学习笔记 logo" height="26" src="_static/logo.png"/>
       </a>
      </div>
      <div class="md-flex__cell md-flex__cell--shrink">
@@ -189,7 +182,7 @@
         <nav class="md-nav md-nav--primary" data-md-level="0">
          <label class="md-nav__title md-nav__title--site" for="__drawer">
           <a class="md-nav__button md-logo" href="index.html" title="学习笔记">
-           <img alt=" logo" height="48" src="_static/logo.png" width="48"/>
+           <img alt=" logo" height="48" src="_static/" width="48"/>
           </a>
           <a href="index.html" title="学习笔记">
            学习笔记
@@ -986,8 +979,8 @@
          </ul>
          <div class="highlight-sql notranslate">
           <div class="highlight">
-           <pre><span></span><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'version'</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">VERSION</span><span class="p">();</span><span class="w"></span>
+           <pre><span></span><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'version'</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">VERSION</span><span class="p">();</span>
 </pre>
           </div>
          </div>
@@ -1608,7 +1601,7 @@ MySQL的插件根据功能和机制的不同，分为“可动态加载”和“
            </p>
            <div class="highlight-sql notranslate">
             <div class="highlight">
-             <pre><span></span><span class="n">INSTALL</span><span class="w"> </span><span class="n">PLUGIN</span><span class="w"> </span><span class="n">myplugin</span><span class="w"> </span><span class="n">SONAME</span><span class="w"> </span><span class="s1">'somepluglib.so'</span><span class="p">;</span><span class="w"></span>
+             <pre><span></span><span class="n">INSTALL</span><span class="w"> </span><span class="n">PLUGIN</span><span class="w"> </span><span class="n">myplugin</span><span class="w"> </span><span class="n">SONAME</span><span class="w"> </span><span class="s1">'somepluglib.so'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2141,11 +2134,11 @@ MySQL的插件根据功能和机制的不同，分为“可动态加载”和“
            <div class="highlight-bash notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1"># 不加参数时默认连接本地3306数据库</span>
-mysql -u<span class="s1">'root'</span> -p
+mysql<span class="w"> </span>-u<span class="s1">'root'</span><span class="w"> </span>-p
 <span class="c1"># -p后可输入密码(MySQL不推荐该方式)</span>
-mysql -u<span class="s1">'root'</span> -p<span class="s1">'my-secret-pw'</span>
+mysql<span class="w"> </span>-u<span class="s1">'root'</span><span class="w"> </span>-p<span class="s1">'my-secret-pw'</span>
 <span class="c1"># 客户端主动尝试SSL连接，服务器未开启SSL则连接失败</span>
-mysql -h <span class="m">192</span>.168.3.8 -P <span class="m">33306</span> -u<span class="s1">'root'</span> -p<span class="s1">'my-secret-pw'</span> --ssl<span class="o">=</span>TRUE
+mysql<span class="w"> </span>-h<span class="w"> </span><span class="m">192</span>.168.3.8<span class="w"> </span>-P<span class="w"> </span><span class="m">33306</span><span class="w"> </span>-u<span class="s1">'root'</span><span class="w"> </span>-p<span class="s1">'my-secret-pw'</span><span class="w"> </span>--ssl<span class="o">=</span>TRUE
 </pre>
             </div>
            </div>
@@ -2171,12 +2164,12 @@ mysql -h <span class="m">192</span>.168.3.8 -P <span class="m">33306</span> -u<s
             <div class="highlight">
              <pre><span></span><span class="c1">-- 在MySQL 5.7之前，User表中的口令字段为Password</span>
 <span class="c1">-- 从MySQL 5.7之后，口令字段改为authentication_string</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="k">User</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">authentication_string</span><span class="p">,</span><span class="w"> </span><span class="n">plugin</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="n">password_expired</span><span class="p">,</span><span class="w"> </span><span class="n">password_last_changed</span><span class="p">,</span><span class="w"> </span><span class="n">password_lifetime</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="o">`</span><span class="k">user</span><span class="o">`</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="k">User</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">authentication_string</span><span class="p">,</span><span class="w"> </span><span class="n">plugin</span><span class="p">,</span>
+<span class="w">       </span><span class="n">password_expired</span><span class="p">,</span><span class="w"> </span><span class="n">password_last_changed</span><span class="p">,</span><span class="w"> </span><span class="n">password_lifetime</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="o">`</span><span class="k">user</span><span class="o">`</span><span class="p">;</span>
 <span class="c1">-- 展示全局口令过期设置</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'default_password_lifetime'</span><span class="p">;</span><span class="w"></span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'disconnect_on_expired_password'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'default_password_lifetime'</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'disconnect_on_expired_password'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2194,14 +2187,14 @@ mysql -h <span class="m">192</span>.168.3.8 -P <span class="m">33306</span> -u<s
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 列出所有插件，不能搜索</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="n">PLUGINS</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">PLUGINS</span><span class="p">;</span>
 <span class="c1">-- 可以按插件名精确(=)或模糊(LIKE)搜索</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">PLUGINS</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">PLUGIN_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mysql_native_password'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">PLUGINS</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">PLUGIN_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mysql_native_password'</span><span class="p">;</span>
 
 <span class="c1">-- 展示插件参数变量</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'validate_password%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'validate_password%'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2217,7 +2210,7 @@ mysql -h <span class="m">192</span>.168.3.8 -P <span class="m">33306</span> -u<s
            </h4>
            <div class="highlight-sql notranslate">
             <div class="highlight">
-             <pre><span></span><span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%timeout%'</span><span class="p">;</span><span class="w"></span>
+             <pre><span></span><span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%timeout%'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2245,7 +2238,7 @@ mysql -h <span class="m">192</span>.168.3.8 -P <span class="m">33306</span> -u<s
            </ul>
            <div class="highlight-bash notranslate">
             <div class="highlight">
-             <pre><span></span>mysqladmin -u root -p<span class="s1">'old_password'</span> password <span class="s1">'new_password'</span>
+             <pre><span></span>mysqladmin<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="s1">'old_password'</span><span class="w"> </span>password<span class="w"> </span><span class="s1">'new_password'</span>
 </pre>
             </div>
            </div>
@@ -2258,10 +2251,10 @@ mysql -h <span class="m">192</span>.168.3.8 -P <span class="m">33306</span> -u<s
            </ul>
            <div class="highlight-sql notranslate">
             <div class="highlight">
-             <pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"></span>
-<span class="k">SET</span><span class="w"> </span><span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="ss">"test"</span><span class="p">)</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="o">=</span><span class="s1">'root'</span><span class="p">;</span><span class="w"></span>
-<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span><span class="w"></span>
+             <pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">(</span><span class="ss">"test"</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="o">=</span><span class="s1">'root'</span><span class="p">;</span>
+<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2275,12 +2268,12 @@ mysql -h <span class="m">192</span>.168.3.8 -P <span class="m">33306</span> -u<s
            <div class="highlight-bash notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1"># 先停止MySQL的服务或守护进程</span>
-systemctl stop mysqld <span class="c1"># systemd</span>
-service mysqld stop <span class="c1"># initd</span>
+systemctl<span class="w"> </span>stop<span class="w"> </span>mysqld<span class="w"> </span><span class="c1"># systemd</span>
+service<span class="w"> </span>mysqld<span class="w"> </span>stop<span class="w"> </span><span class="c1"># initd</span>
 
 <span class="c1"># mysqld_safe为官方自带的守护进程</span>
 <span class="c1"># &amp;表示建立子进程，并在后台运行</span>
-mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
+mysqld_safe<span class="w"> </span>--skip-grant-tables<span class="w"> </span><span class="p">&amp;</span>
 </pre>
             </div>
            </div>
@@ -2977,9 +2970,9 @@ mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="o">`</span><span class="k">user</span><span class="o">`</span><span class="p">;</span><span class="w"> </span><span class="c1">--展示用户的实际权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">tables_priv</span><span class="p">;</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">columns_priv</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">tables_priv</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">columns_priv</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -2987,29 +2980,29 @@ mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 除了管理员帐户，其他帐户不应具有全局访问权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="k">host</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">Select_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Insert_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Update_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="n">Delete_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Create_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Drop_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">);</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="k">host</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">Select_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Insert_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Update_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span>
+<span class="w">      </span><span class="p">(</span><span class="n">Delete_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Create_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Drop_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">);</span>
 
 <span class="c1">-- 除了管理员帐户，其他帐户不应具备权限表的管理权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="k">host</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mysql'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">((</span><span class="n">Select_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Insert_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Update_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="n">Delete_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Create_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Drop_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">));</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="k">host</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mysql'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">((</span><span class="n">Select_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Insert_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Update_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span>
+<span class="w">      </span><span class="p">(</span><span class="n">Delete_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Create_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">Drop_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">));</span>
 
 <span class="c1">--除了管理员帐户，其他帐户不应具备系统操作权限</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="k">host</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">file_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">process_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">super_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="n">shutdown_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">create_user_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">grant_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="n">reload_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">repl_slave_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">);</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="k">host</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">file_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">process_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">super_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span>
+<span class="w">      </span><span class="p">(</span><span class="n">shutdown_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">create_user_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">grant_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span>
+<span class="w">      </span><span class="p">(</span><span class="n">reload_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">repl_slave_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="p">);</span>
 
 <span class="c1">-- 管理员帐户不应具有业务数据库的INSERT，SELECT，UPDATE，DELETE，DROP，CREATE和ALTER权限。</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">User</span><span class="p">,</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="n">db</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">Select_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Insert_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Update_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Delete_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
-<span class="w">      </span><span class="n">Create_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Drop_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Alter_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">User</span><span class="p">,</span><span class="w"> </span><span class="k">Host</span><span class="p">,</span><span class="w"> </span><span class="n">db</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Select_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Insert_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Update_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Delete_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span>
+<span class="w">      </span><span class="n">Create_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Drop_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">Alter_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -3027,12 +3020,12 @@ mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
             <div class="highlight">
              <pre><span></span><span class="c1">-- 创建帐户并赋权</span>
 <span class="c1">-- 实际上只需要在user表中限制远程连接地址，非法地址在登录时就被拒绝连接</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'x.x.x.x'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'xxxx'</span><span class="p">;</span><span class="w"></span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'x.x.x.x'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'xxxx'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
 
 <span class="c1">-- 某个MySQL监控器所需要的全局权限</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'x.x.x.x'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'xxxx'</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">MAX_USER_CONNECTIONS</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
-<span class="k">GRANT</span><span class="w"> </span><span class="n">PROCESS</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">CLIENT</span><span class="p">,</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'x.x.x.x'</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'x.x.x.x'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'xxxx'</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">MAX_USER_CONNECTIONS</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">PROCESS</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">CLIENT</span><span class="p">,</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'user1'</span><span class="o">@</span><span class="s1">'x.x.x.x'</span><span class="p">;</span>
 
 <span class="c1">-- 一般DB管理员需要分配DB级的所有权限</span>
 <span class="c1">-- MySQL 5.7及以下的版本，默认未启用NO_AUTO_CREATE_USER(SQL_Mode)</span>
@@ -3040,19 +3033,19 @@ mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
 <span class="c1">-- 可通过以下语句查询当前SQL_Mode</span>
 <span class="c1">-- SELECT @@global.sql_mode</span>
 <span class="c1">-- MySQL 8.0之后默认启用NO_AUTO_CREATE_USER，必须先create再grant</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user2'</span><span class="o">@</span><span class="s1">'%'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'xxxx'</span><span class="p">;</span><span class="w"></span>
-<span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="k">host</span><span class="o">=</span><span class="s1">'%'</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">user</span><span class="o">=</span><span class="s1">'user3'</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user2'</span><span class="o">@</span><span class="s1">'%'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'xxxx'</span><span class="p">;</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="k">host</span><span class="o">=</span><span class="s1">'%'</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">user</span><span class="o">=</span><span class="s1">'user3'</span><span class="p">;</span>
 
 <span class="c1">-- 如果为用户赋予GRANT权限，则该用户能将自己的权限进行转授</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user3'</span><span class="o">@</span><span class="s1">'%'</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user3'</span><span class="o">@</span><span class="s1">'%'</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="p">;</span>
 <span class="c1">-- GRANT和ADMIN的区别：</span>
 <span class="c1">-- WITH GRANT OPTION的用户，如果授权用户的某个权限给撤回了，那么他所授予给其他用户的这个权限也会一并没了；</span>
 <span class="c1">-- WITH ADMIN OPTION不会追溯转授行为，转授的权限不会收回。</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user3'</span><span class="o">@</span><span class="s1">'%'</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">ADMIN</span><span class="w"> </span><span class="k">OPTION</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">somedb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">'user3'</span><span class="o">@</span><span class="s1">'%'</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">ADMIN</span><span class="w"> </span><span class="k">OPTION</span><span class="p">;</span>
 
 <span class="c1">-- 由于需要频繁读取，MySQL在启动时，会将四张权限表装载入内存。</span>
 <span class="c1">-- 因此修改权限或手动创建用户后，需要使用flush命令重新装载</span>
-<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span><span class="w"></span>
+<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -3069,18 +3062,18 @@ mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 赋予重载权限表的权限</span>
-<span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Reload_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test'</span><span class="p">;</span><span class="w"></span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Reload_priv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Y'</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test'</span><span class="p">;</span>
 <span class="c1">-- 仅授予该用户对mysql.user中权限部分的SELECT及UPDATE权限（不允许删除用户）</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">(</span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">Select_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Insert_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Update_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Delete_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Create_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Drop_priv</span><span class="p">),</span><span class="w"></span>
-<span class="w">      </span><span class="k">UPDATE</span><span class="p">(</span><span class="n">Select_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Insert_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Update_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Delete_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Create_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Drop_priv</span><span class="p">)</span><span class="w"></span>
-<span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"></span>
-<span class="k">TO</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">(</span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">Select_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Insert_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Update_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Delete_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Create_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Drop_priv</span><span class="p">),</span>
+<span class="w">      </span><span class="k">UPDATE</span><span class="p">(</span><span class="n">Select_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Insert_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Update_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Delete_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Create_priv</span><span class="p">,</span><span class="w"> </span><span class="n">Drop_priv</span><span class="p">)</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span>
+<span class="k">TO</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
 
 <span class="c1">-- 授予该用户对其他三张权限表的维护权限</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span><span class="w"></span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">tables_priv</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span><span class="w"></span>
-<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">columns_priv</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span><span class="w"></span>
-<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span><span class="w"></span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">db</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">tables_priv</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">columns_priv</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="s1">'test'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
+<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
 <span class="c1">-- 之后安全管理员通过编辑四张表的形式进行授权，而不是通过GRANT的方式</span>
 </pre>
             </div>
@@ -3795,35 +3788,35 @@ data/xml、delete、insert、update、handler和replace语句）
           </p>
           <div class="highlight-json notranslate">
            <div class="highlight">
-            <pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"msg-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activity"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1510038432019"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"thread-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"43"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"query-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1891"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"priv_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"connect_attrs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"_os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux-glibc2.5"</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"_client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"libmysql"</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"_pid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4009"</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"_client_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.7.9"</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"_platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x86_64"</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"program_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"pid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4009"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"os_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"appname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"rows"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"cmd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"objects"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="s2">"part"</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e"</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">"obj_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TABLE"</span><span class="w"></span>
-<span class="w">    </span><span class="p">}],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert into e values (9898,'smart','james')"</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+            <pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"msg-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activity"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1510038432019"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"thread-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"43"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"query-id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1891"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"priv_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"connect_attrs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"_os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux-glibc2.5"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"_client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"libmysql"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"_pid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4009"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"_client_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.7.9"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"_platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x86_64"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"program_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"pid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4009"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"os_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"appname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"rows"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"cmd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"objects"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">        </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="s2">"part"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"obj_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TABLE"</span>
+<span class="w">    </span><span class="p">}],</span>
+<span class="w">    </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert into e values (9898,'smart','james')"</span>
+<span class="p">}</span>
 </pre>
            </div>
           </div>
@@ -3849,17 +3842,17 @@ data/xml、delete、insert、update、handler和replace语句）
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 查看general log</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%general%'</span><span class="p">;</span><span class="w"></span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%log_output%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%general%'</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%log_output%'</span><span class="p">;</span>
 
 <span class="c1">-- 查看MariaDB Server Audit Plugin</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'server_audit%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'server_audit%'</span><span class="p">;</span>
 
 <span class="c1">-- 查看MySQL Enterprise Audit Plugin</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'auditlog%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'auditlog%'</span><span class="p">;</span>
 
 <span class="c1">-- 查看McAfee Audit Plugin</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'audit_%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'audit_%'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -3897,11 +3890,11 @@ data/xml、delete、insert、update、handler和replace语句）
             <div class="highlight">
              <pre><span></span><span class="c1">-- 关闭allow-suspicious-udfs (防止通过共享对象文件加载存在威胁的UDFs函数)</span>
 <span class="c1">-- 默认不启用</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'allow-suspicious-udfs'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'allow-suspicious-udfs'</span><span class="p">;</span>
 
 <span class="c1">-- 关闭local_infile(防止从本地读取文件)</span>
 <span class="c1">-- 默认启用</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'local_infile'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'local_infile'</span><span class="p">;</span>
 
 <span class="c1">-- 开启skip-symbolic-links(禁止数据库用户删除或重名数据文件目录之外的文件)</span>
 <span class="c1">-- 默认不启用</span>
@@ -3909,11 +3902,11 @@ data/xml、delete、insert、update、handler和replace语句）
 
 <span class="c1">-- 禁用daemon_memcached插件(防止memcached造成内存泄漏)</span>
 <span class="c1">-- 默认不安装</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">plugins</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">PLUGIN_NAME</span><span class="o">=</span><span class="s1">'daemon_memcached'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">plugins</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">PLUGIN_NAME</span><span class="o">=</span><span class="s1">'daemon_memcached'</span><span class="p">;</span>
 
 <span class="c1">-- 设置secure_file_priv(限制客户端可以通过load_file读取数据文件的路径)</span>
 <span class="c1">-- 默认为'/var/lib/mysql-files/'</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Variable_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'secure_file_priv'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Variable_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'secure_file_priv'</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -3936,35 +3929,35 @@ data/xml、delete、insert、update、handler和replace语句）
 <span class="linenos"> 2</span><span class="nv">USER</span><span class="o">=</span>root
 <span class="linenos"> 3</span><span class="nv">PASS</span><span class="o">=</span>pass
 <span class="linenos"> 4</span><span class="nv">BAKFILENAME</span><span class="o">=</span><span class="s1">'all'</span>
-<span class="linenos"> 5</span><span class="nv">DATE</span><span class="o">=</span><span class="k">$(</span>date +%Y%m%d<span class="k">)</span>
+<span class="linenos"> 5</span><span class="nv">DATE</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>
 <span class="linenos"> 6</span><span class="nv">BAKPATH</span><span class="o">=</span>/path/to/mysqlbak
 <span class="linenos"> 7</span><span class="nv">KEEP</span><span class="o">=</span><span class="m">7</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="c1">#########################</span>
-<span class="linenos">10</span><span class="k">while</span> <span class="o">[[</span> <span class="nv">$#</span> &gt; <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">do</span>
-<span class="linenos">11</span>    <span class="k">case</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="k">in</span>
-<span class="linenos">12</span>        -k<span class="p">|</span>--keep<span class="o">)</span>
-<span class="linenos">13</span>            <span class="nv">KEEP</span><span class="o">=</span><span class="k">$((</span><span class="nv">$2</span><span class="o">-</span><span class="m">1</span><span class="k">))</span>
-<span class="linenos">14</span>            <span class="nb">shift</span>
-<span class="linenos">15</span>            <span class="p">;;</span>
-<span class="linenos">16</span>        -d<span class="p">|</span>--database<span class="o">)</span>
-<span class="linenos">17</span>            <span class="nv">DB</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
-<span class="linenos">18</span>            <span class="nv">BAKFILENAME</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
-<span class="linenos">19</span>            <span class="nb">shift</span>
-<span class="linenos">20</span>            <span class="p">;;</span>
-<span class="linenos">21</span>        *<span class="o">)</span>
-<span class="linenos">22</span>            <span class="p">;;</span>
-<span class="linenos">23</span>    <span class="k">esac</span>
-<span class="linenos">24</span>    <span class="nb">shift</span>
+<span class="linenos">10</span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="linenos">11</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="linenos">12</span><span class="w">        </span>-k<span class="p">|</span>--keep<span class="o">)</span>
+<span class="linenos">13</span><span class="w">            </span><span class="nv">KEEP</span><span class="o">=</span><span class="k">$((</span><span class="nv">$2</span><span class="o">-</span><span class="m">1</span><span class="k">))</span>
+<span class="linenos">14</span><span class="w">            </span><span class="nb">shift</span>
+<span class="linenos">15</span><span class="w">            </span><span class="p">;;</span>
+<span class="linenos">16</span><span class="w">        </span>-d<span class="p">|</span>--database<span class="o">)</span>
+<span class="linenos">17</span><span class="w">            </span><span class="nv">DB</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="linenos">18</span><span class="w">            </span><span class="nv">BAKFILENAME</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="linenos">19</span><span class="w">            </span><span class="nb">shift</span>
+<span class="linenos">20</span><span class="w">            </span><span class="p">;;</span>
+<span class="linenos">21</span><span class="w">        </span>*<span class="o">)</span>
+<span class="linenos">22</span><span class="w">            </span><span class="p">;;</span>
+<span class="linenos">23</span><span class="w">    </span><span class="k">esac</span>
+<span class="linenos">24</span><span class="w">    </span><span class="nb">shift</span>
 <span class="linenos">25</span><span class="k">done</span>
 <span class="linenos">26</span><span class="c1">###############################</span>
 <span class="linenos">27</span>
 <span class="linenos">28</span><span class="c1"># 本地安装环境的备份</span>
-<span class="linenos">29</span>mysqldump -u<span class="s1">'$USER'</span> -p<span class="s1">'$PASS'</span> <span class="s1">'$DB'</span> &gt; <span class="s1">'$BAKPATH/$BAKFILENAME'</span>_<span class="s1">'$DATE'</span>.sql
+<span class="linenos">29</span>mysqldump<span class="w"> </span>-u<span class="s1">'$USER'</span><span class="w"> </span>-p<span class="s1">'$PASS'</span><span class="w"> </span><span class="s1">'$DB'</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s1">'$BAKPATH/$BAKFILENAME'</span>_<span class="s1">'$DATE'</span>.sql
 <span class="linenos">30</span><span class="c1"># docker环境的备份</span>
-<span class="linenos">31</span>docker <span class="nb">exec</span> --user root mysql5 sh -c <span class="s2">"mysqldump -u'</span><span class="nv">$USER</span><span class="s2">' -p'</span><span class="nv">$PASS</span><span class="s2">' '</span><span class="nv">$DB</span><span class="s2">'"</span> &gt; <span class="s1">'$BAKPATH/$BAKFILENAME'</span>_<span class="s1">'$DATE'</span>.sql
+<span class="linenos">31</span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--user<span class="w"> </span>root<span class="w"> </span>mysql5<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"mysqldump -u'</span><span class="nv">$USER</span><span class="s2">' -p'</span><span class="nv">$PASS</span><span class="s2">' '</span><span class="nv">$DB</span><span class="s2">'"</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s1">'$BAKPATH/$BAKFILENAME'</span>_<span class="s1">'$DATE'</span>.sql
 <span class="linenos">32</span><span class="c1"># 定期清除旧文件</span>
-<span class="linenos">33</span>find <span class="nv">$BAKPATH</span> -mtime +<span class="nv">$KEEP</span> -name <span class="nv">$BAKFILENAME</span><span class="s1">'_*.sql'</span> -exec rm -rf <span class="o">{}</span> <span class="se">\;</span>
+<span class="linenos">33</span>find<span class="w"> </span><span class="nv">$BAKPATH</span><span class="w"> </span>-mtime<span class="w"> </span>+<span class="nv">$KEEP</span><span class="w"> </span>-name<span class="w"> </span><span class="nv">$BAKFILENAME</span><span class="s1">'_*.sql'</span><span class="w"> </span>-exec<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
 </pre>
             </div>
            </div>
@@ -4132,12 +4125,12 @@ data/xml、delete、insert、update、handler和replace语句）
            </p>
            <div class="highlight-bash notranslate">
             <div class="highlight">
-             <pre><span></span>mysql -u<span class="s1">'user'</span> <span class="se">\</span>
-      -p<span class="s1">'pass'</span> <span class="se">\</span>
-      -h mysql_server_IP <span class="se">\</span>
-      --ssl-ca<span class="o">=</span>/path/to/ca.pem <span class="se">\</span>
-      --ssl-cert<span class="o">=</span>/path/to/client-cert.pem <span class="se">\</span>
-      --ssl-key<span class="o">=</span>/path/to/client-key.pem
+             <pre><span></span>mysql<span class="w"> </span>-u<span class="s1">'user'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-p<span class="s1">'pass'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-h<span class="w"> </span>mysql_server_IP<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--ssl-ca<span class="o">=</span>/path/to/ca.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--ssl-cert<span class="o">=</span>/path/to/client-cert.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--ssl-key<span class="o">=</span>/path/to/client-key.pem
 </pre>
             </div>
            </div>
@@ -4152,10 +4145,10 @@ data/xml、delete、insert、update、handler和replace语句）
            </p>
            <div class="highlight-kconfig notranslate">
             <div class="highlight">
-             <pre><span></span>[client]<span class="w"></span>
-ssl-ca<span class="w"> </span><span class="o">=</span><span class="w"> </span>/path/to/ca.pem<span class="w"></span>
-ssl-cert<span class="w"> </span><span class="o">=</span><span class="w"> </span>/path/to/client-cert.pem<span class="w"></span>
-ssl-key<span class="w"> </span><span class="o">=</span><span class="w"> </span>/path/to/client-key.pem<span class="w"></span>
+             <pre><span></span>[client]
+ssl-ca<span class="w"> </span><span class="o">=</span><span class="w"> </span>/path/to/ca.pem
+ssl-cert<span class="w"> </span><span class="o">=</span><span class="w"> </span>/path/to/client-cert.pem
+ssl-key<span class="w"> </span><span class="o">=</span><span class="w"> </span>/path/to/client-key.pem
 </pre>
             </div>
            </div>
@@ -4172,15 +4165,15 @@ ssl-key<span class="w"> </span><span class="o">=</span><span class="w"> </span>/
            <div class="highlight-sql notranslate">
             <div class="highlight">
              <pre><span></span><span class="c1">-- 核查是否支持SSL，是否配置了证书、CA证书和Key</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%ssl%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%ssl%'</span><span class="p">;</span>
 
 <span class="c1">-- 以下情况二选一配置，任意一条有效均可</span>
 <span class="c1">-- 配置全局变量，限制所有用户仅允许使用SSL连接</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'require_secure_transport'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'require_secure_transport'</span><span class="p">;</span>
 <span class="c1">-- 为所有远程连接用户单独配置，限制仅允许使用SSL连接</span>
 <span class="c1">-- 关注ssl_type参数，为ANY或X509均可，不得为Null</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_type</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_cipher</span><span class="p">,</span><span class="w"> </span><span class="n">x509_issuer</span><span class="p">,</span><span class="w"> </span><span class="n">x509_subject</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="o">`</span><span class="k">user</span><span class="o">`</span><span class="p">;</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_type</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_cipher</span><span class="p">,</span><span class="w"> </span><span class="n">x509_issuer</span><span class="p">,</span><span class="w"> </span><span class="n">x509_subject</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="o">`</span><span class="k">user</span><span class="o">`</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -4199,9 +4192,9 @@ ssl-key<span class="w"> </span><span class="o">=</span><span class="w"> </span>/
             <div class="highlight">
              <pre><span></span><span class="c1">-- 在JDBC查询中用show status like命令</span>
 <span class="c1">-- 如果是SSL连接，ssl_cipher和ssl_version均不为空</span>
-<span class="k">SHOW</span><span class="w"> </span><span class="n">STATUS</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%ssl%'</span><span class="p">;</span><span class="w"></span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">STATUS</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%ssl%'</span><span class="p">;</span>
 <span class="c1">-- 在MySQL Native Client中可直接使用status命令(或\s)</span>
-<span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="n">status</span><span class="p">;</span>
 </pre>
             </div>
            </div>
@@ -4258,7 +4251,7 @@ ssl-key<span class="w"> </span><span class="o">=</span><span class="w"> </span>/
       <a href="http://www.sphinx-doc.org/">
        Sphinx
       </a>
-      5.3.0.
+      6.1.1.
              and
       <a href="https://github.com/bashtage/sphinx-material/">
        Material for
