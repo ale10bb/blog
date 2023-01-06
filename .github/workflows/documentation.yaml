@@ -1,16 +1,19 @@
-name: Docs
-on: [push, pull_request, workflow_dispatch]
+name: Build and Deploy
+on: [push]
+permissions:
+  contents: write
 jobs:
-  docs:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install dependencies
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install and Build 🔧
         run: |
           pip install sphinx sphinx-material sphinx-markdown-tables sphinx-copybutton recommonmark
-      - name: Sphinx build
-        run: |
           sphinx-build -M html index _build/temp/index 
           mv _build/temp/index/html _build/html 
           sphinx-build -M html checklist _build/temp/checklist 
@@ -19,11 +22,15 @@ jobs:
           awk -F'</urlset>' '{printf $1}' _build/html/sitemap.xml > _build/sitemap.xml
           awk -F'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' '{printf $2}' _build/html/checklist/sitemap.xml >> _build/sitemap.xml
           mv _build/sitemap.xml _build/html/sitemap.xml && rm _build/html/checklist/sitemap.xml 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          publish_branch: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/html/
-          force_orphan: true
+          folder: _build/html/
+      - name: Deploy to Alibaba Cloud OSS 🚀
+        uses: fangbinwei/aliyun-oss-website-action@v1
+        with:
+            accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+            accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
+            endpoint: oss-cn-shanghai.aliyuncs.com
+            folder: _build/html/
+            bucket: chenqlz-blog
